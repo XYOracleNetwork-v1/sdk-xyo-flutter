@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "network.xyo.ble.flutter.protobuf";
+
+message DeviceBoundWitnessList {
+    repeated DeviceBoundWitness bound_witnesses = 1;
+}
+
+message DeviceBoundWitness {
+    string bytes = 1;
+    string byte_hash = 2;
+    string human_name = 3;
+    map<string, string> huerestics = 4;
+    repeated string parties = 5;
+    bool linked = 6;    
+}

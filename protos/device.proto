@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_package = "network.xyo.ble.flutter.protobuf";
+
+/**
+    Represents an XYBluetoothDevice
+**/
+
+message Family {
+    string uuid = 1;
+    string prefix = 2;
+    string name = 3;
+    string id = 4;
+}
+
+message Range {
+    sint64 min = 1;
+    sint64 max = 2;
+}
+
+message IBeacon {
+    int64 major = 1;
+    int64 minor = 2;
+    string uuid = 3;
+}
+
+message BluetoothDevice {
+    string id = 1;
+    Family family = 2;
+    IBeacon beacon = 3;
+    sint64 rssi = 4;
+    Range range = 5;
+    bool connected = 6;
+    string name = 7;
+    string address = 8;
+}

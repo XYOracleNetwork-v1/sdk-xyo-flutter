@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option java_package = "network.xyo.ble.flutter.protobuf";
+
+/**
+    Supplies the messages for sending a request for a gatt call and the associated response
+**/
+
+message GattOperationList {
+    // Use the device ID to allow for ease of creating operations that all should be run on the same device
+    string device_id = 1;
+    repeated GattOperation operations = 2;
+    bool disconnect_on_completion = 3;
+}
+
+// Specialized calls that genericize common operations
+enum DefinedOperation {
+    STAY_AWAKE = 0;
+    GO_TO_SLEEP = 1;
+    LOCK = 2;
+    UNLOCK = 3;
+    SONG = 4;
+    STOP_SONG = 5;
+    PUBLIC_KEY = 6;
+}
+
+message GattCall {
+    string service_uuid = 1;
+    string characteristic_uuid = 2;
+}
+
+// An operation can either be a direct service/char uuid or a defined op
+message GattOperation {
+    string device_id = 1;
+
+    oneof operation {
+        DefinedOperation defined_operation = 2;
+        GattCall gatt_call = 3;
+    }
+
+    Write write_request = 4;
+
+    bool disconnect_on_completion = 5;
+
+    message Write {
+        bytes request = 1;
+        bool requires_response = 2;
+    }
+}
+
+message GattResponseList {
+    repeated GattResponse responses = 1;
+}
+
+message GattResponse {
+    string device_id = 1;
+
+    oneof operation {
+        DefinedOperation defined_operation = 2;
+        GattCall gatt_call = 3;
+    }
+    
+    bytes response = 4;
+    string error = 5;
+ }

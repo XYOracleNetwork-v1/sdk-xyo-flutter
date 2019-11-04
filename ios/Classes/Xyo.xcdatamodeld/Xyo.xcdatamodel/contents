@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Interaction" representedClassName=".XyoInteraction" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Interaction" positionX="-63" positionY="-18" width="128" height="75"/>
+    </elements>
+</model>
