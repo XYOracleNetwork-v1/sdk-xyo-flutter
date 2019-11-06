@@ -12,22 +12,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String _buildMessage = 'Unknown';
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    buildXyo();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
+  Future<void> buildXyo() async {
+    String buildMessage;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await SdkXyoFlutter.platformVersion;
+      buildMessage = await SdkXyoFlutter.buildXyo;
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      buildMessage = 'Failed to build XYO.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _buildMessage = buildMessage;
     });
   }
 
@@ -45,10 +45,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('XYO Flutter SDK example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Running on: $_buildMessage\n'),
         ),
       ),
     );

@@ -9,8 +9,8 @@ class SdkXyoFlutter {
 
   static Stream<String> _onBoundWitnessStart;
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
+  static Future<String> get buildXyo async {
+    final String version = await _channel.invokeMethod('build');
     return version;
   }
 

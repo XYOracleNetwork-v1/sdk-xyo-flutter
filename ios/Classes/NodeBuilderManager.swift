@@ -14,7 +14,7 @@ internal class NodeBuilderManager {
     builder?.setBoundWitnessDelegate(self)
   }
 
-  func build() {
+  func build() -> String {
     do {
       xyoNode = try builder?.build()
       builder = nil
@@ -22,6 +22,7 @@ internal class NodeBuilderManager {
     catch {
       print("Caught Error Building Xyo Node\(error)")
     }
+    return("Built")
   }
   
   func setListening(on: Bool) {
