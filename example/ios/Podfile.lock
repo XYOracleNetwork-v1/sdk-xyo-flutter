@@ -1,0 +1,63 @@
+PODS:
+  - Flutter (1.0.0)
+  - PromisesObjC (1.2.8)
+  - PromisesSwift (1.2.8):
+    - PromisesObjC (= 1.2.8)
+  - sdk-core-swift (3.0.1):
+    - sdk-objectmodel-swift (~> 3.0)
+    - secp256k1.swift
+  - sdk-objectmodel-swift (3.0.2)
+  - sdk-xyo-swift (1.0.1):
+    - sdk-xyobleinterface-swift
+  - sdk-xyobleinterface-swift (3.0.8):
+    - PromisesSwift (~> 1.2.4)
+    - sdk-core-swift (~> 3.0.1)
+    - sdk-objectmodel-swift (~> 3.0)
+    - XyBleSdk (~> 3.0.7)
+  - sdk_xyo_flutter (0.0.1):
+    - Flutter
+    - sdk-xyo-swift (~> 1.0.1)
+    - SwiftProtobuf (~> 1.5)
+  - secp256k1.swift (0.1.4)
+  - SwiftProtobuf (1.7.0)
+  - XyBleSdk (3.0.7):
+    - PromisesSwift
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - sdk_xyo_flutter (from `.symlinks/plugins/sdk_xyo_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - PromisesObjC
+    - PromisesSwift
+    - sdk-core-swift
+    - sdk-objectmodel-swift
+    - sdk-xyo-swift
+    - sdk-xyobleinterface-swift
+    - secp256k1.swift
+    - SwiftProtobuf
+    - XyBleSdk
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  sdk_xyo_flutter:
+    :path: ".symlinks/plugins/sdk_xyo_flutter/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
+  sdk-core-swift: 6b089045fe8483388bd3c82d2d1375d796c29745
+  sdk-objectmodel-swift: 8d880c7871ab0ce16fed958d782c737fd495dd53
+  sdk-xyo-swift: 0932fdf0757154b855fcf548ac15cccac7697398
+  sdk-xyobleinterface-swift: ba891f790841a9c9a503f60548586f3efadc8b23
+  sdk_xyo_flutter: 11341ce3fabab4e0e7c83ee67e5861017011e301
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
+  SwiftProtobuf: 4fd9645e69b72cbae6ec8da5be0cdd20ca6565dd
+  XyBleSdk: 8d63d5cba164fa7d05d662fca0231f065fddccbe
+
+PODFILE CHECKSUM: 1684eb5a3603bbff42054fc5031250e7ae86cfe4
+
+COCOAPODS: 1.8.4
