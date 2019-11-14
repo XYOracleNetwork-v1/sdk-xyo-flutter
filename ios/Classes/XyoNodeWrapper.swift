@@ -1,19 +1,20 @@
 //
-//  NodeBuilderManager.swift
+//  XyoNodeWrapper.swift
 //  sdk-xyo-flutter
 //
 import sdk_xyo_swift
 import sdk_core_swift
 import sdk_objectmodel_swift
 
-internal class NodeBuilderManager: NSObject {
+internal class XyoNodeWrapper: NSObject {
+  public static let instance = XyoNodeWrapper()
+
   var xyoNode : XyoNode?
   var blockRepository: XyoOriginBlockRepository?
   var hasher: XyoHasher?
   var builder: XyoNodeBuilder? = XyoNodeBuilder()
-  public static let instance = NodeBuilderManager()
-  var _eventSink: FlutterEventSink?
-  public var payloadData: [UInt8]?
+  var _completedBWSink: FlutterEventSink?
+  public var payloadString: [UInt8]?
   
   override init() {
     super.init()
@@ -37,38 +38,56 @@ internal class NodeBuilderManager: NSObject {
     let ble = xyoNode?.networks["ble"] as? XyoBleNetwork
     ble?.server?.listen = on
     // stop server listening if listening on
-    if on && ble?.client?.scan == true {
-      ble?.client?.scan = false
-    }
+//    if on && ble?.client?.scan == true {
+//      ble?.client?.scan = false
+//    }
   }
 
   func setScanning(on: Bool) {
     let ble = xyoNode?.networks["ble"] as? XyoBleNetwork
     ble?.client?.scan = on
     // stop server listening if you want to start scanning as client
-    if on && ble?.server?.listen == true {
-      ble?.server?.listen = false
-    }
+//    if on && ble?.server?.listen == true {
+//      ble?.server?.listen = false
+//    }
   }
   
-  func setBridging(on: Bool) {
-    let ble = xyoNode?.networks["ble"] as? XyoBleNetwork
-
+  func setBridging(isClient: Bool, on: Bool) {
     let tcp = xyoNode?.networks["tcpip"] as? XyoTcpipNetwork
-
-    if ble?.client?.scan == true {
+    if isClient {
       tcp?.client?.autoBridge = on
     } else {
       tcp?.server?.autoBridge = on
     }
   }
   
-  func getClient() -> XyoClient? {
-    if let ble = xyoNode?.networks["ble"] as? XyoBleNetwork {
-      return ble.client
+  func setHeuristicString(isClient: Bool, payload: String) {
+    let ble = xyoNode?.networks["ble"] as? XyoBleNetwork
+    if isClient {
+      ble?.client?.stringHeuristic = payload
+    } else {
+      ble?.server?.stringHeuristic = payload
     }
-    return nil
   }
+  
+  var client : XyoClient? {
+    get {
+      if let ble = xyoNode?.networks["ble"] as? XyoBleNetwork {
+        return ble.client
+      }
+      return nil
+    }
+  }
+  
+  var server : XyoServer? {
+    get {
+      if let ble = xyoNode?.networks["ble"] as? XyoBleNetwork {
+        return ble.server
+      }
+      return nil
+    }
+  }
+  
   func getOriginBlock(fromHash: [UInt8]) -> XyoBoundWitness? {
     guard let repo = blockRepository else {
       return nil
@@ -77,9 +96,9 @@ internal class NodeBuilderManager: NSObject {
     return try! repo.getOriginBlock(originBlockHash:fromHash)
   }
   
-  func getPublicKey() -> String? {
-    if let client = getClient() {
-      if let pKey = client.publicKey() {
+  func getPublicKey(isClient : Bool) -> String? {
+    if let target = isClient ? client : server {
+      if let pKey = target.publicKey() {
         return pKey
       }
     }
@@ -88,35 +107,19 @@ internal class NodeBuilderManager: NSObject {
 }
 
 
-extension NodeBuilderManager : FlutterStreamHandler {
+extension XyoNodeWrapper : FlutterStreamHandler {
   public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-       _eventSink = events
+       _completedBWSink = events
        return nil
    }
 
    public func onCancel(withArguments arguments: Any?) -> FlutterError? {
-       _eventSink = nil
+       _completedBWSink = nil
        return nil
    }
-  
-//  private func buildMessage(_ boundWitnessList: DeviceBoundWitnessList) -> Data? {
-//      do {
-//          return try boundWitnessList.serializedData()
-//      } catch {
-//          return nil
-//      }
-//  }
-//
-//  func sendMessage(_ boundWitnesses: [InteractionModel]) {
-//      let boundWitnessList = DeviceBoundWitnessList.with {
-//          $0.boundWitnesses = boundWitnesses.map { witness in witness.toBuffer }
-//      }
-//
-//      _eventSink?(self.buildMessage(boundWitnessList))
-//  }
 }
 
-extension NodeBuilderManager : BoundWitnessDelegate {
+extension XyoNodeWrapper : BoundWitnessDelegate {
   private func hashToBoundWitnesses(hash: XyoObjectStructure) -> DeviceBoundWitness {
     let model = InteractionModel(hash.getBuffer().toByteArray(), date: Date(), linked: true)
     return model.toBuffer
@@ -130,30 +133,23 @@ extension NodeBuilderManager : BoundWitnessDelegate {
     print("Completed BW with \(withDeviceId)")
     
     if let bw = withBoundWitness {
-//      if let bw = withBoundWitness.toBuffer() {
-//
-//      }
       do {
         if try bw.getNewIterator().hasNext() {
-          let boundWitness = hashToBoundWitnesses(hash: try! bw.getHash(hasher: hasher!))
-          try! _eventSink?(boundWitness.serializedData())
-
+          if let her = hasher, let sink = _completedBWSink {
+            let hash = try bw.getHash(hasher: her)
+            let boundWitness = hashToBoundWitnesses(hash: hash)
+            try sink(boundWitness.serializedData())
+          }
         }
       } catch {
-        print("Error thrown")
+        print("Error thrown \(error)")
       }
-      
-      
     }
-
   }
   
   func boundWitness(failed withDeviceId: String?, withError: XyoError) {
     print("Errored BW with \(String(describing: withDeviceId)) \(String(describing: withError))")
   }
   
-  func getPayloadData() -> [UInt8]? {
-    //TODO 
-    return payloadData
-  }
+
 }

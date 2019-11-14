@@ -29,7 +29,7 @@ class InteractionModel {
             return [:]
         }
 
-        return XyoHumanHeuristics.getHumanHeuristics(boundWitness: bw)
+        return XyoHumanHeuristics.getAllHeuristics(boundWitness: bw)
     }
 
     var bytes: String {
@@ -100,22 +100,21 @@ class InteractionModel {
     }
 
     init(_ hash: [UInt8], date: Date, linked: Bool = true) {
-        self.byteHash = hash
-        self.date = date
-        self.linked = linked
-      boundWitness =  NodeBuilderManager.instance.getOriginBlock(fromHash: self.byteHash)
-      print("HERE")
+      self.byteHash = hash
+      self.date = date
+      self.linked = linked
+      boundWitness =  XyoNodeWrapper.instance.getOriginBlock(fromHash: self.byteHash)
     }
 
     var toBuffer: DeviceBoundWitness {
-        return DeviceBoundWitness.with {
-            $0.bytes = self.bytes
-            $0.byteHash = self.byteHash.toHexString()
-            $0.linked = self.linked
-            $0.huerestics = self.huerestics
-            $0.parties = self.parties
-            $0.humanName = self.humanName
-        }
+      return DeviceBoundWitness.with {
+        $0.bytes = self.bytes
+        $0.byteHash = self.byteHash.toHexString()
+        $0.linked = self.linked
+        $0.huerestics = self.huerestics
+        $0.parties = self.parties
+        $0.humanName = self.humanName
+      }
     }
 
 }

@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   
   s.dependency 'Flutter'
   s.dependency 'SwiftProtobuf', '~> 1.5'
-  s.dependency 'sdk-xyo-swift', '~> 1.0.1'
+  s.dependency 'sdk-xyo-swift', '~> 1.0.4'
 
   s.ios.deployment_target = '11.0'
 end
