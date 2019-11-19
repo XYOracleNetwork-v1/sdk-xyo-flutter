@@ -6,7 +6,10 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import network.xyo.*
+import network.xyo.sdk.XyoBleNetwork
+import network.xyo.sdk.XyoNode
+import network.xyo.sdk.XyoNodeBuilder
+
 //import network.xyo.
 
 open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
