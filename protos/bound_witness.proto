@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "network.xyo.ble.flutter.protobuf";
+option java_package = "network.xyo.sdk_xyo_flutter.protobuf";
 
 message DeviceBoundWitnessList {
     repeated DeviceBoundWitness bound_witnesses = 1;
