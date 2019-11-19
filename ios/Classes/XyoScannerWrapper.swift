@@ -75,7 +75,7 @@ internal class XyoScannerWrapper: NSObject, FlutterStreamHandler {
 }
 
 // Wraps the smart scan/central calls, handles the delegate methods and reports updates to the event channel
-internal class SmartScanWrapper {
+internal class SmartScanWrapper:  FlutterPlugin {
 
   fileprivate let smartScan = XYSmartScan.instance
 
@@ -83,22 +83,33 @@ internal class SmartScanWrapper {
   let deviceExited = XyoScannerWrapper()
 
   init(with registrar: FlutterPluginRegistrar) {
-    let entered = FlutterEventChannel(name: "xyo_device_detected_channel", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "xyoDevice", binaryMessenger: registrar.messenger())
+    registrar.addMethodCallDelegate(self, channel: channel)
+
+    let entered = FlutterEventChannel(name: "xyoDeviceDetect", binaryMessenger: registrar.messenger())
     entered.setStreamHandler(deviceDetected)
     
-    let exited = FlutterEventChannel(name: "xyo_device_exited_channel", binaryMessenger: registrar.messenger())
+    let exited = FlutterEventChannel(name: "xyoDeviceOnExit", binaryMessenger: registrar.messenger())
     exited.setStreamHandler(deviceExited)
     
     smartScan.setDelegate(self, key: "xyo_smart_scan_wrapper")
     XyoBluetoothDeviceCreator.enable(enable: true)
     XyoBluetoothDevice.family.enable(enable: true)
     XyoSentinelXDeviceCreator().enable(enable: true)
-    smartScan.start(mode: XYSmartScanMode.foreground)
   }
   
   deinit {
     smartScan.removeDelegate(for: "xyo_smart_scan_wrapper")
   }
+
+  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    if (arguments as! Bool == true) {
+      smartScan.start(mode: XYSmartScanMode.foreground)
+    } else {
+      smartScan.stop()
+    }
+  }
+
 }
 
 

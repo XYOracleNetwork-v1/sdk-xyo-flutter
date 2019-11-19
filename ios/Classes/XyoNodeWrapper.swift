@@ -37,19 +37,13 @@ internal class XyoNodeWrapper: NSObject {
   func setListening(on: Bool) {
     let ble = xyoNode?.networks["ble"] as? XyoBleNetwork
     ble?.server?.listen = on
-    // stop server listening if listening on
-//    if on && ble?.client?.scan == true {
-//      ble?.client?.scan = false
-//    }
+
   }
 
   func setScanning(on: Bool) {
     let ble = xyoNode?.networks["ble"] as? XyoBleNetwork
     ble?.client?.scan = on
-    // stop server listening if you want to start scanning as client
-//    if on && ble?.server?.listen == true {
-//      ble?.server?.listen = false
-//    }
+
   }
   
   func setBridging(isClient: Bool, on: Bool) {

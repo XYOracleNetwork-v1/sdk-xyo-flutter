@@ -172,10 +172,9 @@ class _MyAppState extends State<MyApp> {
             ),
             Row(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    width: 200,
-                    padding: EdgeInsets.all(8),
+                Container(
+                  child: Flexible(
+                    flex: 3,
                     child: TextField(
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -187,8 +186,8 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 if (_payloadString != null)
-                  Container(
-                    width: 150,
+                  Flexible(
+                    flex: 2,
                     child: RaisedButton(
                       child: Text(
                         "Set $nodeType Payload: $_payloadString",

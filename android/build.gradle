@@ -1,16 +1,16 @@
-group 'com.example.sdk_xyo_flutter'
+group 'network.xyo.sdk_xyo_flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.2.71'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
     }
 }
 
@@ -18,20 +18,26 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
+        maven {
+            url  "https://dl.bintray.com/xyoraclenetwork/xyo"
+        }
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.protobuf'
 
 android {
     compileSdkVersion 28
 
     sourceSets {
+        main.proto.srcDirs += "$projectDir/../protos"
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -39,6 +45,39 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.8.0'
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                remove java
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/generated"
+}
+
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'network.xyo:sdk-xyo-android:3.0.129'
+    implementation 'network.xyo:sdk-xyobleinterface-android:2.1.573'
+    implementation 'network.xyo:sdk-base-android:2.1.114'
+    implementation 'network.xyo:sdk-ble-android:3.0.1103'
+    implementation 'network.xyo:sdk-core-kotlin:3.0.33'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'com.github.kotlin-graphics:kotlin-unsigned:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    api 'com.snappydb:snappydb-lib:0.5.2'
+    api 'com.esotericsoftware.kryo:kryo:2.24.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1'
+
+    api 'com.google.protobuf:protobuf-javalite:3.8.0'
+    api "org.bouncycastle:bcpkix-jdk15on:1.64"
+
 }

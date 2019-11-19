@@ -18,11 +18,11 @@ public class SwiftSdkXyoFlutterPlugin: NSObject, FlutterPlugin {
   static var scanner : SmartScanWrapper?
   
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "xyo_node_methods", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "xyoNode", binaryMessenger: registrar.messenger())
     let instance = SwiftSdkXyoFlutterPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
 
-    let boundWitnessChannel = FlutterEventChannel(name: "xyo_bw_success_channel", binaryMessenger: registrar.messenger())
+    let boundWitnessChannel = FlutterEventChannel(name: "xyoNodeEvents", binaryMessenger: registrar.messenger())
     boundWitnessChannel.setStreamHandler(XyoNodeWrapper.instance)
     
     scanner = SmartScanWrapper(with: registrar)
