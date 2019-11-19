@@ -8,12 +8,17 @@ enum XyoNodeType { client, server }
 
 class XyoScanner {
   static XyoScanner instance = XyoScanner();
+  final MethodChannel _channel = const MethodChannel('xyoDevice');
+
   final EventChannel _deviceDetectedChannel =
-      const EventChannel('xyo_device_detected_channel');
+      const EventChannel('xyoDeviceOnDetect');
   final EventChannel _deviceExitedChannel =
-      const EventChannel('xyo_device_exited_channel');
-  Stream<BluetoothDevice> _deviceDetectedStream;
-  Stream<List<BluetoothDevice>> _deviceExitedStream;
+      const EventChannel('xyoDeviceOnExit');
+
+  Future<bool> setListening(bool on) async {
+    final bool success = await _channel.invokeMethod('setListening', on);
+    return success;
+  }
 
   Stream<BluetoothDevice> onDeviceDetected() {
     return _deviceDetectedChannel
@@ -24,25 +29,22 @@ class XyoScanner {
     });
   }
 
-  Stream<List<BluetoothDevice>> onDeviceExited() {
-    List<BluetoothDevice> bws = [];
-    _deviceExitedStream ??= _deviceExitedChannel
+  Stream<BluetoothDevice> onDeviceExited() {
+    return _deviceExitedChannel
         .receiveBroadcastStream()
-        .map<List<BluetoothDevice>>((value) {
+        .map<BluetoothDevice>((value) {
       final bw = BluetoothDevice.fromBuffer(value);
-      bws.add(bw);
-      return bws;
+      return bw;
     });
-    return _deviceExitedStream;
   }
 }
 
 class XyoNode {
   static XyoNode instance = XyoNode();
 
-  final MethodChannel _channel = const MethodChannel('xyo_node_methods');
+  final MethodChannel _channel = const MethodChannel('xyoNode');
   final EventChannel _boundWitnessSuccessChannel =
-      const EventChannel('xyo_bw_success_channel');
+      const EventChannel('xyoNodeEvents');
 
   Stream<List<DeviceBoundWitness>> _boundWitnessSuccessStream;
 

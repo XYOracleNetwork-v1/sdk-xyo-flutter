@@ -1,4 +1,4 @@
-package network.xyo.ble.xyo_ble.channels
+package network.xyo.sdk_xyo_flutter.channels
 
 import io.flutter.plugin.common.*
 import kotlinx.coroutines.GlobalScope

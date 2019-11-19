@@ -1,61 +1,26 @@
 package network.xyo.sdk_xyo_flutter
 
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
-import io.flutter.plugin.common.EventChannel
+import network.xyo.sdk_xyo_flutter.channels.XyoNodeChannel
+import network.xyo.ble.generic.scanner.XYSmartScanModern
+import network.xyo.sdk_xyo_flutter.channels.XyoDeviceChannel
 
-import network.xyo.ble.xyo_ble.ui
-
-class EventStreamHandler: EventChannel.StreamHandler {
-  private var eventSink: EventChannel.EventSink? = null
-
-  override fun onListen(args: Any?, eventSink: EventChannel.EventSink?) {
-    this.eventSink = eventSink
-  }
-
-  override fun onCancel(args: Any?) {
-    this.eventSink = null
-  }
-
-  fun send(event: Any) {
-    ui {
-      eventSink?.success(event)
-    }
-  }
-}
-
-class SdkXyoFlutterPlugin: MethodCallHandler {
+class SdkXyoFlutterPlugin {
   companion object {
-    private val onDetect = EventStreamHandler()
-    private val onBoundWitnessSuccess = EventStreamHandler()
+    var node:XyoNodeChannel? = null
+    var device:XyoDeviceChannel? = null
 
     @JvmStatic
     fun registerWith(registrar: Registrar) {
-      val channel = MethodChannel(registrar.messenger(), "xyo_node_methods")
-      channel.setMethodCallHandler(SdkXyoFlutterPlugin())
+      val context = registrar.activeContext()
+      val smartScan = XYSmartScanModern(context.applicationContext)
 
-      val deviewChannel = EventChannel(registrar.messenger(), "xyo_device_detected_channel")
 
-      deviewChannel.setStreamHandler(onDetect)
-
-      val boundWitnessChannel = EventChannel(registrar.messenger(), "xyo_bw_success_channel")
-
-      boundWitnessChannel.setStreamHandler(onBoundWitnessSuccess)
+      node = XyoNodeChannel(context, registrar, "xyoNode")
+      node?.initializeChannels()
+      device = XyoDeviceChannel(context, smartScan, registrar, "xyoDevice")
+      device?.initializeChannels()
     }
 
-  }
-
-  override fun onMethodCall(call: MethodCall, result: Result) {
-    if (call.method == "build") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else if (call.method == "getPublicKey") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    }
-    else {
-      result.notImplemented()
-    }
   }
 }

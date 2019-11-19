@@ -1,4 +1,4 @@
-package network.xyo.ble.xyo_ble.channels
+package network.xyo.sdk_xyo_flutter.channels
 
 import android.content.Context
 import io.flutter.plugin.common.MethodCall
@@ -14,8 +14,7 @@ import network.xyo.sdk.XyoNodeBuilder
 
 open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
   lateinit var node: XyoNode
-
-  protected var status = STATUS_STOPPED
+  var context: Context = context
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
     when (call.method) {
@@ -32,11 +31,11 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
 
   private fun build(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val builder = XyoNodeBuilder()
-    node = builder.build(this)
+    node = builder.build(context)
   }
 
   private fun setBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val args = call.arguments as Any
+    val args = call.arguments as List<Boolean>
     val isClient = args[0]
     val setBridging = args[1]
     (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
@@ -46,33 +45,44 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
         network.server.autoBridge = setBridging
       }
     }
-    sendResult(result, status)
+    sendResult(result, true)
   }
   private fun setListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val args = call.arguments as Any
+    val args = call.arguments as Boolean
     val on = args
     (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
-      network.server.listening = on
+      network.server.listen = on
     }
-    sendResult(result, status)
+    sendResult(result, true)
   }
 
   private fun setScanning(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    status = onStartAsync().await()
-    sendResult(result, status)
+    val args = call.arguments as Boolean
+    val on = args
+    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      network.client.scan = on
+    }
+    sendResult(result, true)
   }
 
   private fun setPayloadData(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    status = onStopAsync().await()
-    sendResult(result, status)
+    val args = call.arguments  as List<Any>
+    val isClient = args[0]
+    val payload = args[1]
+    //
+    sendResult(result, true)
   }
 
   private fun getPublicKey(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    sendResult(result, XyoSdk.getPrimaryPublicKeyAsString())
+    val args = call.arguments as Boolean
+    val isClient = args
+    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      if (isClient) {
+        sendResult(result, network.client.publicKey)
+      } else {
+        sendResult(result, network.server.publicKey)
+      }
+    }
   }
 
-  companion object {
-    const val STATUS_STARTED = "started"
-    const val STATUS_STOPPED = "stopped"
-  }
 }

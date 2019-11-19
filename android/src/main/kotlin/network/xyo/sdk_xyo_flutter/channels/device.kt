@@ -1,4 +1,4 @@
-package network.xyo.ble.xyo_ble.channels
+package network.xyo.sdk_xyo_flutter.channels
 
 import android.content.Context
 import io.flutter.plugin.common.*
@@ -66,7 +66,6 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
   private val onDetectChannel = EventChannel(registrar.messenger(), "${name}OnDetect")
 
   init {
-
     smartScan.addListener("device", listener)
   }
 
@@ -79,19 +78,20 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
     when (call.method) {
-      "start" -> start(call, result)
-      "stop" -> stop(call, result)
+      "setListening" -> setListening(call, result)
       else -> super.onMethodCall(call, result)
     }
   }
 
-  private fun start(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+  private fun setListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+    if (call.arguments as Boolean == true) {
+      smartScan.start()
+    } else {
+      smartScan.stop()
+    }
     sendResult(result, true)
   }
 
-  private fun stop(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    sendResult(result, true)
-  }
 
 
 }

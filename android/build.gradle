@@ -71,6 +71,7 @@ dependencies {
     implementation 'network.xyo:sdk-core-kotlin:3.0.33'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api 'com.github.kotlin-graphics:kotlin-unsigned:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     api 'com.snappydb:snappydb-lib:0.5.2'
     api 'com.esotericsoftware.kryo:kryo:2.24.0'
