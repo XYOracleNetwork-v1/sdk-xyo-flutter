@@ -39,8 +39,8 @@ class XyoScanner {
   }
 }
 
-class XyoNode {
-  static XyoNode instance = XyoNode();
+class XyoSdkDartBridge {
+  static XyoSdkDartBridge instance = XyoSdkDartBridge();
 
   final MethodChannel _channel = const MethodChannel('xyoNode');
   final EventChannel _boundWitnessSuccessChannel =
@@ -48,8 +48,9 @@ class XyoNode {
 
   Stream<List<DeviceBoundWitness>> _boundWitnessSuccessStream;
 
-  Future<String> get build async {
+  Future<String> build() async {
     final String version = await _channel.invokeMethod('build');
+
     return version;
   }
 
@@ -91,4 +92,8 @@ class XyoNode {
     });
     return _boundWitnessSuccessStream;
   }
+
+  void setAutoBoundWitnessing(bool param0, bool autoBoundWitness) {}
+
+  void setAcceptBridging(bool param0, bool acceptBridging) {}
 }

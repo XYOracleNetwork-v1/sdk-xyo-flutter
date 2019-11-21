@@ -103,11 +103,14 @@ internal class SmartScanWrapper:  FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    if (arguments as! Bool == true) {
-      smartScan.start(mode: XYSmartScanMode.foreground)
-    } else {
-      smartScan.stop()
+    if (call.method == "setListening") {
+      if (arguments as! Bool == true) {
+        smartScan.start(mode: XYSmartScanMode.foreground)
+      } else {
+        smartScan.stop()
+      }
     }
+
   }
 
 }

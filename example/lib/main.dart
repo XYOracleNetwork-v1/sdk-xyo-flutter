@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
+import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
+import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
+import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
+import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,12 +19,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _isClient = true;
-  String _buildMessage = 'Unknown';
+  XyoNode _xyoNode;
   String _publicKey = "";
-  bool _bridging = false;
-  bool _scanning = false;
-  bool _listening = false;
+
   String _payloadString;
+
   @override
   void initState() {
     super.initState();
@@ -30,22 +32,19 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> buildXyo() async {
-    String buildMessage;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      buildMessage = await XyoNode.instance.build;
+      final builder = XyoNodeBuilder();
+      final xyoNode = await builder.build();
+
+      if (!mounted) return;
+
+      setState(() {
+        _xyoNode = xyoNode;
+      });
     } on PlatformException {
-      buildMessage = 'Failed to build XYO.';
+      print("Received Platform Exception");
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _buildMessage = buildMessage;
-    });
   }
 
   Widget _buildTile(DeviceBoundWitness s) {
@@ -85,7 +84,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('XYO $nodeType Config'),
+          title: Text('XY $nodeType Config'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -94,8 +93,9 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 RaisedButton(
                     onPressed: () async {
-                      String address =
-                          await XyoNode.instance.getPublicKey(_isClient);
+                      String address = _isClient
+                          ? await _xyoNode.getClient('ble').getPublicKey()
+                          : await _xyoNode.getServer('ble').getPublicKey();
                       setState(() {
                         _publicKey = address;
                       });
@@ -134,12 +134,9 @@ class _MyAppState extends State<MyApp> {
                   Text("Toggle Client BW Scanning"),
                   Switch(
                       onChanged: (isOn) async {
-                        bool result = await XyoNode.instance.setScanning(isOn);
-                        setState(() {
-                          _scanning = isOn;
-                        });
+                        _xyoNode.getClient('ble').scan = isOn;
                       },
-                      value: _scanning),
+                      value: _xyoNode.getClient('ble').scan),
                 ],
               ),
             if (!_isClient)
@@ -148,12 +145,9 @@ class _MyAppState extends State<MyApp> {
                   Text("Toggle Server Listening"),
                   Switch(
                       onChanged: (isOn) async {
-                        bool result = await XyoNode.instance.setListening(isOn);
-                        setState(() {
-                          _listening = isOn;
-                        });
+                        _xyoNode.getServer('ble').listen = isOn;
                       },
-                      value: _listening),
+                      value: _xyoNode.getServer('ble').listen),
                 ],
               ),
             Row(
@@ -161,13 +155,15 @@ class _MyAppState extends State<MyApp> {
                 Text("Toggle Bridging on $nodeType"),
                 Switch(
                     onChanged: (isOn) async {
-                      bool result =
-                          await XyoNode.instance.setBridging(_isClient, isOn);
-                      setState(() {
-                        _bridging = isOn;
-                      });
+                      if (_isClient) {
+                        _xyoNode.getClient('ble').autoBridge = isOn;
+                      } else {
+                        _xyoNode.getServer('ble').autoBridge = isOn;
+                      }
                     },
-                    value: _bridging),
+                    value: _isClient
+                        ? _xyoNode.getClient('ble').autoBridge
+                        : _xyoNode.getServer('ble').autoBridge),
               ],
             ),
             Row(
@@ -189,13 +185,19 @@ class _MyAppState extends State<MyApp> {
                   Flexible(
                     flex: 2,
                     child: RaisedButton(
-                      child: Text(
-                        "Set $nodeType Payload: $_payloadString",
-                        softWrap: true,
-                      ),
-                      onPressed: () => XyoNode.instance
-                          .setPayloadString(_isClient, _payloadString),
-                    ),
+                        child: Text(
+                          "Set $nodeType Payload: $_payloadString",
+                          softWrap: true,
+                        ),
+                        onPressed: () {
+                          if (_isClient) {
+                            _xyoNode.getClient('ble').stringHeuristic =
+                                _payloadString;
+                          } else {
+                            _xyoNode.getServer('ble').stringHeuristic =
+                                _payloadString;
+                          }
+                        }),
                   )
               ],
             ),
@@ -212,22 +214,40 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             Text("Bound Witnesses:"),
-            Flexible(
-              flex: 3,
-              child: StreamBuilder<List<DeviceBoundWitness>>(
-                stream: XyoNode.instance.onBoundWitnessSuccess(),
-                builder: (context, snapshot) {
-                  final bws = snapshot.data;
-                  if (bws == null) return Container();
-                  final count = bws.length;
-                  return ListView.builder(
-                      itemCount: count,
-                      itemBuilder: (BuildContext context, int index) {
-                        return _buildTile(bws[index]);
-                      });
-                },
+            if (_isClient)
+              Flexible(
+                flex: 3,
+                child: StreamBuilder<List<DeviceBoundWitness>>(
+                  stream: _xyoNode.getClient('ble').onBoundWitnessSuccess(),
+                  builder: (context, snapshot) {
+                    final bws = snapshot.data;
+                    if (bws == null) return Container();
+                    final count = bws.length;
+                    return ListView.builder(
+                        itemCount: count,
+                        itemBuilder: (BuildContext context, int index) {
+                          return _buildTile(bws[index]);
+                        });
+                  },
+                ),
               ),
-            ),
+            if (!_isClient)
+              Flexible(
+                flex: 3,
+                child: StreamBuilder<List<DeviceBoundWitness>>(
+                  stream: _xyoNode.getServer('ble').onBoundWitnessSuccess(),
+                  builder: (context, snapshot) {
+                    final bws = snapshot.data;
+                    if (bws == null) return Container();
+                    final count = bws.length;
+                    return ListView.builder(
+                        itemCount: count,
+                        itemBuilder: (BuildContext context, int index) {
+                          return _buildTile(bws[index]);
+                        });
+                  },
+                ),
+              ),
           ]),
         ),
       ),

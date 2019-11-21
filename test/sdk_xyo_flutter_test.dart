@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('sdk_xyo_flutter');
