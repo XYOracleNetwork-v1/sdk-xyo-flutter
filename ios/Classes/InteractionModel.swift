@@ -99,11 +99,12 @@ class InteractionModel {
         return try publicKeySet.get(index: 0).getBuffer().toByteArray()
     }
 
-    init(_ hash: [UInt8], date: Date, linked: Bool = true) {
+  init(_ hash: [UInt8], date: Date, boundWitness: XyoBoundWitness, linked: Bool = true) {
       self.byteHash = hash
       self.date = date
       self.linked = linked
-      boundWitness =  XyoNodeWrapper.instance.getOriginBlock(fromHash: self.byteHash)
+    self.boundWitness = boundWitness
+//    XyoNodeChannel.instance.getOriginBlock(fromHash: self.byteHash)
     }
 
     var toBuffer: DeviceBoundWitness {

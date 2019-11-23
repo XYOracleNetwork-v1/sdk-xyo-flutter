@@ -1,4 +1,3 @@
-import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoClient.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoServer.dart';

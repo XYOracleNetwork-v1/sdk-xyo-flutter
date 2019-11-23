@@ -10,9 +10,6 @@ class XyoNodeBuilder {
   }
 
   defaultNetworks() {
-    return [
-      {"ble": XyoBleNetwork()},
-      {"tcp": XyoTcpNetwork()}
-    ];
+    return {"ble": XyoBleNetwork(), "tcp": XyoTcpNetwork()};
   }
 }

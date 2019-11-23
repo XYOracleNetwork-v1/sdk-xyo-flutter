@@ -8,7 +8,6 @@ import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
 import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
-import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 
 void main() => runApp(MyApp());
 
@@ -60,8 +59,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _buildDeviceTile(BluetoothDevice s) {
-    final fmt = DateFormat("MMMM dd, h:mm a");
-
     return ListTile(
       title: Text(
         "${s.family.name} ${s.family.prefix} - ${s.family.uuid} ",
@@ -80,6 +77,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    if (_xyoNode == null) {
+      return Center(child: CircularProgressIndicator());
+    }
     String nodeType = _isClient ? "Client" : "Server";
     return MaterialApp(
       home: Scaffold(

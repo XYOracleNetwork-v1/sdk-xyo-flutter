@@ -1,5 +1,5 @@
 //
-//  XyoScannerWrapper.swift
+//  XyoDeviceChannel.swift
 //  Pods
 //
 //  Created by Kevin Weiler on 11/13/19.
@@ -46,56 +46,31 @@ extension XYIBeaconDefinition {
     }
 }
 
-// Wraps up the event listener and the event sink, used by the wrapper below
-internal class XyoScannerWrapper: NSObject, FlutterStreamHandler {
-
-    var eventSink: FlutterEventSink?
-
-    func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-        self.eventSink = events
-        return nil
-    }
-
-    func onCancel(withArguments arguments: Any?) -> FlutterError? {
-        self.eventSink = nil
-        return nil
-    }
-
-    private func buildMessage(_ device: XYBluetoothDevice) -> Data? {
-        do {
-            return try device.toBuffer.serializedData()
-        } catch {
-            return nil
-        }
-    }
-
-    func sendMessage(_ device: XYBluetoothDevice) {
-        self.eventSink?(self.buildMessage(device))
-    }
-}
-
 // Wraps the smart scan/central calls, handles the delegate methods and reports updates to the event channel
-internal class SmartScanWrapper:  FlutterPlugin {
+internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
+  static func register(with registrar: FlutterPluginRegistrar) {
+    //we do nothing here since this is only so that the addMethodCallDelegate will be ok with it
+  }
 
   fileprivate let smartScan = XYSmartScan.instance
+  let deviceDetected = XyoNodeStreamHandler()
+  let deviceExited = XyoNodeStreamHandler()
 
-  let deviceDetected = XyoScannerWrapper()
-  let deviceExited = XyoScannerWrapper()
-
-  init(with registrar: FlutterPluginRegistrar) {
+  init(registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "xyoDevice", binaryMessenger: registrar.messenger())
-    registrar.addMethodCallDelegate(self, channel: channel)
 
-    let entered = FlutterEventChannel(name: "xyoDeviceDetect", binaryMessenger: registrar.messenger())
+    let entered = FlutterEventChannel(name: "xyoDeviceOnDetect", binaryMessenger: registrar.messenger())
     entered.setStreamHandler(deviceDetected)
     
     let exited = FlutterEventChannel(name: "xyoDeviceOnExit", binaryMessenger: registrar.messenger())
     exited.setStreamHandler(deviceExited)
     
-    smartScan.setDelegate(self, key: "xyo_smart_scan_wrapper")
     XyoBluetoothDeviceCreator.enable(enable: true)
     XyoBluetoothDevice.family.enable(enable: true)
     XyoSentinelXDeviceCreator().enable(enable: true)
+    super.init()
+    registrar.addMethodCallDelegate(self, channel: channel)
+    smartScan.setDelegate(self, key: "xyo_smart_scan_wrapper")
   }
   
   deinit {
@@ -104,7 +79,7 @@ internal class SmartScanWrapper:  FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     if (call.method == "setListening") {
-      if (arguments as! Bool == true) {
+      if (call.arguments as! Bool == true) {
         smartScan.start(mode: XYSmartScanMode.foreground)
       } else {
         smartScan.stop()
@@ -117,7 +92,7 @@ internal class SmartScanWrapper:  FlutterPlugin {
 
 
 
-extension SmartScanWrapper: XYSmartScanDelegate {
+extension XyoDeviceChannel: XYSmartScanDelegate {
 
   func smartScan(status: XYSmartScanStatus) {}
   func smartScan(location: XYLocationCoordinate2D) {}
@@ -126,11 +101,16 @@ extension SmartScanWrapper: XYSmartScanDelegate {
   func smartScan(exiting device: XYBluetoothDevice) {}
   
   func smartScan(detected device: XYBluetoothDevice, rssi: Int, family: XYDeviceFamily) {
-    self.deviceDetected.sendMessage(device)
+    if let sink = deviceDetected.eventSink {
+      try? sink(device.toBuffer.serializedData())
+    }
   }
 
   func smartScan(exited device: XYBluetoothDevice) {
-    self.deviceExited.sendMessage(device)
+    if let sink = deviceExited.eventSink {
+      try? sink(device.toBuffer.serializedData())
+    }
+    
   }
 
 }

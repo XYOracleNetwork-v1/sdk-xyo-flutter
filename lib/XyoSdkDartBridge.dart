@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 
 enum XyoNodeType { client, server }
@@ -43,10 +42,6 @@ class XyoSdkDartBridge {
   static XyoSdkDartBridge instance = XyoSdkDartBridge();
 
   final MethodChannel _channel = const MethodChannel('xyoNode');
-  final EventChannel _boundWitnessSuccessChannel =
-      const EventChannel('xyoNodeEvents');
-
-  Stream<List<DeviceBoundWitness>> _boundWitnessSuccessStream;
 
   Future<String> build() async {
     final String version = await _channel.invokeMethod('build');
@@ -79,18 +74,6 @@ class XyoSdkDartBridge {
     final bool success =
         await _channel.invokeMethod('setPayloadData', [isClient, data]);
     return success;
-  }
-
-  Stream<List<DeviceBoundWitness>> onBoundWitnessSuccess() {
-    List<DeviceBoundWitness> bws = [];
-    _boundWitnessSuccessStream ??= _boundWitnessSuccessChannel
-        .receiveBroadcastStream()
-        .map<List<DeviceBoundWitness>>((value) {
-      final bw = DeviceBoundWitness.fromBuffer(value);
-      bws.add(bw);
-      return bws;
-    });
-    return _boundWitnessSuccessStream;
   }
 
   void setAutoBoundWitnessing(bool param0, bool autoBoundWitness) {}

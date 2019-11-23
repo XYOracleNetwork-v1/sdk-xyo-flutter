@@ -11,26 +11,29 @@ abstract class XyoNetwork {
 
 class XyoBleNetwork extends XyoNetwork {
   XyoBleNetwork() : super() {
-    client = XyoBleClient();
-    client.autoBoundWitness = true;
+    type = XyoNetworkType.ble;
+
+    client = XyoBleClient(XyoNetworkType.ble);
+    client.autoBoundWitness = false; // true
     client.autoBridge = false;
     client.acceptBridging = false;
-    client.scan = true;
-    server = XyoBleServer();
-    server.autoBridge = false;
+    client.scan = false; // true
+    server = XyoBleServer(XyoNetworkType.ble);
+    server.autoBridge = false; // true
     server.acceptBridging = false;
-    server.listen = true;
+    server.listen = false;
   }
 }
 
 class XyoTcpNetwork extends XyoNetwork {
   XyoTcpNetwork() : super() {
-    client = XyoTcpClient();
+    type = XyoNetworkType.tcpip;
+    client = XyoTcpClient(XyoNetworkType.tcpip);
     client.autoBoundWitness = true;
     client.autoBridge = false;
     client.acceptBridging = false;
     client.scan = true;
-    server = XyoTcpServer();
+    server = XyoTcpServer(XyoNetworkType.tcpip);
     server.autoBridge = false;
     server.acceptBridging = false;
     server.listen = true;
