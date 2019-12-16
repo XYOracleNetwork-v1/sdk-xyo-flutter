@@ -24,7 +24,7 @@ PODS:
     - PromisesSwift
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - sdk_xyo_flutter (from `.symlinks/plugins/sdk_xyo_flutter/ios`)
 
 SPEC REPOS:
@@ -41,7 +41,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   sdk_xyo_flutter:
     :path: ".symlinks/plugins/sdk_xyo_flutter/ios"
 
@@ -58,6 +58,6 @@ SPEC CHECKSUMS:
   SwiftProtobuf: 4fd9645e69b72cbae6ec8da5be0cdd20ca6565dd
   XyBleSdk: 8d63d5cba164fa7d05d662fca0231f065fddccbe
 
-PODFILE CHECKSUM: 1684eb5a3603bbff42054fc5031250e7ae86cfe4
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
 COCOAPODS: 1.8.4
