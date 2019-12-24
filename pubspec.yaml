@@ -1,21 +1,21 @@
 name: sdk_xyo_flutter
-description: A new flutter plugin project.
+description: XYO SDK for Flutter Projects
 version: 0.0.1
-author:
-homepage:
+author: XYO Open Source Team
+homepage: https://xyo.network
 
 environment:
-  sdk: '>=2.2.2 <3.0.0'
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   protobuf: ^1.0.0
+  mutex: ^1.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -29,6 +29,7 @@ flutter:
   plugin:
     androidPackage: network.xyo.sdk_xyo_flutter
     pluginClass: SdkXyoFlutterPlugin
+
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -39,6 +40,7 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
+
   # To add custom fonts to your plugin package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

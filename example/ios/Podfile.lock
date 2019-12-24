@@ -53,11 +53,11 @@ SPEC CHECKSUMS:
   sdk-objectmodel-swift: a60e0bca94cac846589720322d63bf65b7eb584f
   sdk-xyo-swift: 0bfc143aa36bc7fa52c876f1de66e4687d0e1e86
   sdk-xyobleinterface-swift: 335aa5ee475c1f680d2461a4d622f02532613e91
-  sdk_xyo_flutter: 043d490bfe4325911ab3745005a7ef40686d8908
+  sdk_xyo_flutter: 8b947d79d1cca664819c2a9ed695c06864867726
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SwiftProtobuf: 4fd9645e69b72cbae6ec8da5be0cdd20ca6565dd
   XyBleSdk: 8d63d5cba164fa7d05d662fca0231f065fddccbe
 
-PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+PODFILE CHECKSUM: 73d69d282a87aa0aafabdecb47f632fc347a9aac
 
 COCOAPODS: 1.8.4

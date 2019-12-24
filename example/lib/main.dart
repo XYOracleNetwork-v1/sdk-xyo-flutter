@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
-import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 
 void main() => runApp(MyApp());
@@ -24,15 +23,15 @@ class _MyAppState extends State<MyApp> {
   String _payloadString;
 
   @override
-  void initState() {
-    super.initState();
-    buildXyo();
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    await buildXyo();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> buildXyo() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
+    // try {
       final builder = XyoNodeBuilder();
       final xyoNode = await builder.build();
 
@@ -41,9 +40,9 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         _xyoNode = xyoNode;
       });
-    } on PlatformException {
+    /*} on PlatformException {
       print("Received Platform Exception");
-    }
+    }*/
   }
 
   Widget _buildTile(DeviceBoundWitness s) {

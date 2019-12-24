@@ -32,6 +32,7 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   private fun build(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val builder = XyoNodeBuilder()
     node = builder.build(context)
+    sendResult(result, true)
   }
 
   private fun setBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {

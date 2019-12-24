@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pb.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 
