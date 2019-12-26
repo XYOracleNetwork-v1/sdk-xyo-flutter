@@ -19,6 +19,7 @@ class XyoClient extends XyoBoundWitnessTarget {
   set scan(bool scan) {
     isScanning = scan;
     XyoSdkDartBridge.instance.setScanning(scan);
+    notifyListeners();
   }
 
   set autoBoundWitness(bool autoBoundWitness) {

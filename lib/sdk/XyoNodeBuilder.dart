@@ -6,7 +6,7 @@ class XyoNodeBuilder {
   Future<XyoNode> build() async {
     print("XyoNodeBuilder: build");
     XyoNode node = XyoNode(defaultNetworks());
-    var result = await XyoSdkDartBridge.instance.build();
+    await XyoSdkDartBridge.instance.build();
     return node;
   }
 

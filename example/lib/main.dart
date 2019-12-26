@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   bool _isClient = true;
   XyoNode _xyoNode;
   String _publicKey = "";
+  bool _scanning = false;
 
   String _payloadString;
 
@@ -26,20 +27,25 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     await buildXyo();
+    _xyoNode.getClient('ble').addListener(() {
+      setState(() {
+        _scanning = _xyoNode.getClient('ble').scan;
+      });
+    });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> buildXyo() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // try {
-      final builder = XyoNodeBuilder();
-      final xyoNode = await builder.build();
+    final builder = XyoNodeBuilder();
+    final xyoNode = await builder.build();
 
-      if (!mounted) return;
+    if (!mounted) return;
 
-      setState(() {
-        _xyoNode = xyoNode;
-      });
+    setState(() {
+      _xyoNode = xyoNode;
+    });
     /*} on PlatformException {
       print("Received Platform Exception");
     }*/
@@ -132,10 +138,11 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Text("Toggle Client BW Scanning"),
                   Switch(
-                      onChanged: (isOn) async {
-                        _xyoNode.getClient('ble').scan = isOn;
-                      },
-                      value: _xyoNode.getClient('ble').scan),
+                    onChanged: (isOn) async {
+                      _xyoNode.getClient('ble').scan = isOn;
+                    },
+                    value: _scanning,
+                  ),
                 ],
               ),
             if (!_isClient)
@@ -143,26 +150,26 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Text("Toggle Server Listening"),
                   Switch(
-                      onChanged: (isOn) async {
-                        _xyoNode.getServer('ble').listen = isOn;
-                      },
-                      value: _xyoNode.getServer('ble').listen),
+                    onChanged: (isOn) async {
+                      _xyoNode.getServer('ble').listen = isOn;
+                    },
+                    value: _xyoNode.getServer('ble').listen,
+                  ),
                 ],
               ),
             Row(
               children: <Widget>[
                 Text("Toggle Bridging on $nodeType"),
                 Switch(
-                    onChanged: (isOn) async {
-                      if (_isClient) {
-                        _xyoNode.getClient('ble').autoBridge = isOn;
-                      } else {
-                        _xyoNode.getServer('ble').autoBridge = isOn;
-                      }
-                    },
-                    value: _isClient
-                        ? _xyoNode.getClient('ble').autoBridge
-                        : _xyoNode.getServer('ble').autoBridge),
+                  onChanged: (isOn) async {
+                    if (_isClient) {
+                      _xyoNode.getClient('ble').autoBridge = isOn;
+                    } else {
+                      _xyoNode.getServer('ble').autoBridge = isOn;
+                    }
+                  },
+                  value: _isClient ? _xyoNode.getClient('ble').autoBridge : _xyoNode.getServer('ble').autoBridge,
+                ),
               ],
             ),
             Row(
@@ -171,9 +178,7 @@ class _MyAppState extends State<MyApp> {
                   child: Flexible(
                     flex: 3,
                     child: TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Enter $nodeType payload'),
+                      decoration: InputDecoration(border: OutlineInputBorder(), hintText: 'Enter $nodeType payload'),
                       onChanged: (newVal) => setState(() {
                         _payloadString = newVal;
                       }),
@@ -190,11 +195,9 @@ class _MyAppState extends State<MyApp> {
                         ),
                         onPressed: () {
                           if (_isClient) {
-                            _xyoNode.getClient('ble').stringHeuristic =
-                                _payloadString;
+                            _xyoNode.getClient('ble').stringHeuristic = _payloadString;
                           } else {
-                            _xyoNode.getServer('ble').stringHeuristic =
-                                _payloadString;
+                            _xyoNode.getServer('ble').stringHeuristic = _payloadString;
                           }
                         }),
                   )

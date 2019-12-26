@@ -1,6 +1,7 @@
 package network.xyo.sdk_xyo_flutter.channels
 
 import android.content.Context
+import io.flutter.Log
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
@@ -12,16 +13,19 @@ import network.xyo.sdk.XyoNodeBuilder
 
 //import network.xyo.
 
+@kotlin.ExperimentalUnsignedTypes
 open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
   lateinit var node: XyoNode
   var context: Context = context
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+    Log.i(TAG, "onMethodCall [" + call.method + "]")
     when (call.method) {
       "build" -> build(call, result)
       "getPublicKey" -> getPublicKey(call, result)
       "setBridging" -> setBridging(call, result)
       "setScanning" -> setScanning(call, result)
+      "getScanning" -> getScanning(call, result)
       "setPayloadData" -> setPayloadData(call, result)
       "setListening" -> setListening(call, result)
       else -> super.onMethodCall(call, result)
@@ -61,9 +65,19 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
     val args = call.arguments as Boolean
     val on = args
     (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
-      network.client.scan = on
+      if (network.client.scan != on) {
+        network.client.scan = on
+      }
     }
-    sendResult(result, true)
+    sendResult(result, on)
+  }
+
+  private fun getScanning(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      sendResult(result, network.client.scan)
+      return@launch
+    }
+    sendResult(result, false)
   }
 
   private fun setPayloadData(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
@@ -84,6 +98,10 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
         sendResult(result, network.server.publicKey)
       }
     }
+  }
+
+  companion object {
+    val TAG = "XyoNodeChannel"
   }
 
 }

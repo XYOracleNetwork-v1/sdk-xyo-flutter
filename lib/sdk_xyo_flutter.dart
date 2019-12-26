@@ -56,7 +56,7 @@ class XyoSdkDartBridge {
       // check a second time since after the pause it may have been set
       if (_version == null) {
         print("SDK:initialize2");
-        _version = await _channel.invokeMethod('build');
+        _version = (await _channel.invokeMethod('build')).toString();
       }
     }
     finally {
@@ -88,8 +88,15 @@ class XyoSdkDartBridge {
   Future<bool> setScanning(bool on) async {
     await initialize();
     print("SDK:setScanning");
-    final bool success = await _channel.invokeMethod('setScanning', on);
-    return success;
+    final bool scanning = await _channel.invokeMethod('setScanning', on);
+    return scanning;
+  }
+
+  Future<bool> getScanning() async {
+    await initialize();
+    print("SDK:getScanning");
+    final bool scanning = await _channel.invokeMethod('getScanning');
+    return scanning;
   }
 
   Future<bool> setListening(bool on) async {
