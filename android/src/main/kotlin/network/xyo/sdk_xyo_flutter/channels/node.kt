@@ -24,6 +24,7 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
       "build" -> build(call, result)
       "getPublicKey" -> getPublicKey(call, result)
       "setBridging" -> setBridging(call, result)
+      "getBridging" -> getBridging(call, result)
       "setScanning" -> setScanning(call, result)
       "getScanning" -> getScanning(call, result)
       "setPayloadData" -> setPayloadData(call, result)
@@ -52,6 +53,20 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
     }
     sendResult(result, true)
   }
+
+  private fun getBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+    val args = call.arguments as List<Boolean>
+    val isClient = args[0]
+    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      if (isClient) {
+        sendResult(result, network.client.autoBridge)
+      } else {
+        sendResult(result, network.server.autoBridge)
+      }
+    }
+    sendResult(result, true)
+  }
+
   private fun setListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val args = call.arguments as Boolean
     val on = args

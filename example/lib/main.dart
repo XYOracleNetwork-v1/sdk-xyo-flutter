@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   XyoNode _xyoNode;
   String _publicKey = "";
   bool _scanning = false;
+  bool _autoBridging = false;
 
   String _payloadString;
 
@@ -30,6 +31,12 @@ class _MyAppState extends State<MyApp> {
     _xyoNode.getClient('ble').addListener(() {
       setState(() {
         _scanning = _xyoNode.getClient('ble').scan;
+        _autoBridging = _xyoNode.getClient('ble').autoBridge;
+      });
+    });
+    _xyoNode.getServer('ble').addListener(() {
+      setState(() {
+        _autoBridging = _xyoNode.getServer('ble').autoBridge;
       });
     });
   }
@@ -168,7 +175,7 @@ class _MyAppState extends State<MyApp> {
                       _xyoNode.getServer('ble').autoBridge = isOn;
                     }
                   },
-                  value: _isClient ? _xyoNode.getClient('ble').autoBridge : _xyoNode.getServer('ble').autoBridge,
+                  value: _autoBridging,
                 ),
               ],
             ),

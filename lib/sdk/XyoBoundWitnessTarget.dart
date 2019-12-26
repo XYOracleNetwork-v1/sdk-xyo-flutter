@@ -47,6 +47,7 @@ class XyoBoundWitnessTarget extends ChangeNotifier {
   set autoBridge(bool autoBridge) {
     isBridging = autoBridge;
     XyoSdkDartBridge.instance.setBridging(this is XyoClient, autoBridge);
+    notifyListeners();
   }
 
   set acceptBridging(bool acceptBridging) {
