@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
@@ -47,14 +47,14 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _buildTile(DeviceBoundWitness s) {
-    final fmt = DateFormat("MMMM dd, h:mm a");
+    // final fmt = DateFormat("MMMM dd, h:mm a");
 
     return ListTile(
       title: Text(
         "${s.parties} - ${s.huerestics}",
         softWrap: true,
       ),
-      subtitle: Text(fmt.format(DateTime.now())),
+      // subtitle: Text(fmt.format(DateTime.now())),
     );
   }
 

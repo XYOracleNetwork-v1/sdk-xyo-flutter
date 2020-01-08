@@ -76,7 +76,16 @@ class XyoSdkDartBridge {
     return success;
   }
 
-  void setAutoBoundWitnessing(bool param0, bool autoBoundWitness) {}
+  Future<bool> setAutoBoundWitnessing(
+      bool isClient, bool autoBoundWitness) async {
+    final bool success = await _channel
+        .invokeMethod('setAutoBoundWitnessing', [isClient, autoBoundWitness]);
+    return success;
+  }
 
-  void setAcceptBridging(bool param0, bool acceptBridging) {}
+  Future<bool> setAcceptBridging(bool isClient, bool acceptBridging) async {
+    final bool success = await _channel
+        .invokeMethod('setAcceptBridging', [isClient, acceptBridging]);
+    return success;
+  }
 }

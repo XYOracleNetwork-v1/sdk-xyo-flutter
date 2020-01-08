@@ -13,7 +13,7 @@ import network.xyo.sdk.XyoNodeBuilder
 //import network.xyo.
 
 open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
-  lateinit var node: XyoNode
+  var node: XyoNode? = null
   var context: Context = context
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
@@ -23,6 +23,8 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
       "setBridging" -> setBridging(call, result)
       "setScanning" -> setScanning(call, result)
       "setPayloadData" -> setPayloadData(call, result)
+      "setAcceptBridging" -> setAcceptBridging(call, result)
+      "setAutoBoundWitnessing" -> setAutoBoundWitnessing(call, result)
       "setListening" -> setListening(call, result)
       else -> super.onMethodCall(call, result)
     }
@@ -32,37 +34,94 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   private fun build(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val builder = XyoNodeBuilder()
     node = builder.build(context)
+    sendResult(result, "success")
   }
 
   private fun setBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val args = call.arguments as List<Boolean>
-    val isClient = args[0]
-    val setBridging = args[1]
-    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
-      if (isClient) {
-        network.client.autoBridge = setBridging
-      } else {
-        network.server.autoBridge = setBridging
+    if (node != null) {
+     val node = node
+
+      val args = call.arguments as List<Boolean>
+      val isClient = args[0]
+      val setBridging = args[1]
+
+      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        if (isClient) {
+          network.client.autoBridge = setBridging
+        } else {
+          network.server.autoBridge = setBridging
+        }
       }
+      sendResult(result, true)
+    } else {
+      sendResult(result, false)
     }
-    sendResult(result, true)
   }
   private fun setListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val args = call.arguments as Boolean
-    val on = args
-    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
-      network.server.listen = on
+
+    if (node != null) {
+      val node = node
+
+      val args = call.arguments as Boolean
+      val on = args
+      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        network.server.listen = on
+      }
+      sendResult(result, true)
+    } else {
+      sendResult(result, false)
     }
-    sendResult(result, true)
   }
 
+   private fun setAcceptBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+    if (node != null) {
+      val node = node
+
+      val args = call.arguments as List<Boolean>
+      val isClient = args[0]
+      val on = args[1]
+      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network -> 
+        if (isClient) {
+          network.client.acceptBridging = on
+        } else {
+          network.server.acceptBridging = on
+        }
+      }
+      sendResult(result, true)
+    } else {
+      sendResult(result, false)
+    }
+  }
+
+ private fun setAutoBoundWitnessing(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+
+    if (node != null) {
+      val node = node
+
+      val args = call.arguments as Boolean
+      val on = args
+      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        network.client.autoBoundWitness = on
+      }
+      sendResult(result, true)
+    } else {
+      sendResult(result, false)
+    }
+  }
   private fun setScanning(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val args = call.arguments as Boolean
     val on = args
-    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
-      network.client.scan = on
+    if (node != null) {
+      val node = node
+
+      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        network.client.scan = on
+      }
+      sendResult(result, true)
     }
-    sendResult(result, true)
+    else {
+      sendResult(result, false)
+    }
   }
 
   private fun setPayloadData(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
@@ -76,13 +135,19 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   private fun getPublicKey(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val args = call.arguments as Boolean
     val isClient = args
-    (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
-      if (isClient) {
-        sendResult(result, network.client.publicKey)
-      } else {
-        sendResult(result, network.server.publicKey)
+    if (node != null) {
+      val node = node
+
+      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        if (isClient) {
+          sendResult(result, network.client.publicKey)
+        } else {
+          sendResult(result, network.server.publicKey)
+        }
       }
-    }
+    } else {
+      sendResult(result, false)
+    }   
   }
 
 }
