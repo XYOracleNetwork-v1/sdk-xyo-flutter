@@ -1,7 +1,6 @@
 import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
-
-import '../XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 
 class XyoBleServer extends XyoServer {
   XyoBleServer(XyoNetworkType network) : super(network);

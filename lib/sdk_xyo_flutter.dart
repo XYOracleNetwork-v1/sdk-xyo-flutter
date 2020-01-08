@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:mutex/mutex.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 
 enum XyoNodeType { client, server }
@@ -42,35 +43,72 @@ class XyoSdkDartBridge {
   static XyoSdkDartBridge instance = XyoSdkDartBridge();
 
   final MethodChannel _channel = const MethodChannel('xyoNode');
+  String _version;
+  var _initMutex = new Mutex();
+
+  Future<void> initialize() async {
+    print("SDK:initialize");
+    if (_version != null) {
+      return;
+    }
+    await _initMutex.acquire();
+    try {
+      // check a second time since after the pause it may have been set
+      if (_version == null) {
+        print("SDK:initialize2");
+        _version = (await _channel.invokeMethod('build')).toString();
+      }
+    }
+    finally {
+      _initMutex.release();
+    }
+  }
 
   Future<String> build() async {
-    final String version = await _channel.invokeMethod('build');
-
-    return version;
+    await initialize();
+    print("SDK:build");
+    return _version;
   }
 
   Future<String> getPublicKey(bool isClient) async {
+    await initialize();
+    print("SDK:getPublicKey");
     final String value = await _channel.invokeMethod('getPublicKey', isClient);
     return value;
   }
 
   Future<bool> setBridging(bool isClient, bool on) async {
+    await initialize();
+    print("SDK:setBridging");
     final bool success =
         await _channel.invokeMethod('setBridging', [isClient, on]);
     return success;
   }
 
   Future<bool> setScanning(bool on) async {
-    final bool success = await _channel.invokeMethod('setScanning', on);
-    return success;
+    await initialize();
+    print("SDK:setScanning");
+    final bool scanning = await _channel.invokeMethod('setScanning', on);
+    return scanning;
+  }
+
+  Future<bool> getScanning() async {
+    await initialize();
+    print("SDK:getScanning");
+    final bool scanning = await _channel.invokeMethod('getScanning');
+    return scanning;
   }
 
   Future<bool> setListening(bool on) async {
+    await initialize();
+    print("SDK:setListening");
     final bool success = await _channel.invokeMethod('setListening', on);
     return success;
   }
 
   Future<bool> setPayloadString(bool isClient, String data) async {
+    await initialize();
+    print("SDK:setPayloadString");
     final bool success =
         await _channel.invokeMethod('setPayloadData', [isClient, data]);
     return success;

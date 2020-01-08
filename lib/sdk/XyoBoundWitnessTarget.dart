@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pb.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 
 import 'XyoClient.dart';
 
-class XyoBoundWitnessTarget {
+class XyoBoundWitnessTarget extends ChangeNotifier {
   EventChannel _boundWitnessStartedChannel;
   EventChannel _boundWitnessCompletedChannel;
   XyoNetworkType network;
@@ -46,6 +47,7 @@ class XyoBoundWitnessTarget {
   set autoBridge(bool autoBridge) {
     isBridging = autoBridge;
     XyoSdkDartBridge.instance.setBridging(this is XyoClient, autoBridge);
+    notifyListeners();
   }
 
   set acceptBridging(bool acceptBridging) {

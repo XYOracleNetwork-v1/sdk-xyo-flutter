@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
-import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 
 void main() => runApp(MyApp());
@@ -20,30 +20,43 @@ class _MyAppState extends State<MyApp> {
   bool _isClient = true;
   XyoNode _xyoNode;
   String _publicKey = "";
+  bool _scanning = false;
+  bool _autoBridging = false;
 
   String _payloadString;
 
   @override
-  void initState() {
-    super.initState();
-    buildXyo();
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    await buildXyo();
+    _xyoNode.getClient('ble').addListener(() {
+      setState(() {
+        _scanning = _xyoNode.getClient('ble').scan;
+        _autoBridging = _xyoNode.getClient('ble').autoBridge;
+      });
+    });
+    _xyoNode.getServer('ble').addListener(() {
+      setState(() {
+        _autoBridging = _xyoNode.getServer('ble').autoBridge;
+      });
+    });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> buildXyo() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      final builder = XyoNodeBuilder();
-      final xyoNode = await builder.build();
+    // try {
+    final builder = XyoNodeBuilder();
+    final xyoNode = await builder.build();
 
-      if (!mounted) return;
+    if (!mounted) return;
 
-      setState(() {
-        _xyoNode = xyoNode;
-      });
-    } on PlatformException {
+    setState(() {
+      _xyoNode = xyoNode;
+    });
+    /*} on PlatformException {
       print("Received Platform Exception");
-    }
+    }*/
   }
 
   Widget _buildTile(DeviceBoundWitness s) {
@@ -133,10 +146,11 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Text("Toggle Client BW Scanning"),
                   Switch(
-                      onChanged: (isOn) async {
-                        _xyoNode.getClient('ble').scan = isOn;
-                      },
-                      value: _xyoNode.getClient('ble').scan),
+                    onChanged: (isOn) async {
+                      _xyoNode.getClient('ble').scan = isOn;
+                    },
+                    value: _scanning,
+                  ),
                 ],
               ),
             if (!_isClient)
@@ -144,26 +158,26 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Text("Toggle Server Listening"),
                   Switch(
-                      onChanged: (isOn) async {
-                        _xyoNode.getServer('ble').listen = isOn;
-                      },
-                      value: _xyoNode.getServer('ble').listen),
+                    onChanged: (isOn) async {
+                      _xyoNode.getServer('ble').listen = isOn;
+                    },
+                    value: _xyoNode.getServer('ble').listen,
+                  ),
                 ],
               ),
             Row(
               children: <Widget>[
                 Text("Toggle Bridging on $nodeType"),
                 Switch(
-                    onChanged: (isOn) async {
-                      if (_isClient) {
-                        _xyoNode.getClient('ble').autoBridge = isOn;
-                      } else {
-                        _xyoNode.getServer('ble').autoBridge = isOn;
-                      }
-                    },
-                    value: _isClient
-                        ? _xyoNode.getClient('ble').autoBridge
-                        : _xyoNode.getServer('ble').autoBridge),
+                  onChanged: (isOn) async {
+                    if (_isClient) {
+                      _xyoNode.getClient('ble').autoBridge = isOn;
+                    } else {
+                      _xyoNode.getServer('ble').autoBridge = isOn;
+                    }
+                  },
+                  value: _autoBridging,
+                ),
               ],
             ),
             Row(
