@@ -11,6 +11,7 @@ jobs:
     strategy:
       matrix:
         destination: ['platform=iOS Simulator,iOS=13.1,name=iPhone11']
+        buildDir: 'https://github.com/flutter/flutter.git'
     
     steps: 
       - uses: actions/checkout@v2
@@ -23,10 +24,10 @@ jobs:
               pod repo update
               pip install six
               git clone https://github.com/flutter/flutter.git --depth 1 -b beta
-              ${{ secrets.GITHUB_WORKSPACE }}/flutter/bin/flutter doctor
+              ${{ matrix.buildDir }}/flutter/bin/flutter doctor
       - name: Build
         env:
           destination: ${{ matrix.destination }}
         run: |
               cd ${{ secrets.GITHUB_WORKSPACE }}/example
-              ${{ secrets.GITHUB_WORKSPACE }}/flutter/bin/flutter build ios --no-codesign
+              ${{ matrix.buildDir }}/flutter/bin/flutter build ios --no-codesign
