@@ -8,10 +8,15 @@ on:
 jobs: 
   build: 
     runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,iOS=13.1,name=iPhone11']
     
     steps: 
       - uses: actions/checkout@v2
       - name: Pre-Build
+        env:
+          destination: ${{ matrix.destination }}
         run: |
               gem install cocoapods-acknowledgements
               gem install cocoapods
@@ -20,6 +25,8 @@ jobs:
               git clone https://github.com/flutter/flutter.git --depth 1 -b beta
               $GITHUB_WORKSPACE/flutter/bin/flutter doctor
       - name: Build
+        env:
+          destination: ${{ matrix.destination }}
         run: |
               cd $GITHUB_WORKSPACE/example
               $GITHUB_WORKSPACE/flutter/bin/flutter build ios --no-codesign
