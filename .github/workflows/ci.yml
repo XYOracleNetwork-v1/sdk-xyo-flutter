@@ -23,10 +23,10 @@ jobs:
               pod repo update
               pip install six
               git clone https://github.com/flutter/flutter.git --depth 1 -b beta
-              ${{ GITHUB_WORKSPACE }}/flutter/bin/flutter doctor
+              ${{ secrets.GITHUB_WORKSPACE }}/flutter/bin/flutter doctor
       - name: Build
         env:
           destination: ${{ matrix.destination }}
         run: |
-              cd ${{ GITHUB_WORKSPACE }}/example
-              ${{ GITHUB_WORKSPACE }}/flutter/bin/flutter build ios --no-codesign
+              cd ${{ secrets.GITHUB_WORKSPACE }}/example
+              ${{ secrets.GITHUB_WORKSPACE }}/flutter/bin/flutter build ios --no-codesign
