@@ -18,6 +18,7 @@ class SdkXyoFlutterPlugin {
 
       node = XyoNodeChannel(context, registrar, "xyoNode")
       node?.initializeChannels()
+
       device = XyoDeviceChannel(context, smartScan, registrar, "xyoDevice")
       device?.initializeChannels()
     }
