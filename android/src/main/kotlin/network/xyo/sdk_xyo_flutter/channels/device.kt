@@ -5,6 +5,7 @@ import io.flutter.plugin.common.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import network.xyo.sdk_xyo_flutter.protobuf.Device
+import android.util.Log
 
 import network.xyo.ble.generic.scanner.XYSmartScan
 import network.xyo.ble.devices.apple.XYIBeaconBluetoothDevice
@@ -16,14 +17,20 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
 
   private val listener = object: XYSmartScan.Listener() {
     override fun statusChanged(status: XYSmartScan.Status) {
+      Log.i(TAG, "statusChanged" + status)
+
       super.statusChanged(status)
     }
 
     override fun connectionStateChanged(device: XYBluetoothDevice, newState: Int) {
+      Log.i(TAG, "connectionStateChanged" + newState)
+
       super.connectionStateChanged(device, newState)
     }
 
     fun buildDevice(device: XYBluetoothDevice): Device.BluetoothDevice {
+      Log.i(TAG, "buildDevice" + device)
+
       val builder = Device.BluetoothDevice.newBuilder()
 
       builder.setId(device.id)
@@ -42,16 +49,22 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
     }
 
     override fun detected(device: XYBluetoothDevice) {
+      Log.i(TAG, "detected" + device)
+
       onDetect.send(buildDevice(device).toByteArray())
       super.detected(device)
     }
 
     override fun entered(device: XYBluetoothDevice) {
+      Log.i(TAG, "entered" + device)
+
       onEnter.send(buildDevice(device).toByteArray())
       super.entered(device)
     }
 
     override fun exited(device: XYBluetoothDevice) {
+      Log.i(TAG, "exited" + device)
+
       onExit.send(buildDevice(device).toByteArray())
       super.exited(device)
     }
@@ -66,17 +79,24 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
   private val onDetectChannel = EventChannel(registrar.messenger(), "${name}OnDetect")
 
   init {
+    Log.i(TAG, "init smartScan with listener" + listener)
+
     smartScan.addListener("device", listener)
   }
 
   override fun initializeChannels() {
+
     super.initializeChannels()
     onEnterChannel.setStreamHandler(onEnter)
     onExitChannel.setStreamHandler(onExit)
     onDetectChannel.setStreamHandler(onDetect)
+    Log.i(TAG, "initializeChannels")
+
   }
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+    Log.i(TAG, "onMethodCall [" + call.method + "]")
+
     when (call.method) {
       "setListening" -> setListening(call, result)
       else -> super.onMethodCall(call, result)
@@ -92,6 +112,8 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
     sendResult(result, true)
   }
 
-
+  companion object {
+    val TAG = "XyoDeviceChannel"
+  }
 
 }

@@ -48,7 +48,7 @@ android {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.8.0'
+        artifact = 'com.google.protobuf:protoc:3.10.0'
     }
     generateProtoTasks {
         all().each { task ->
@@ -78,6 +78,6 @@ dependencies {
     api 'com.esotericsoftware.kryo:kryo:2.24.0'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1'
 
-    api 'com.google.protobuf:protobuf-javalite:3.8.0'
+    api 'com.google.protobuf:protobuf-javalite:3.10.0'
     api "org.bouncycastle:bcpkix-jdk15on:1.64"
 }

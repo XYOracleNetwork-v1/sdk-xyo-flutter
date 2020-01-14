@@ -20,6 +20,6 @@ class XyoServer extends XyoBoundWitnessTarget {
 
   set listen(bool listen) {
     isListening = listen;
-    XyoSdkDartBridge.instance.setListening(listen);
+    XyoServerFlutterBridge.instance.setListening(listen);
   }
 }

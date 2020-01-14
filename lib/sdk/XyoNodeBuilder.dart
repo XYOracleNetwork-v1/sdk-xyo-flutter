@@ -5,8 +5,12 @@ import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
 class XyoNodeBuilder {
   Future<XyoNode> build() async {
     print("XyoNodeBuilder: build");
+
+    await XyoClientFlutterBridge.instance.build();
+    await XyoServerFlutterBridge.instance.build();
+
     XyoNode node = XyoNode(defaultNetworks());
-    await XyoSdkDartBridge.instance.build();
+
     return node;
   }
 

@@ -26,8 +26,12 @@ class _MyAppState extends State<MyApp> {
   String _payloadString;
 
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    _initS();
+  }
+
+  void _initS() async {
     await buildXyo();
     _xyoNode.getClient('ble').addListener(() {
       setState(() {
@@ -40,6 +44,7 @@ class _MyAppState extends State<MyApp> {
         _autoBridging = _xyoNode.getServer('ble').autoBridge;
       });
     });
+    XyoScanner().setListening(true);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.

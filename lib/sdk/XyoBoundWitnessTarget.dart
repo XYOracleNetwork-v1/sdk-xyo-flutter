@@ -11,20 +11,25 @@ class XyoBoundWitnessTarget extends ChangeNotifier {
   EventChannel _boundWitnessCompletedChannel;
   XyoNetworkType network;
 
+  XyoFlutterBridge _flutterBridge;
+
   XyoBoundWitnessTarget(this.network) {
-    String cliStr = isClient() ? "Client" : "Server";
+    String cliStr = isClient() ? "xyoClient" : "xyoServer";
     String networkStr = this.network == XyoNetworkType.ble ? "ble" : "tcpip";
 
-    String startChannelName = "xyoNode" + networkStr + cliStr + "Started";
+    String startChannelName = cliStr + networkStr + "Started";
     //xyoNodebleClientStarted
-    String completeChannelName = "xyoNode" + networkStr + cliStr + "Ended";
+    String completeChannelName = cliStr + networkStr + "Ended";
     //xyoNodebleClientEnded
     _boundWitnessStartedChannel = EventChannel(startChannelName);
     _boundWitnessCompletedChannel = EventChannel(completeChannelName);
+    _flutterBridge = isClient()
+        ? XyoClientFlutterBridge.instance
+        : XyoServerFlutterBridge.instance;
   }
 
   Future<String> getPublicKey() async {
-    return XyoSdkDartBridge.instance.getPublicKey(this is XyoClient);
+    return _flutterBridge.getPublicKey(this is XyoClient);
   }
 
   bool isBridging;
@@ -41,19 +46,18 @@ class XyoBoundWitnessTarget extends ChangeNotifier {
 
   set stringHeuristic(String stringHeuristic) {
     payloadData = stringHeuristic;
-    XyoSdkDartBridge.instance.setPayloadString(this is XyoClient, payloadData);
+    _flutterBridge.setPayloadString(payloadData);
   }
 
   set autoBridge(bool autoBridge) {
     isBridging = autoBridge;
-    XyoSdkDartBridge.instance.setBridging(this is XyoClient, autoBridge);
+    _flutterBridge.setBridging(autoBridge);
     notifyListeners();
   }
 
   set acceptBridging(bool acceptBridging) {
     isAcceptingBridging = acceptBridging;
-    XyoSdkDartBridge.instance
-        .setAcceptBridging(this is XyoClient, acceptBridging);
+    _flutterBridge.setAcceptBridging(acceptBridging);
   }
 
   bool isClient() => this is XyoClient;

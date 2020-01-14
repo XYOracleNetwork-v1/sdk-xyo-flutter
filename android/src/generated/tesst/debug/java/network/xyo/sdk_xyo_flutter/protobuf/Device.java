@@ -14,48 +14,40 @@ public final class Device {
 
     /**
      * <code>string uuid = 1;</code>
-     * @return The uuid.
      */
     java.lang.String getUuid();
     /**
      * <code>string uuid = 1;</code>
-     * @return The bytes for uuid.
      */
     com.google.protobuf.ByteString
         getUuidBytes();
 
     /**
      * <code>string prefix = 2;</code>
-     * @return The prefix.
      */
     java.lang.String getPrefix();
     /**
      * <code>string prefix = 2;</code>
-     * @return The bytes for prefix.
      */
     com.google.protobuf.ByteString
         getPrefixBytes();
 
     /**
      * <code>string name = 3;</code>
-     * @return The name.
      */
     java.lang.String getName();
     /**
      * <code>string name = 3;</code>
-     * @return The bytes for name.
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
      * <code>string id = 4;</code>
-     * @return The id.
      */
     java.lang.String getId();
     /**
      * <code>string id = 4;</code>
-     * @return The bytes for id.
      */
     com.google.protobuf.ByteString
         getIdBytes();
@@ -78,7 +70,6 @@ public final class Device {
     private java.lang.String uuid_;
     /**
      * <code>string uuid = 1;</code>
-     * @return The uuid.
      */
     @java.lang.Override
     public java.lang.String getUuid() {
@@ -86,7 +77,6 @@ public final class Device {
     }
     /**
      * <code>string uuid = 1;</code>
-     * @return The bytes for uuid.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -95,7 +85,6 @@ public final class Device {
     }
     /**
      * <code>string uuid = 1;</code>
-     * @param value The uuid to set.
      */
     private void setUuid(
         java.lang.String value) {
@@ -114,7 +103,6 @@ public final class Device {
     }
     /**
      * <code>string uuid = 1;</code>
-     * @param value The bytes for uuid to set.
      */
     private void setUuidBytes(
         com.google.protobuf.ByteString value) {
@@ -130,7 +118,6 @@ public final class Device {
     private java.lang.String prefix_;
     /**
      * <code>string prefix = 2;</code>
-     * @return The prefix.
      */
     @java.lang.Override
     public java.lang.String getPrefix() {
@@ -138,7 +125,6 @@ public final class Device {
     }
     /**
      * <code>string prefix = 2;</code>
-     * @return The bytes for prefix.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -147,7 +133,6 @@ public final class Device {
     }
     /**
      * <code>string prefix = 2;</code>
-     * @param value The prefix to set.
      */
     private void setPrefix(
         java.lang.String value) {
@@ -166,7 +151,6 @@ public final class Device {
     }
     /**
      * <code>string prefix = 2;</code>
-     * @param value The bytes for prefix to set.
      */
     private void setPrefixBytes(
         com.google.protobuf.ByteString value) {
@@ -182,7 +166,6 @@ public final class Device {
     private java.lang.String name_;
     /**
      * <code>string name = 3;</code>
-     * @return The name.
      */
     @java.lang.Override
     public java.lang.String getName() {
@@ -190,7 +173,6 @@ public final class Device {
     }
     /**
      * <code>string name = 3;</code>
-     * @return The bytes for name.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -199,7 +181,6 @@ public final class Device {
     }
     /**
      * <code>string name = 3;</code>
-     * @param value The name to set.
      */
     private void setName(
         java.lang.String value) {
@@ -218,7 +199,6 @@ public final class Device {
     }
     /**
      * <code>string name = 3;</code>
-     * @param value The bytes for name to set.
      */
     private void setNameBytes(
         com.google.protobuf.ByteString value) {
@@ -234,7 +214,6 @@ public final class Device {
     private java.lang.String id_;
     /**
      * <code>string id = 4;</code>
-     * @return The id.
      */
     @java.lang.Override
     public java.lang.String getId() {
@@ -242,7 +221,6 @@ public final class Device {
     }
     /**
      * <code>string id = 4;</code>
-     * @return The bytes for id.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -251,7 +229,6 @@ public final class Device {
     }
     /**
      * <code>string id = 4;</code>
-     * @param value The id to set.
      */
     private void setId(
         java.lang.String value) {
@@ -270,7 +247,6 @@ public final class Device {
     }
     /**
      * <code>string id = 4;</code>
-     * @param value The bytes for id to set.
      */
     private void setIdBytes(
         com.google.protobuf.ByteString value) {
@@ -379,7 +355,6 @@ public final class Device {
 
       /**
        * <code>string uuid = 1;</code>
-       * @return The uuid.
        */
       @java.lang.Override
       public java.lang.String getUuid() {
@@ -387,7 +362,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 1;</code>
-       * @return The bytes for uuid.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -396,8 +370,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 1;</code>
-       * @param value The uuid to set.
-       * @return This builder for chaining.
        */
       public Builder setUuid(
           java.lang.String value) {
@@ -407,7 +379,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 1;</code>
-       * @return This builder for chaining.
        */
       public Builder clearUuid() {
         copyOnWrite();
@@ -416,8 +387,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 1;</code>
-       * @param value The bytes for uuid to set.
-       * @return This builder for chaining.
        */
       public Builder setUuidBytes(
           com.google.protobuf.ByteString value) {
@@ -428,7 +397,6 @@ public final class Device {
 
       /**
        * <code>string prefix = 2;</code>
-       * @return The prefix.
        */
       @java.lang.Override
       public java.lang.String getPrefix() {
@@ -436,7 +404,6 @@ public final class Device {
       }
       /**
        * <code>string prefix = 2;</code>
-       * @return The bytes for prefix.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -445,8 +412,6 @@ public final class Device {
       }
       /**
        * <code>string prefix = 2;</code>
-       * @param value The prefix to set.
-       * @return This builder for chaining.
        */
       public Builder setPrefix(
           java.lang.String value) {
@@ -456,7 +421,6 @@ public final class Device {
       }
       /**
        * <code>string prefix = 2;</code>
-       * @return This builder for chaining.
        */
       public Builder clearPrefix() {
         copyOnWrite();
@@ -465,8 +429,6 @@ public final class Device {
       }
       /**
        * <code>string prefix = 2;</code>
-       * @param value The bytes for prefix to set.
-       * @return This builder for chaining.
        */
       public Builder setPrefixBytes(
           com.google.protobuf.ByteString value) {
@@ -477,7 +439,6 @@ public final class Device {
 
       /**
        * <code>string name = 3;</code>
-       * @return The name.
        */
       @java.lang.Override
       public java.lang.String getName() {
@@ -485,7 +446,6 @@ public final class Device {
       }
       /**
        * <code>string name = 3;</code>
-       * @return The bytes for name.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -494,8 +454,6 @@ public final class Device {
       }
       /**
        * <code>string name = 3;</code>
-       * @param value The name to set.
-       * @return This builder for chaining.
        */
       public Builder setName(
           java.lang.String value) {
@@ -505,7 +463,6 @@ public final class Device {
       }
       /**
        * <code>string name = 3;</code>
-       * @return This builder for chaining.
        */
       public Builder clearName() {
         copyOnWrite();
@@ -514,8 +471,6 @@ public final class Device {
       }
       /**
        * <code>string name = 3;</code>
-       * @param value The bytes for name to set.
-       * @return This builder for chaining.
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -526,7 +481,6 @@ public final class Device {
 
       /**
        * <code>string id = 4;</code>
-       * @return The id.
        */
       @java.lang.Override
       public java.lang.String getId() {
@@ -534,7 +488,6 @@ public final class Device {
       }
       /**
        * <code>string id = 4;</code>
-       * @return The bytes for id.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -543,8 +496,6 @@ public final class Device {
       }
       /**
        * <code>string id = 4;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
        */
       public Builder setId(
           java.lang.String value) {
@@ -554,7 +505,6 @@ public final class Device {
       }
       /**
        * <code>string id = 4;</code>
-       * @return This builder for chaining.
        */
       public Builder clearId() {
         copyOnWrite();
@@ -563,8 +513,6 @@ public final class Device {
       }
       /**
        * <code>string id = 4;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
@@ -609,9 +557,7 @@ public final class Device {
             synchronized (network.xyo.sdk_xyo_flutter.protobuf.Device.Family.class) {
               parser = PARSER;
               if (parser == null) {
-                parser =
-                    new DefaultInstanceBasedParser<network.xyo.sdk_xyo_flutter.protobuf.Device.Family>(
-                        DEFAULT_INSTANCE);
+                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -632,14 +578,15 @@ public final class Device {
     // @@protoc_insertion_point(class_scope:Family)
     private static final network.xyo.sdk_xyo_flutter.protobuf.Device.Family DEFAULT_INSTANCE;
     static {
-      Family defaultInstance = new Family();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = defaultInstance;
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        Family.class, defaultInstance);
+      DEFAULT_INSTANCE = new Family();
     }
 
+    static {
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        Family.class, DEFAULT_INSTANCE);
+    }
     public static network.xyo.sdk_xyo_flutter.protobuf.Device.Family getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
@@ -657,13 +604,11 @@ public final class Device {
 
     /**
      * <code>sint64 min = 1;</code>
-     * @return The min.
      */
     long getMin();
 
     /**
      * <code>sint64 max = 2;</code>
-     * @return The max.
      */
     long getMax();
   }
@@ -681,7 +626,6 @@ public final class Device {
     private long min_;
     /**
      * <code>sint64 min = 1;</code>
-     * @return The min.
      */
     @java.lang.Override
     public long getMin() {
@@ -689,7 +633,6 @@ public final class Device {
     }
     /**
      * <code>sint64 min = 1;</code>
-     * @param value The min to set.
      */
     private void setMin(long value) {
       
@@ -707,7 +650,6 @@ public final class Device {
     private long max_;
     /**
      * <code>sint64 max = 2;</code>
-     * @return The max.
      */
     @java.lang.Override
     public long getMax() {
@@ -715,7 +657,6 @@ public final class Device {
     }
     /**
      * <code>sint64 max = 2;</code>
-     * @param value The max to set.
      */
     private void setMax(long value) {
       
@@ -826,7 +767,6 @@ public final class Device {
 
       /**
        * <code>sint64 min = 1;</code>
-       * @return The min.
        */
       @java.lang.Override
       public long getMin() {
@@ -834,8 +774,6 @@ public final class Device {
       }
       /**
        * <code>sint64 min = 1;</code>
-       * @param value The min to set.
-       * @return This builder for chaining.
        */
       public Builder setMin(long value) {
         copyOnWrite();
@@ -844,7 +782,6 @@ public final class Device {
       }
       /**
        * <code>sint64 min = 1;</code>
-       * @return This builder for chaining.
        */
       public Builder clearMin() {
         copyOnWrite();
@@ -854,7 +791,6 @@ public final class Device {
 
       /**
        * <code>sint64 max = 2;</code>
-       * @return The max.
        */
       @java.lang.Override
       public long getMax() {
@@ -862,8 +798,6 @@ public final class Device {
       }
       /**
        * <code>sint64 max = 2;</code>
-       * @param value The max to set.
-       * @return This builder for chaining.
        */
       public Builder setMax(long value) {
         copyOnWrite();
@@ -872,7 +806,6 @@ public final class Device {
       }
       /**
        * <code>sint64 max = 2;</code>
-       * @return This builder for chaining.
        */
       public Builder clearMax() {
         copyOnWrite();
@@ -914,9 +847,7 @@ public final class Device {
             synchronized (network.xyo.sdk_xyo_flutter.protobuf.Device.Range.class) {
               parser = PARSER;
               if (parser == null) {
-                parser =
-                    new DefaultInstanceBasedParser<network.xyo.sdk_xyo_flutter.protobuf.Device.Range>(
-                        DEFAULT_INSTANCE);
+                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -937,14 +868,15 @@ public final class Device {
     // @@protoc_insertion_point(class_scope:Range)
     private static final network.xyo.sdk_xyo_flutter.protobuf.Device.Range DEFAULT_INSTANCE;
     static {
-      Range defaultInstance = new Range();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = defaultInstance;
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        Range.class, defaultInstance);
+      DEFAULT_INSTANCE = new Range();
     }
 
+    static {
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        Range.class, DEFAULT_INSTANCE);
+    }
     public static network.xyo.sdk_xyo_flutter.protobuf.Device.Range getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
@@ -962,24 +894,20 @@ public final class Device {
 
     /**
      * <code>int64 major = 1;</code>
-     * @return The major.
      */
     long getMajor();
 
     /**
      * <code>int64 minor = 2;</code>
-     * @return The minor.
      */
     long getMinor();
 
     /**
      * <code>string uuid = 3;</code>
-     * @return The uuid.
      */
     java.lang.String getUuid();
     /**
      * <code>string uuid = 3;</code>
-     * @return The bytes for uuid.
      */
     com.google.protobuf.ByteString
         getUuidBytes();
@@ -999,7 +927,6 @@ public final class Device {
     private long major_;
     /**
      * <code>int64 major = 1;</code>
-     * @return The major.
      */
     @java.lang.Override
     public long getMajor() {
@@ -1007,7 +934,6 @@ public final class Device {
     }
     /**
      * <code>int64 major = 1;</code>
-     * @param value The major to set.
      */
     private void setMajor(long value) {
       
@@ -1025,7 +951,6 @@ public final class Device {
     private long minor_;
     /**
      * <code>int64 minor = 2;</code>
-     * @return The minor.
      */
     @java.lang.Override
     public long getMinor() {
@@ -1033,7 +958,6 @@ public final class Device {
     }
     /**
      * <code>int64 minor = 2;</code>
-     * @param value The minor to set.
      */
     private void setMinor(long value) {
       
@@ -1051,7 +975,6 @@ public final class Device {
     private java.lang.String uuid_;
     /**
      * <code>string uuid = 3;</code>
-     * @return The uuid.
      */
     @java.lang.Override
     public java.lang.String getUuid() {
@@ -1059,7 +982,6 @@ public final class Device {
     }
     /**
      * <code>string uuid = 3;</code>
-     * @return The bytes for uuid.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -1068,7 +990,6 @@ public final class Device {
     }
     /**
      * <code>string uuid = 3;</code>
-     * @param value The uuid to set.
      */
     private void setUuid(
         java.lang.String value) {
@@ -1087,7 +1008,6 @@ public final class Device {
     }
     /**
      * <code>string uuid = 3;</code>
-     * @param value The bytes for uuid to set.
      */
     private void setUuidBytes(
         com.google.protobuf.ByteString value) {
@@ -1196,7 +1116,6 @@ public final class Device {
 
       /**
        * <code>int64 major = 1;</code>
-       * @return The major.
        */
       @java.lang.Override
       public long getMajor() {
@@ -1204,8 +1123,6 @@ public final class Device {
       }
       /**
        * <code>int64 major = 1;</code>
-       * @param value The major to set.
-       * @return This builder for chaining.
        */
       public Builder setMajor(long value) {
         copyOnWrite();
@@ -1214,7 +1131,6 @@ public final class Device {
       }
       /**
        * <code>int64 major = 1;</code>
-       * @return This builder for chaining.
        */
       public Builder clearMajor() {
         copyOnWrite();
@@ -1224,7 +1140,6 @@ public final class Device {
 
       /**
        * <code>int64 minor = 2;</code>
-       * @return The minor.
        */
       @java.lang.Override
       public long getMinor() {
@@ -1232,8 +1147,6 @@ public final class Device {
       }
       /**
        * <code>int64 minor = 2;</code>
-       * @param value The minor to set.
-       * @return This builder for chaining.
        */
       public Builder setMinor(long value) {
         copyOnWrite();
@@ -1242,7 +1155,6 @@ public final class Device {
       }
       /**
        * <code>int64 minor = 2;</code>
-       * @return This builder for chaining.
        */
       public Builder clearMinor() {
         copyOnWrite();
@@ -1252,7 +1164,6 @@ public final class Device {
 
       /**
        * <code>string uuid = 3;</code>
-       * @return The uuid.
        */
       @java.lang.Override
       public java.lang.String getUuid() {
@@ -1260,7 +1171,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 3;</code>
-       * @return The bytes for uuid.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -1269,8 +1179,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 3;</code>
-       * @param value The uuid to set.
-       * @return This builder for chaining.
        */
       public Builder setUuid(
           java.lang.String value) {
@@ -1280,7 +1188,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 3;</code>
-       * @return This builder for chaining.
        */
       public Builder clearUuid() {
         copyOnWrite();
@@ -1289,8 +1196,6 @@ public final class Device {
       }
       /**
        * <code>string uuid = 3;</code>
-       * @param value The bytes for uuid to set.
-       * @return This builder for chaining.
        */
       public Builder setUuidBytes(
           com.google.protobuf.ByteString value) {
@@ -1334,9 +1239,7 @@ public final class Device {
             synchronized (network.xyo.sdk_xyo_flutter.protobuf.Device.IBeacon.class) {
               parser = PARSER;
               if (parser == null) {
-                parser =
-                    new DefaultInstanceBasedParser<network.xyo.sdk_xyo_flutter.protobuf.Device.IBeacon>(
-                        DEFAULT_INSTANCE);
+                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -1357,14 +1260,15 @@ public final class Device {
     // @@protoc_insertion_point(class_scope:IBeacon)
     private static final network.xyo.sdk_xyo_flutter.protobuf.Device.IBeacon DEFAULT_INSTANCE;
     static {
-      IBeacon defaultInstance = new IBeacon();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = defaultInstance;
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        IBeacon.class, defaultInstance);
+      DEFAULT_INSTANCE = new IBeacon();
     }
 
+    static {
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IBeacon.class, DEFAULT_INSTANCE);
+    }
     public static network.xyo.sdk_xyo_flutter.protobuf.Device.IBeacon getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
@@ -1382,58 +1286,48 @@ public final class Device {
 
     /**
      * <code>string id = 1;</code>
-     * @return The id.
      */
     java.lang.String getId();
     /**
      * <code>string id = 1;</code>
-     * @return The bytes for id.
      */
     com.google.protobuf.ByteString
         getIdBytes();
 
     /**
      * <code>.Family family = 2;</code>
-     * @return Whether the family field is set.
      */
     boolean hasFamily();
     /**
      * <code>.Family family = 2;</code>
-     * @return The family.
      */
     network.xyo.sdk_xyo_flutter.protobuf.Device.Family getFamily();
 
     /**
      * <code>.IBeacon beacon = 3;</code>
-     * @return Whether the beacon field is set.
      */
     boolean hasBeacon();
     /**
      * <code>.IBeacon beacon = 3;</code>
-     * @return The beacon.
      */
     network.xyo.sdk_xyo_flutter.protobuf.Device.IBeacon getBeacon();
 
     /**
      * <code>sint64 rssi = 4;</code>
-     * @return The rssi.
      */
     long getRssi();
 
     /**
      * <code>.Range range = 5;</code>
-     * @return Whether the range field is set.
      */
     boolean hasRange();
     /**
      * <code>.Range range = 5;</code>
-     * @return The range.
      */
     network.xyo.sdk_xyo_flutter.protobuf.Device.Range getRange();
 
     /**
      * <code>bool connected = 6;</code>
-     * @return The connected.
      */
     boolean getConnected();
   }
@@ -1452,7 +1346,6 @@ public final class Device {
     private java.lang.String id_;
     /**
      * <code>string id = 1;</code>
-     * @return The id.
      */
     @java.lang.Override
     public java.lang.String getId() {
@@ -1460,7 +1353,6 @@ public final class Device {
     }
     /**
      * <code>string id = 1;</code>
-     * @return The bytes for id.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -1469,7 +1361,6 @@ public final class Device {
     }
     /**
      * <code>string id = 1;</code>
-     * @param value The id to set.
      */
     private void setId(
         java.lang.String value) {
@@ -1488,7 +1379,6 @@ public final class Device {
     }
     /**
      * <code>string id = 1;</code>
-     * @param value The bytes for id to set.
      */
     private void setIdBytes(
         com.google.protobuf.ByteString value) {
@@ -1620,7 +1510,6 @@ public final class Device {
     private long rssi_;
     /**
      * <code>sint64 rssi = 4;</code>
-     * @return The rssi.
      */
     @java.lang.Override
     public long getRssi() {
@@ -1628,7 +1517,6 @@ public final class Device {
     }
     /**
      * <code>sint64 rssi = 4;</code>
-     * @param value The rssi to set.
      */
     private void setRssi(long value) {
       
@@ -1704,7 +1592,6 @@ public final class Device {
     private boolean connected_;
     /**
      * <code>bool connected = 6;</code>
-     * @return The connected.
      */
     @java.lang.Override
     public boolean getConnected() {
@@ -1712,7 +1599,6 @@ public final class Device {
     }
     /**
      * <code>bool connected = 6;</code>
-     * @param value The connected to set.
      */
     private void setConnected(boolean value) {
       
@@ -1823,7 +1709,6 @@ public final class Device {
 
       /**
        * <code>string id = 1;</code>
-       * @return The id.
        */
       @java.lang.Override
       public java.lang.String getId() {
@@ -1831,7 +1716,6 @@ public final class Device {
       }
       /**
        * <code>string id = 1;</code>
-       * @return The bytes for id.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -1840,8 +1724,6 @@ public final class Device {
       }
       /**
        * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
        */
       public Builder setId(
           java.lang.String value) {
@@ -1851,7 +1733,6 @@ public final class Device {
       }
       /**
        * <code>string id = 1;</code>
-       * @return This builder for chaining.
        */
       public Builder clearId() {
         copyOnWrite();
@@ -1860,8 +1741,6 @@ public final class Device {
       }
       /**
        * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
@@ -1966,7 +1845,6 @@ public final class Device {
 
       /**
        * <code>sint64 rssi = 4;</code>
-       * @return The rssi.
        */
       @java.lang.Override
       public long getRssi() {
@@ -1974,8 +1852,6 @@ public final class Device {
       }
       /**
        * <code>sint64 rssi = 4;</code>
-       * @param value The rssi to set.
-       * @return This builder for chaining.
        */
       public Builder setRssi(long value) {
         copyOnWrite();
@@ -1984,7 +1860,6 @@ public final class Device {
       }
       /**
        * <code>sint64 rssi = 4;</code>
-       * @return This builder for chaining.
        */
       public Builder clearRssi() {
         copyOnWrite();
@@ -2041,7 +1916,6 @@ public final class Device {
 
       /**
        * <code>bool connected = 6;</code>
-       * @return The connected.
        */
       @java.lang.Override
       public boolean getConnected() {
@@ -2049,8 +1923,6 @@ public final class Device {
       }
       /**
        * <code>bool connected = 6;</code>
-       * @param value The connected to set.
-       * @return This builder for chaining.
        */
       public Builder setConnected(boolean value) {
         copyOnWrite();
@@ -2059,7 +1931,6 @@ public final class Device {
       }
       /**
        * <code>bool connected = 6;</code>
-       * @return This builder for chaining.
        */
       public Builder clearConnected() {
         copyOnWrite();
@@ -2105,9 +1976,7 @@ public final class Device {
             synchronized (network.xyo.sdk_xyo_flutter.protobuf.Device.BluetoothDevice.class) {
               parser = PARSER;
               if (parser == null) {
-                parser =
-                    new DefaultInstanceBasedParser<network.xyo.sdk_xyo_flutter.protobuf.Device.BluetoothDevice>(
-                        DEFAULT_INSTANCE);
+                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -2128,14 +1997,15 @@ public final class Device {
     // @@protoc_insertion_point(class_scope:BluetoothDevice)
     private static final network.xyo.sdk_xyo_flutter.protobuf.Device.BluetoothDevice DEFAULT_INSTANCE;
     static {
-      BluetoothDevice defaultInstance = new BluetoothDevice();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = defaultInstance;
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        BluetoothDevice.class, defaultInstance);
+      DEFAULT_INSTANCE = new BluetoothDevice();
     }
 
+    static {
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        BluetoothDevice.class, DEFAULT_INSTANCE);
+    }
     public static network.xyo.sdk_xyo_flutter.protobuf.Device.BluetoothDevice getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }

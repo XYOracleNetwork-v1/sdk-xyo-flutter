@@ -1,4 +1,5 @@
 package network.xyo.sdk_xyo_flutter.channels
+import android.util.Log
 
 import io.flutter.plugin.common.*
 import kotlinx.coroutines.GlobalScope
@@ -19,6 +20,7 @@ class EventStreamHandler: EventChannel.StreamHandler {
     }
 
     fun send(event: Any) {
+        Log.i("Event", event.toString())
         ui {
             eventSink?.success(event)
         }
@@ -26,12 +28,14 @@ class EventStreamHandler: EventChannel.StreamHandler {
 }
 
 open class XyoBaseChannel(registrar: PluginRegistry.Registrar, name: String): MethodChannel.MethodCallHandler {
-
+    val nodeName = name
     protected val events = EventStreamHandler()
     private val methodChannel = MethodChannel(registrar.messenger(), name)
     private val eventChannel = EventChannel(registrar.messenger(), "${name}Events")
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        Log.i("XYOBASE", "SOME BULLSHIT")
+
         when (call.method) {
             else -> notImplemented(result)
         }
