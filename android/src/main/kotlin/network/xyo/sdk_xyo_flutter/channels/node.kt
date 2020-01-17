@@ -13,29 +13,14 @@ import network.xyo.sdk_xyo_flutter.InteractionModel
 import io.flutter.plugin.common.EventChannel
 import java.util.*
 
-//data class DeviceBoundWitness(
-//        val bytes: String = String(),
-//        val byteHash: String = String(),
-//        val humanName: String = String(),
-//        val huerestics: Map<String, String> = emptyMap(),
-//        val parties: Array<String> = emptyArray(),
-//        val linked: Boolean = false,
-//        val unknownFields: ByteArray = byteArrayOf(0)
-//)
-//
-//data class DeviceBoundWitnessList (
-//        val boundWitnesses: List<DeviceBoundWitness> = listOf(),
-//        val unknownFields: ByteArray = ByttargetNameeArray(0)
-//)
 
 open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registrar) :XyoNodeChannel(context, registrar, "xyoClient") {
   val listener = object : XyoBoundWitnessTarget.Listener() {
     override fun boundWitnessCompleted(source: Any?, target: XyoBoundWitnessTarget, boundWitness: XyoBoundWitness?, error:String?) {
-//      super.boundWitnessCompleted(boundWitness, error)
       Log.i(TAG, "Bound Witness Completed")
-      // TODO how to serialize
-      // streamHandleEnd.send(boundWitness.serializedData())
-      }
+      var model = InteractionModel(boundWitness, null, Date())
+      streamHandleEnd.send(model.toBuffer().toByteArray())
+    }
 
     override fun boundWitnessStarted(source: Any?, target: XyoBoundWitnessTarget) {
 //      super.boundWitnessStarted()
@@ -100,16 +85,12 @@ open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registra
 open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registrar): XyoNodeChannel(context, registrar, "xyoServer") {
   val listener = object : XyoBoundWitnessTarget.Listener() {
     override fun boundWitnessCompleted(source: Any?, target: XyoBoundWitnessTarget, boundWitness: XyoBoundWitness?, error:String?) {
-//      super.boundWitnessCompleted(boundWitness, error)
       Log.i(TAG, "Bound Witness Completed")
-      // TODO how to serialize
-
       var model = InteractionModel(boundWitness, null, Date())
       streamHandleEnd.send(model.toBuffer().toByteArray())
       }
 
     override fun boundWitnessStarted(source: Any?, target: XyoBoundWitnessTarget) {
-//      super.boundWitnessStarted()
 
       Log.i(TAG, "Bound Witness Started" + target)
       // streamHandleEnd.send(buildDevice(device).toByteArray())

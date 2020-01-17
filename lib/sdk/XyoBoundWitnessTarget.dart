@@ -15,11 +15,11 @@ class XyoBoundWitnessTarget extends ChangeNotifier {
 
   XyoBoundWitnessTarget(this.network) {
     String cliStr = isClient() ? "xyoClient" : "xyoServer";
-    String networkStr = this.network == XyoNetworkType.ble ? "ble" : "tcpip";
+    // String networkStr = this.network == XyoNetworkType.ble ? "ble" : "tcpip";
 
-    String startChannelName = cliStr + networkStr + "Started";
+    String startChannelName = cliStr + "Started";
     //xyoNodebleClientStarted
-    String completeChannelName = cliStr + networkStr + "Ended";
+    String completeChannelName = cliStr + "Ended";
     //xyoNodebleClientEnded
     _boundWitnessStartedChannel = EventChannel(startChannelName);
     _boundWitnessCompletedChannel = EventChannel(completeChannelName);
@@ -29,7 +29,7 @@ class XyoBoundWitnessTarget extends ChangeNotifier {
   }
 
   Future<String> getPublicKey() async {
-    return _flutterBridge.getPublicKey(this is XyoClient);
+    return _flutterBridge.getPublicKey();
   }
 
   bool isBridging;

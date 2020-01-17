@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-//import 'package:intl/intl.dart';
 
-import 'package:flutter/services.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
@@ -109,6 +107,27 @@ class _MyAppState extends State<MyApp> {
           child: Column(children: [
             Row(
               children: <Widget>[
+                InputChip(
+                  label: Text("Client"),
+                  selected: _isClient,
+                  onSelected: (selected) {
+                    setState(() {
+                      _isClient = selected;
+                    });
+                  },
+                ),
+                InputChip(
+                    label: Text("Server"),
+                    selected: !_isClient,
+                    onSelected: (selected) {
+                      setState(() {
+                        _isClient = !selected;
+                      });
+                    }),
+              ],
+            ),
+            Row(
+              children: <Widget>[
                 RaisedButton(
                     onPressed: () async {
                       String address = _isClient
@@ -132,18 +151,6 @@ class _MyAppState extends State<MyApp> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   )),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text("$nodeType Config"),
-                Switch(
-                    onChanged: (isOn) {
-                      setState(() {
-                        _isClient = isOn;
-                      });
-                    },
-                    value: _isClient),
               ],
             ),
             if (_isClient)

@@ -1,6 +1,6 @@
 name: sdk_xyo_flutter_example
 description: Demonstrates how to use the sdk_xyo_flutter plugin.
-publish_to: 'none'
+publish_to: "none"
 version: 0.0.1
 
 environment:
@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_chips_input: ^1.7.0
 
   intl: ^0.16.0
 
@@ -29,7 +30,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

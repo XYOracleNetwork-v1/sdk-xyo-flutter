@@ -34,7 +34,6 @@ open class XyoBaseChannel(registrar: PluginRegistry.Registrar, name: String): Me
     private val eventChannel = EventChannel(registrar.messenger(), "${name}Events")
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-        Log.i("XYOBASE", "SOME BULLSHIT")
 
         when (call.method) {
             else -> notImplemented(result)
