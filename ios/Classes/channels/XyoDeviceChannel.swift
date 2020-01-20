@@ -55,6 +55,7 @@ internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
   fileprivate let smartScan = XYSmartScan.instance
   let deviceDetected = XyoNodeStreamHandler()
   let deviceExited = XyoNodeStreamHandler()
+  let statusChanged = XyoNodeStreamHandler()
 
   init(registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "xyoDevice", binaryMessenger: registrar.messenger())
@@ -64,6 +65,9 @@ internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
     
     let exited = FlutterEventChannel(name: "xyoDeviceOnExit", binaryMessenger: registrar.messenger())
     exited.setStreamHandler(deviceExited)
+
+    let onStatusChanged = FlutterEventChannel(name: "xyoOnStatusChanged", binaryMessenger: registrar.messenger())
+    onStatusChanged.setStreamHandler(statusChanged)
     
     XyoBluetoothDeviceCreator.enable(enable: true)
     XyoBluetoothDevice.family.enable(enable: true)
