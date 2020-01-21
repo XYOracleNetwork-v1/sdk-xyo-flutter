@@ -2,11 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:mutex/mutex.dart';
-// import 'package:mutex/mutex.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 import 'package:retry/retry.dart';
 
 enum XyoNodeType { client, server }
+
+enum XyoScannerStatus {
+  none,
+  enabled,
+  bluetoothDisabled,
+  bluetoothUnavailable,
+  locationDisabled,
+  unknown
+}
 
 class XyoScanner {
   static XyoScanner instance = XyoScanner();
@@ -16,10 +24,18 @@ class XyoScanner {
       const EventChannel('xyoDeviceOnDetect');
   final EventChannel _deviceExitedChannel =
       const EventChannel('xyoDeviceOnExit');
+  final EventChannel _statusChangedChannel =
+      const EventChannel('xyoOnStatusChanged');
 
   Future<bool> setListening(bool on) async {
     final bool success = await _channel.invokeMethod('setDeviceListening', on);
     return success;
+  }
+
+  Future<String> getPublicKey(BluetoothDevice device) async {
+    final String publicKey =
+        await _channel.invokeMethod('getPublicKey', device.id);
+    return publicKey;
   }
 
   Stream<BluetoothDevice> onDeviceDetected() {
@@ -37,6 +53,14 @@ class XyoScanner {
         .map<BluetoothDevice>((value) {
       final bw = BluetoothDevice.fromBuffer(value);
       return bw;
+    });
+  }
+
+  Stream<XyoScannerStatus> onStatusChanged() {
+    return _statusChangedChannel
+        .receiveBroadcastStream()
+        .map<XyoScannerStatus>((value) {
+      return value;
     });
   }
 }
@@ -58,6 +82,13 @@ class XyoClientFlutterBridge extends XyoFlutterBridge {
     final bool scanning = await _channel.invokeMethod('getScanning');
     print("SDK:$channelName:getScanning $scanning");
     return scanning;
+  }
+
+  Future<bool> initiateBoundWitness(String id) async {
+    await initialize();
+    print("SDK:$channelName:initiateBoundWitness");
+    final bool result = await _channel.invokeMethod('initiateBoundWitness');
+    return result;
   }
 
   Future<bool> setAutoBoundWitnessing(bool autoBoundWitness) async {
