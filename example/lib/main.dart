@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:intl/intl.dart';
 
-import 'package:flutter/services.dart';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
@@ -21,25 +19,39 @@ class _MyAppState extends State<MyApp> {
   XyoNode _xyoNode;
   String _publicKey = "";
   bool _scanning = false;
+  bool _listening = false;
   bool _autoBridging = false;
 
   String _payloadString;
+  String _payloadStringTemp;
+
+  TextEditingController textController = TextEditingController();
 
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    _initS();
+  }
+
+  void _initS() async {
     await buildXyo();
     _xyoNode.getClient('ble').addListener(() {
       setState(() {
         _scanning = _xyoNode.getClient('ble').scan;
         _autoBridging = _xyoNode.getClient('ble').autoBridge;
+        _payloadString = _xyoNode.getClient('ble').payloadData;
+        textController.text = _payloadString ?? "";
       });
     });
     _xyoNode.getServer('ble').addListener(() {
       setState(() {
         _autoBridging = _xyoNode.getServer('ble').autoBridge;
+        _listening = _xyoNode.getServer('ble').listen;
+        _payloadString = _xyoNode.getServer('ble').payloadData;
+        textController.text = _payloadString ?? "";
       });
     });
+    XyoScanner().setListening(true);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -104,6 +116,27 @@ class _MyAppState extends State<MyApp> {
           child: Column(children: [
             Row(
               children: <Widget>[
+                InputChip(
+                  label: Text("Client"),
+                  selected: _isClient,
+                  onSelected: (selected) {
+                    setState(() {
+                      _isClient = selected;
+                    });
+                  },
+                ),
+                InputChip(
+                    label: Text("Server"),
+                    selected: !_isClient,
+                    onSelected: (selected) {
+                      setState(() {
+                        _isClient = !selected;
+                      });
+                    }),
+              ],
+            ),
+            Row(
+              children: <Widget>[
                 RaisedButton(
                     onPressed: () async {
                       String address = _isClient
@@ -129,18 +162,6 @@ class _MyAppState extends State<MyApp> {
                   )),
               ],
             ),
-            Row(
-              children: <Widget>[
-                Text("$nodeType Config"),
-                Switch(
-                    onChanged: (isOn) {
-                      setState(() {
-                        _isClient = isOn;
-                      });
-                    },
-                    value: _isClient),
-              ],
-            ),
             if (_isClient)
               Row(
                 children: <Widget>[
@@ -161,7 +182,7 @@ class _MyAppState extends State<MyApp> {
                     onChanged: (isOn) async {
                       _xyoNode.getServer('ble').listen = isOn;
                     },
-                    value: _xyoNode.getServer('ble').listen,
+                    value: _listening,
                   ),
                 ],
               ),
@@ -186,30 +207,31 @@ class _MyAppState extends State<MyApp> {
                   child: Flexible(
                     flex: 3,
                     child: TextField(
+                      controller: textController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Enter $nodeType payload'),
                       onChanged: (newVal) => setState(() {
-                        _payloadString = newVal;
+                        _payloadStringTemp = newVal;
                       }),
                     ),
                   ),
                 ),
-                if (_payloadString != null)
+                if (_payloadStringTemp != null)
                   Flexible(
                     flex: 2,
                     child: RaisedButton(
                         child: Text(
-                          "Set $nodeType Payload: $_payloadString",
+                          "Set $nodeType Payload: $_payloadStringTemp",
                           softWrap: true,
                         ),
                         onPressed: () {
                           if (_isClient) {
                             _xyoNode.getClient('ble').stringHeuristic =
-                                _payloadString;
+                                _payloadStringTemp;
                           } else {
                             _xyoNode.getServer('ble').stringHeuristic =
-                                _payloadString;
+                                _payloadStringTemp;
                           }
                         }),
                   )

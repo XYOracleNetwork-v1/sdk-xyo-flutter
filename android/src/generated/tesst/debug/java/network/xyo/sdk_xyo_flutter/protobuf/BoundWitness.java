@@ -388,9 +388,7 @@ public final class BoundWitness {
             synchronized (network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitnessList.class) {
               parser = PARSER;
               if (parser == null) {
-                parser =
-                    new DefaultInstanceBasedParser<network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitnessList>(
-                        DEFAULT_INSTANCE);
+                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -411,14 +409,15 @@ public final class BoundWitness {
     // @@protoc_insertion_point(class_scope:DeviceBoundWitnessList)
     private static final network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitnessList DEFAULT_INSTANCE;
     static {
-      DeviceBoundWitnessList defaultInstance = new DeviceBoundWitnessList();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = defaultInstance;
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        DeviceBoundWitnessList.class, defaultInstance);
+      DEFAULT_INSTANCE = new DeviceBoundWitnessList();
     }
 
+    static {
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        DeviceBoundWitnessList.class, DEFAULT_INSTANCE);
+    }
     public static network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitnessList getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
@@ -436,36 +435,30 @@ public final class BoundWitness {
 
     /**
      * <code>string bytes = 1;</code>
-     * @return The bytes.
      */
     java.lang.String getBytes();
     /**
      * <code>string bytes = 1;</code>
-     * @return The bytes for bytes.
      */
     com.google.protobuf.ByteString
         getBytesBytes();
 
     /**
      * <code>string byte_hash = 2;</code>
-     * @return The byteHash.
      */
     java.lang.String getByteHash();
     /**
      * <code>string byte_hash = 2;</code>
-     * @return The bytes for byteHash.
      */
     com.google.protobuf.ByteString
         getByteHashBytes();
 
     /**
      * <code>string human_name = 3;</code>
-     * @return The humanName.
      */
     java.lang.String getHumanName();
     /**
      * <code>string human_name = 3;</code>
-     * @return The bytes for humanName.
      */
     com.google.protobuf.ByteString
         getHumanNameBytes();
@@ -506,32 +499,25 @@ public final class BoundWitness {
 
     /**
      * <code>repeated string parties = 5;</code>
-     * @return A list containing the parties.
      */
     java.util.List<java.lang.String>
         getPartiesList();
     /**
      * <code>repeated string parties = 5;</code>
-     * @return The count of parties.
      */
     int getPartiesCount();
     /**
      * <code>repeated string parties = 5;</code>
-     * @param index The index of the element to return.
-     * @return The parties at the given index.
      */
     java.lang.String getParties(int index);
     /**
      * <code>repeated string parties = 5;</code>
-     * @param index The index of the element to return.
-     * @return The parties at the given index.
      */
     com.google.protobuf.ByteString
         getPartiesBytes(int index);
 
     /**
      * <code>bool linked = 6;</code>
-     * @return The linked.
      */
     boolean getLinked();
   }
@@ -553,7 +539,6 @@ public final class BoundWitness {
     private java.lang.String bytes_;
     /**
      * <code>string bytes = 1;</code>
-     * @return The bytes.
      */
     @java.lang.Override
     public java.lang.String getBytes() {
@@ -561,7 +546,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string bytes = 1;</code>
-     * @return The bytes for bytes.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -570,7 +554,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string bytes = 1;</code>
-     * @param value The bytes to set.
      */
     private void setBytes(
         java.lang.String value) {
@@ -589,7 +572,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string bytes = 1;</code>
-     * @param value The bytes for bytes to set.
      */
     private void setBytesBytes(
         com.google.protobuf.ByteString value) {
@@ -605,7 +587,6 @@ public final class BoundWitness {
     private java.lang.String byteHash_;
     /**
      * <code>string byte_hash = 2;</code>
-     * @return The byteHash.
      */
     @java.lang.Override
     public java.lang.String getByteHash() {
@@ -613,7 +594,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string byte_hash = 2;</code>
-     * @return The bytes for byteHash.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -622,7 +602,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string byte_hash = 2;</code>
-     * @param value The byteHash to set.
      */
     private void setByteHash(
         java.lang.String value) {
@@ -641,7 +620,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string byte_hash = 2;</code>
-     * @param value The bytes for byteHash to set.
      */
     private void setByteHashBytes(
         com.google.protobuf.ByteString value) {
@@ -657,7 +635,6 @@ public final class BoundWitness {
     private java.lang.String humanName_;
     /**
      * <code>string human_name = 3;</code>
-     * @return The humanName.
      */
     @java.lang.Override
     public java.lang.String getHumanName() {
@@ -665,7 +642,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string human_name = 3;</code>
-     * @return The bytes for humanName.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -674,7 +650,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string human_name = 3;</code>
-     * @param value The humanName to set.
      */
     private void setHumanName(
         java.lang.String value) {
@@ -693,7 +668,6 @@ public final class BoundWitness {
     }
     /**
      * <code>string human_name = 3;</code>
-     * @param value The bytes for humanName to set.
      */
     private void setHumanNameBytes(
         com.google.protobuf.ByteString value) {
@@ -802,7 +776,6 @@ public final class BoundWitness {
     private com.google.protobuf.Internal.ProtobufList<java.lang.String> parties_;
     /**
      * <code>repeated string parties = 5;</code>
-     * @return A list containing the parties.
      */
     @java.lang.Override
     public java.util.List<java.lang.String> getPartiesList() {
@@ -810,7 +783,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @return The count of parties.
      */
     @java.lang.Override
     public int getPartiesCount() {
@@ -818,8 +790,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @param index The index of the element to return.
-     * @return The parties at the given index.
      */
     @java.lang.Override
     public java.lang.String getParties(int index) {
@@ -827,8 +797,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the parties at the given index.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
@@ -844,8 +812,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @param index The index to set the value at.
-     * @param value The parties to set.
      */
     private void setParties(
         int index, java.lang.String value) {
@@ -857,7 +823,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @param value The parties to add.
      */
     private void addParties(
         java.lang.String value) {
@@ -869,7 +834,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @param values The parties to add.
      */
     private void addAllParties(
         java.lang.Iterable<java.lang.String> values) {
@@ -885,7 +849,6 @@ public final class BoundWitness {
     }
     /**
      * <code>repeated string parties = 5;</code>
-     * @param value The bytes of the parties to add.
      */
     private void addPartiesBytes(
         com.google.protobuf.ByteString value) {
@@ -901,7 +864,6 @@ public final class BoundWitness {
     private boolean linked_;
     /**
      * <code>bool linked = 6;</code>
-     * @return The linked.
      */
     @java.lang.Override
     public boolean getLinked() {
@@ -909,7 +871,6 @@ public final class BoundWitness {
     }
     /**
      * <code>bool linked = 6;</code>
-     * @param value The linked to set.
      */
     private void setLinked(boolean value) {
       
@@ -1020,7 +981,6 @@ public final class BoundWitness {
 
       /**
        * <code>string bytes = 1;</code>
-       * @return The bytes.
        */
       @java.lang.Override
       public java.lang.String getBytes() {
@@ -1028,7 +988,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string bytes = 1;</code>
-       * @return The bytes for bytes.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -1037,8 +996,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string bytes = 1;</code>
-       * @param value The bytes to set.
-       * @return This builder for chaining.
        */
       public Builder setBytes(
           java.lang.String value) {
@@ -1048,7 +1005,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string bytes = 1;</code>
-       * @return This builder for chaining.
        */
       public Builder clearBytes() {
         copyOnWrite();
@@ -1057,8 +1013,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string bytes = 1;</code>
-       * @param value The bytes for bytes to set.
-       * @return This builder for chaining.
        */
       public Builder setBytesBytes(
           com.google.protobuf.ByteString value) {
@@ -1069,7 +1023,6 @@ public final class BoundWitness {
 
       /**
        * <code>string byte_hash = 2;</code>
-       * @return The byteHash.
        */
       @java.lang.Override
       public java.lang.String getByteHash() {
@@ -1077,7 +1030,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string byte_hash = 2;</code>
-       * @return The bytes for byteHash.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -1086,8 +1038,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string byte_hash = 2;</code>
-       * @param value The byteHash to set.
-       * @return This builder for chaining.
        */
       public Builder setByteHash(
           java.lang.String value) {
@@ -1097,7 +1047,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string byte_hash = 2;</code>
-       * @return This builder for chaining.
        */
       public Builder clearByteHash() {
         copyOnWrite();
@@ -1106,8 +1055,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string byte_hash = 2;</code>
-       * @param value The bytes for byteHash to set.
-       * @return This builder for chaining.
        */
       public Builder setByteHashBytes(
           com.google.protobuf.ByteString value) {
@@ -1118,7 +1065,6 @@ public final class BoundWitness {
 
       /**
        * <code>string human_name = 3;</code>
-       * @return The humanName.
        */
       @java.lang.Override
       public java.lang.String getHumanName() {
@@ -1126,7 +1072,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string human_name = 3;</code>
-       * @return The bytes for humanName.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -1135,8 +1080,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string human_name = 3;</code>
-       * @param value The humanName to set.
-       * @return This builder for chaining.
        */
       public Builder setHumanName(
           java.lang.String value) {
@@ -1146,7 +1089,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string human_name = 3;</code>
-       * @return This builder for chaining.
        */
       public Builder clearHumanName() {
         copyOnWrite();
@@ -1155,8 +1097,6 @@ public final class BoundWitness {
       }
       /**
        * <code>string human_name = 3;</code>
-       * @param value The bytes for humanName to set.
-       * @return This builder for chaining.
        */
       public Builder setHumanNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1265,7 +1205,6 @@ public final class BoundWitness {
 
       /**
        * <code>repeated string parties = 5;</code>
-       * @return A list containing the parties.
        */
       @java.lang.Override
       public java.util.List<java.lang.String>
@@ -1275,7 +1214,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @return The count of parties.
        */
       @java.lang.Override
       public int getPartiesCount() {
@@ -1283,8 +1221,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @param index The index of the element to return.
-       * @return The parties at the given index.
        */
       @java.lang.Override
       public java.lang.String getParties(int index) {
@@ -1292,8 +1228,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @param index The index of the value to return.
-       * @return The bytes of the parties at the given index.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
@@ -1302,9 +1236,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @param index The index to set the value at.
-       * @param value The parties to set.
-       * @return This builder for chaining.
        */
       public Builder setParties(
           int index, java.lang.String value) {
@@ -1314,8 +1245,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @param value The parties to add.
-       * @return This builder for chaining.
        */
       public Builder addParties(
           java.lang.String value) {
@@ -1325,8 +1254,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @param values The parties to add.
-       * @return This builder for chaining.
        */
       public Builder addAllParties(
           java.lang.Iterable<java.lang.String> values) {
@@ -1336,7 +1263,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @return This builder for chaining.
        */
       public Builder clearParties() {
         copyOnWrite();
@@ -1345,8 +1271,6 @@ public final class BoundWitness {
       }
       /**
        * <code>repeated string parties = 5;</code>
-       * @param value The bytes of the parties to add.
-       * @return This builder for chaining.
        */
       public Builder addPartiesBytes(
           com.google.protobuf.ByteString value) {
@@ -1357,7 +1281,6 @@ public final class BoundWitness {
 
       /**
        * <code>bool linked = 6;</code>
-       * @return The linked.
        */
       @java.lang.Override
       public boolean getLinked() {
@@ -1365,8 +1288,6 @@ public final class BoundWitness {
       }
       /**
        * <code>bool linked = 6;</code>
-       * @param value The linked to set.
-       * @return This builder for chaining.
        */
       public Builder setLinked(boolean value) {
         copyOnWrite();
@@ -1375,7 +1296,6 @@ public final class BoundWitness {
       }
       /**
        * <code>bool linked = 6;</code>
-       * @return This builder for chaining.
        */
       public Builder clearLinked() {
         copyOnWrite();
@@ -1422,9 +1342,7 @@ public final class BoundWitness {
             synchronized (network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitness.class) {
               parser = PARSER;
               if (parser == null) {
-                parser =
-                    new DefaultInstanceBasedParser<network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitness>(
-                        DEFAULT_INSTANCE);
+                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -1445,14 +1363,15 @@ public final class BoundWitness {
     // @@protoc_insertion_point(class_scope:DeviceBoundWitness)
     private static final network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitness DEFAULT_INSTANCE;
     static {
-      DeviceBoundWitness defaultInstance = new DeviceBoundWitness();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = defaultInstance;
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        DeviceBoundWitness.class, defaultInstance);
+      DEFAULT_INSTANCE = new DeviceBoundWitness();
     }
 
+    static {
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        DeviceBoundWitness.class, DEFAULT_INSTANCE);
+    }
     public static network.xyo.sdk_xyo_flutter.protobuf.BoundWitness.DeviceBoundWitness getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }

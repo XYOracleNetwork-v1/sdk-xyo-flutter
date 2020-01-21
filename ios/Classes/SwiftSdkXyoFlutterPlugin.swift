@@ -4,12 +4,14 @@ import sdk_xyo_swift
 public class SwiftSdkXyoFlutterPlugin: NSObject, FlutterPlugin {
   static var instance: SwiftSdkXyoFlutterPlugin?
   
-  let nodeChannel : XyoNodeChannel;
+  let client : XyoBleClientChannel;
+  let server : XyoBleServerChannel;
   let deviceChannel : XyoDeviceChannel;
 
   init(with registrar: FlutterPluginRegistrar) {
     deviceChannel = XyoDeviceChannel(registrar: registrar)
-    nodeChannel = XyoNodeChannel(registrar: registrar)
+    client = XyoBleClientChannel(registrar: registrar)
+    server = XyoBleServerChannel(registrar: registrar)
 
     super.init()
   }

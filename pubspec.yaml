@@ -1,6 +1,6 @@
 name: sdk_xyo_flutter
 description: XYO SDK for Flutter Projects
-version: 0.0.1
+version: 0.1.0
 author: XYO Open Source Team
 homepage: https://xyo.network
 
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   protobuf: ^1.0.0
   mutex: ^1.0.1
-
+  retry: ^3.0.0+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
