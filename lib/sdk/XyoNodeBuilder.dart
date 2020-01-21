@@ -10,11 +10,12 @@ class XyoNodeBuilder {
     await XyoServerFlutterBridge.instance.build();
 
     XyoNode node = XyoNode(defaultNetworks());
+    print("XyoNodeBuilder: built default networks");
 
     return node;
   }
 
   defaultNetworks() {
-    return {"ble": XyoBleNetwork(), "tcp": XyoTcpNetwork()};
+    return {"ble": XyoBleNetwork()};
   }
 }

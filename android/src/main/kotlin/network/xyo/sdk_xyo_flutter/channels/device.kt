@@ -98,7 +98,7 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
     Log.i(TAG, "onMethodCall [" + call.method + "]")
 
     when (call.method) {
-      "setListening" -> setListening(call, result)
+      "setDeviceListening" -> setListening(call, result)
       else -> super.onMethodCall(call, result)
     }
   }

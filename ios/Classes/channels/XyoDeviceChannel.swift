@@ -78,7 +78,7 @@ internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    if (call.method == "setListening") {
+    if (call.method == "setDeviceListening") {
       if (call.arguments as! Bool == true) {
         smartScan.start(mode: XYSmartScanMode.foreground)
       } else {

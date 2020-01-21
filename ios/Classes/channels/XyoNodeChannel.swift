@@ -70,13 +70,18 @@ internal class XyoBleServerChannel : XyoNodeChannel {
     return XyoNodeInstance.instance.node.networks["ble"]?.server?.publicKey()
   }
   override func setBridging( on: Bool) {
-    XyoNodeInstance.instance.node.networks["ble"]?.server?.autoBridge = on
+    if (XyoNodeInstance.instance.node.networks["ble"]?.server?.autoBridge != on) {
+      XyoNodeInstance.instance.node.networks["ble"]?.server?.autoBridge = on
+    }
   }
   override func setHeuristicString(payload: String) {
-    XyoNodeInstance.instance.node.networks["ble"]?.server?.stringHeuristic = payload
+    if (XyoNodeInstance.instance.node.networks["ble"]?.server?.stringHeuristic != payload) {
+        XyoNodeInstance.instance.node.networks["ble"]?.server?.stringHeuristic = payload
+    }
   }
   override func setupDelegates() -> Bool {
     let networks = XyoNodeInstance.instance.node.networks
+    
      _delegateRetention.removeAll()
     let serv = XyoNodeEventChannel(channelPrefix: name, with: _registrar, with: XyoNodeInstance.instance.hasher)
     networks["ble"]?.server?.delegate = serv
@@ -125,10 +130,14 @@ class XyoNodeChannel: NSObject, FlutterPlugin {
   }
   
   func setScanning(on: Bool) {
-    XyoNodeInstance.instance.node.networks["ble"]?.client?.scan = on
+    if (XyoNodeInstance.instance.node.networks["ble"]?.client?.scan != on) {
+      XyoNodeInstance.instance.node.networks["ble"]?.client?.scan = on
+    }
   }
   func setListening(on: Bool) {
-    XyoNodeInstance.instance.node.networks["ble"]?.server?.listen = on
+    if (XyoNodeInstance.instance.node.networks["ble"]?.server?.listen != on) {
+      XyoNodeInstance.instance.node.networks["ble"]?.server?.listen = on
+    }
   }
 
   func setBridging( on: Bool) {

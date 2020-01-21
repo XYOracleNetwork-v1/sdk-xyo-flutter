@@ -13,13 +13,22 @@ class XyoTcpServer extends XyoServer {
 class XyoServer extends XyoBoundWitnessTarget {
   bool isListening;
 
-  XyoServer(XyoNetworkType network) : super(network);
+  XyoServer(XyoNetworkType network) : super(network) {
+    _initVars();
+  }
+
+  _initVars() async {
+    isListening = await XyoServerFlutterBridge.instance.getListening();
+  }
+
   bool get listen {
     return isListening;
   }
 
   set listen(bool listen) {
+    print("Listen set $listen");
     isListening = listen;
+
     XyoServerFlutterBridge.instance.setListening(listen);
   }
 }

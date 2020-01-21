@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:mutex/mutex.dart';
 // import 'package:mutex/mutex.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 import 'package:retry/retry.dart';
@@ -17,7 +18,7 @@ class XyoScanner {
       const EventChannel('xyoDeviceOnExit');
 
   Future<bool> setListening(bool on) async {
-    final bool success = await _channel.invokeMethod('setListening', on);
+    final bool success = await _channel.invokeMethod('setDeviceListening', on);
     return success;
   }
 
@@ -72,10 +73,10 @@ class XyoServerFlutterBridge extends XyoFlutterBridge {
 
   XyoServerFlutterBridge(String s) : super(s);
 
-  Future<bool> setListening(bool on) async {
+  Future<bool> setListening(bool listen) async {
     await initialize();
-    print("SDK:$channelName:setListening $on");
-    final bool success = await _channel.invokeMethod('setListening', on);
+    print("SDK:$channelName:setListening $listen");
+    final bool success = await _channel.invokeMethod('setListening', listen);
     return success;
   }
 
@@ -91,32 +92,36 @@ class XyoFlutterBridge {
   MethodChannel _channel;
   String _buildResult;
   final channelName;
-  // var _initMutex = new Mutex();
+  var _initMutex = new Mutex();
 
   XyoFlutterBridge(this.channelName) {
     _channel = MethodChannel(channelName);
   }
 
   Future<String> initialize() async {
-    print("SDK:$channelName:initialize");
     if (_buildResult != null) {
       return _buildResult;
     }
-    // await _initMutex.acquire();
+    print("SDK:$channelName:initialize");
+
+    await _initMutex.acquire();
     try {
       print("SDK:$channelName:initialize2");
       final r = RetryOptions(maxAttempts: 3);
-      _buildResult = await r.retry(() {
-        return _channel.invokeMethod('build');
+      _buildResult = await r.retry(() async {
+        print("SDK:$channelName:try build");
+
+        _buildResult = await _channel.invokeMethod('build');
+        print("SDK:$channelName:try build finished");
+
+        return _buildResult;
       }, retryIf: (e) => _buildResult == null);
     } catch (err) {
       print("Error initializing, $err");
+    } finally {
+      _initMutex.release();
     }
     return _buildResult;
-
-    // finally {
-    //   _initMutex.release();
-    // }
   }
 
   Future<String> build() async {

@@ -21,7 +21,7 @@ class XyoBleNetwork extends XyoNetwork {
     server = XyoBleServer(XyoNetworkType.ble);
     server.autoBridge = false; // true
     server.acceptBridging = false;
-    server.listen = false;
+    server.isListening = false;
   }
 }
 
