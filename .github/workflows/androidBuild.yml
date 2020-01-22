@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Pre-Build
         run: |
-          wget http://services.gradle.org/distributions/gradle-3.5-bin.zip
+          wget http://services.gradle.org/distributions/gradle-4.4.1-all.zip
           unzip -qq gradle-3.5-bin.zip
           export GRADLE_HOME=$PWD/gradle-3.5
           export PATH=$GRADLE_HOME/bin:$PATH
