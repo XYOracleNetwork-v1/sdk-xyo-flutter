@@ -1,0 +1,26 @@
+name: android build
+
+on: 
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Pre-Build
+        run: |
+          wget http://services.gradle.org/distributions/gradle-3.5-bin.zip
+          unzip -qq gradle-3.5-bin.zip
+          export GRADLE_HOME=$PWD/gradle-3.5
+          export PATH=$GRADLE_HOME/bin:$PATH
+          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
+          $GITHUB_WORKSPACE/flutter/bin/flutter doctor
+              
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE/example
+          $GITHUB_WORKSPACE/flutter/bin/flutter -v build apk
