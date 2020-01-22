@@ -1,0 +1,25 @@
+name: android build
+
+on: 
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs: 
+  build: 
+    runs-on: macos-latest
+    
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Pre-Build
+        run: |
+          brew reinstall gradle
+          export GRADLE_HOME=$PWD/gradle-6.0.1
+          export PATH=$GRADLE_HOME/bin:$PATH
+          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
+          $GITHUB_WORKSPACE/flutter/bin/flutter doctor
+              
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE/example
+          $GITHUB_WORKSPACE/flutter/bin/flutter -v build apk
