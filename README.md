@@ -23,9 +23,18 @@ Not only will this SDK make XYO apps better, but bring XYO functionality to exis
 
 Add this to your pubspec:
 
+```yaml
+dependencies: 
+  sdk_xyo_flutter: ^0.1.0
 ```
 
+Update your packages:
+
+```bash
+flutter pub get
 ```
+
+If you are using VSCode, you will be prompted to update packages in the editor.
 
 ## Usage
 
