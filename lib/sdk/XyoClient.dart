@@ -1,4 +1,4 @@
-import 'package:sdk_xyo_flutter/XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 
@@ -18,13 +18,18 @@ class XyoClient extends XyoBoundWitnessTarget {
 
   set scan(bool scan) {
     isScanning = scan;
-    XyoSdkDartBridge.instance.setScanning(scan);
+    XyoClientFlutterBridge.instance.setScanning(scan);
+    notifyListeners();
   }
 
   set autoBoundWitness(bool autoBoundWitness) {
     isAutoBoundWitnessing = autoBoundWitness;
-    XyoSdkDartBridge.instance
-        .setAutoBoundWitnessing(this is XyoClient, autoBoundWitness);
+    XyoClientFlutterBridge.instance.setAutoBoundWitnessing(autoBoundWitness);
+  }
+
+  set acceptBridging(bool acceptBridging) {
+    isAcceptingBridging = acceptBridging;
+    XyoClientFlutterBridge.instance.setAcceptBridging(acceptBridging);
   }
 }
 

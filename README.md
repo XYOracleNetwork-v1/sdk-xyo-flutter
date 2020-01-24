@@ -1,14 +1,48 @@
-# sdk_xyo_flutter
+[logo]: https://cdn.xy.company/img/brand/XYO_full_colored.png
 
-A new flutter plugin project.
+[![logo]](https://xyo.network)
 
-## Getting Started
+# XYO Flutter SDK
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## Table of Contents
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+-   [Title](#xyo-flutter-sdk)
+-   [Description](#description)
+-   [Install](#install)
+-   [Usage](#usage)
+-   [License](#license)
+-   [Credits](#credits)
+
+## Description
+
+A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin,
+ to help developers with the agonizing issues with Android the BLE stack.
+Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In adition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
+
+## Install
+
+Add this to your pubspec:
+
+```yaml
+dependencies: 
+  sdk_xyo_flutter: ^0.1.0
+```
+
+Update your packages:
+
+```bash
+flutter pub get
+```
+
+If you are using VSCode, you will be prompted to update packages in the editor.
+
+## Usage
+
+## License
+
+See the [LICENSE](LICENSE) file for license details.
+
+## Credits
+
+Made with 🔥and ❄️ by [XYO](https://www.xyo.network)
+

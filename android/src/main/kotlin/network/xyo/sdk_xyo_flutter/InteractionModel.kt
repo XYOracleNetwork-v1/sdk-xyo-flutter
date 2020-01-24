@@ -35,8 +35,10 @@ class InteractionModel {
         }
     }
 
-    constructor(block: XyoBoundWitness?, hash: ByteArray, date: Date, linked: Boolean = true) {
-        this.byteHash = hash
+    constructor(block: XyoBoundWitness?, hash: ByteArray?, date: Date, linked: Boolean = true) {
+        if (hash != null) {
+            this.byteHash = hash!!
+        }
         this.date = date
         this.linked = linked
         this.boundWitness = block
@@ -134,8 +136,6 @@ class InteractionModel {
         builder.linked = linked
         builder.addAllParties(parties.toList())
         builder.putAllHuerestics(huerestics)
-
-
         return builder.build()
     }
 }

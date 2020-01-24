@@ -23,13 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>This example needs bluetooth</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>This example needs bluetooth</string>
+	<string>Uses bluetooth</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This example needs location</string>
+	<string>Need location for example</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This example needs location</string>
+	<string>Need location for example</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>

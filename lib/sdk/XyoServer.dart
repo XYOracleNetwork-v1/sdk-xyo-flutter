@@ -1,7 +1,6 @@
 import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
-
-import '../XyoSdkDartBridge.dart';
+import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
 
 class XyoBleServer extends XyoServer {
   XyoBleServer(XyoNetworkType network) : super(network);
@@ -14,13 +13,22 @@ class XyoTcpServer extends XyoServer {
 class XyoServer extends XyoBoundWitnessTarget {
   bool isListening;
 
-  XyoServer(XyoNetworkType network) : super(network);
+  XyoServer(XyoNetworkType network) : super(network) {
+    _initVars();
+  }
+
+  _initVars() async {
+    isListening = await XyoServerFlutterBridge.instance.getListening();
+  }
+
   bool get listen {
     return isListening;
   }
 
   set listen(bool listen) {
+    print("Listen set $listen");
     isListening = listen;
-    XyoSdkDartBridge.instance.setListening(listen);
+
+    XyoServerFlutterBridge.instance.setListening(listen);
   }
 }

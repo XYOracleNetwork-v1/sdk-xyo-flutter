@@ -1,6 +1,6 @@
 #!/bin/sh
 
-brew tab dart-lang/dart
-brew install dart
+brew tap dart-lang/dart
+brew reinstall dart
 
-pub global activate protoc_plugin
+pub global activate protoc_plugin`
