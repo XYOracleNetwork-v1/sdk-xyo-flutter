@@ -308,17 +308,17 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
 
   private fun getPublicKey(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val node = XyoNodeWrapper.getInstance(context)?.node
+    var value: String? = null
     if (node != null) {
       (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
         if (nodeName == "xyoClient") {
-          sendResult(result, network.client.publicKey)
+          value = network.client.publicKey
         } else {
-          sendResult(result, network.server.publicKey)
+          value = network.server.publicKey
         }
       }
-    } else {
-      sendResult(result, false)
-    }   
+    } 
+    sendResult(result, value)
   }
 
   companion object {

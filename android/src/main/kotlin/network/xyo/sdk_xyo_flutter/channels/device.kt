@@ -19,6 +19,8 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
     override fun statusChanged(status: XYSmartScan.Status) {
       Log.i(TAG, "statusChanged" + status)
 
+      onStatusChanged.send(1)
+
       super.statusChanged(status)
     }
 
@@ -73,10 +75,12 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
   private val onEnter = EventStreamHandler()
   private val onExit = EventStreamHandler()
   private val onDetect = EventStreamHandler()
+  private val onStatusChanged = EventStreamHandler()
 
   private val onEnterChannel = EventChannel(registrar.messenger(), "${name}OnEnter")
   private val onExitChannel = EventChannel(registrar.messenger(), "${name}OnExit")
   private val onDetectChannel = EventChannel(registrar.messenger(), "${name}OnDetect")
+  private val onStatusChangedChannel = EventChannel(registrar.messenger(), "${name}OnStatusChanged")
 
   init {
     Log.i(TAG, "init smartScan with listener" + listener)
@@ -90,6 +94,7 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
     onEnterChannel.setStreamHandler(onEnter)
     onExitChannel.setStreamHandler(onExit)
     onDetectChannel.setStreamHandler(onDetect)
+    onStatusChangedChannel.setStreamHandler(onStatusChanged)
     Log.i(TAG, "initializeChannels")
 
   }
