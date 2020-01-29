@@ -2,6 +2,10 @@
 
 [![logo]](https://xyo.network)
 
+![](https://github.com/XYOracleNetwork/sdk-ble-swift/workflows/iOS%20Build/badge.svg?branch=develop)
+![](https://github.com/XYOracleNetwork/sdk-ble-swift/workflows/APK%20Build/badge.svg?branch=develop)
+
+
 # XYO Flutter SDK
 
 ## Table of Contents
