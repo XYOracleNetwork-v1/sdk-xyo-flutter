@@ -13,13 +13,22 @@ import network.xyo.ble.generic.devices.XYBluetoothDevice
 import network.xyo.ble.devices.xy.XY4BluetoothDevice
 
 
+@ExperimentalUnsignedTypes
 class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
 
   private val listener = object: XYSmartScan.Listener() {
     override fun statusChanged(status: XYSmartScan.Status) {
-      Log.i(TAG, "statusChanged" + status)
+      Log.i(TAG, "statusChanged$status")
 
-      onStatusChanged.send(1)
+      val result = when (status) {
+        XYSmartScan.Status.Enabled -> "Enabled"
+        XYSmartScan.Status.None -> "None"
+        XYSmartScan.Status.BluetoothDisabled -> "BluetoothDisabled"
+        XYSmartScan.Status.BluetoothUnavailable -> "BluetoothUnavailable"
+        XYSmartScan.Status.LocationDisabled -> "LocationDisabled"
+      }
+
+      onStatusChanged.send(result)
 
       super.statusChanged(status)
     }
