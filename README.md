@@ -4,6 +4,8 @@
 
 ![](https://github.com/XYOracleNetwork/sdk-xyo-flutter/workflows/iOS%20Build/badge.svg?branch=develop)
 ![](https://github.com/XYOracleNetwork/sdk-xyo-flutter/workflows/APK%20Build/badge.svg?branch=develop)
+[![BCH compliance](https://bettercodehub.com/edge/badge/XYOracleNetwork/sdk-xyo-flutter?branch=master)](https://bettercodehub.com/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9f0fbaa81c0c46d4879dc70e1b665139)](https://www.codacy.com/gh/XYOracleNetwork/sdk-xyo-flutter?utm_source=github.com&utm_medium=referral&utm_content=XYOracleNetwork/sdk-xyo-flutter&utm_campaign=Badge_Grade) [![Known Vulnerabilities](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter/badge.svg?targetFile=android/build.gradle)](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter?targetFile=android/build.gradle)
+
 
 
 # XYO Flutter SDK
