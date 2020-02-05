@@ -13,11 +13,22 @@ import network.xyo.ble.generic.devices.XYBluetoothDevice
 import network.xyo.ble.devices.xy.XY4BluetoothDevice
 
 
+@ExperimentalUnsignedTypes
 class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
 
   private val listener = object: XYSmartScan.Listener() {
     override fun statusChanged(status: XYSmartScan.Status) {
-      Log.i(TAG, "statusChanged" + status)
+      Log.i(TAG, "statusChanged$status")
+
+      val result = when (status) {
+        XYSmartScan.Status.Enabled -> "Enabled"
+        XYSmartScan.Status.None -> "None"
+        XYSmartScan.Status.BluetoothDisabled -> "BluetoothDisabled"
+        XYSmartScan.Status.BluetoothUnavailable -> "BluetoothUnavailable"
+        XYSmartScan.Status.LocationDisabled -> "LocationDisabled"
+      }
+
+      onStatusChanged.send(result)
 
       super.statusChanged(status)
     }
@@ -73,10 +84,12 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
   private val onEnter = EventStreamHandler()
   private val onExit = EventStreamHandler()
   private val onDetect = EventStreamHandler()
+  private val onStatusChanged = EventStreamHandler()
 
   private val onEnterChannel = EventChannel(registrar.messenger(), "${name}OnEnter")
   private val onExitChannel = EventChannel(registrar.messenger(), "${name}OnExit")
   private val onDetectChannel = EventChannel(registrar.messenger(), "${name}OnDetect")
+  private val onStatusChangedChannel = EventChannel(registrar.messenger(), "${name}OnStatusChanged")
 
   init {
     Log.i(TAG, "init smartScan with listener" + listener)
@@ -90,6 +103,7 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
     onEnterChannel.setStreamHandler(onEnter)
     onExitChannel.setStreamHandler(onExit)
     onDetectChannel.setStreamHandler(onDetect)
+    onStatusChangedChannel.setStreamHandler(onStatusChanged)
     Log.i(TAG, "initializeChannels")
 
   }
