@@ -14,12 +14,15 @@ PODS:
     - sdk-core-swift (~> 3.0.1)
     - sdk-objectmodel-swift (~> 3.0.3)
     - XyBleSdk (~> 3.0.7)
-  - sdk_xyo_flutter (0.0.1):
+  - sdk_xyo_flutter (0.1.0):
     - Flutter
     - sdk-xyo-swift (~> 1.0.5)
     - SwiftProtobuf (~> 1.5)
+    - XyBaseSdk (~> 1.0.1)
   - secp256k1.swift (0.1.4)
-  - SwiftProtobuf (1.7.0)
+  - SwiftProtobuf (1.8.0)
+  - XyBaseSdk (1.0.1):
+    - PromisesSwift
   - XyBleSdk (3.0.7):
     - PromisesSwift
 
@@ -37,6 +40,7 @@ SPEC REPOS:
     - sdk-xyobleinterface-swift
     - secp256k1.swift
     - SwiftProtobuf
+    - XyBaseSdk
     - XyBleSdk
 
 EXTERNAL SOURCES:
@@ -53,11 +57,12 @@ SPEC CHECKSUMS:
   sdk-objectmodel-swift: a60e0bca94cac846589720322d63bf65b7eb584f
   sdk-xyo-swift: 0bfc143aa36bc7fa52c876f1de66e4687d0e1e86
   sdk-xyobleinterface-swift: 335aa5ee475c1f680d2461a4d622f02532613e91
-  sdk_xyo_flutter: 8b947d79d1cca664819c2a9ed695c06864867726
+  sdk_xyo_flutter: bb398fb793da8f3c263a2fb6c1ad467f22ee91c6
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
-  SwiftProtobuf: 4fd9645e69b72cbae6ec8da5be0cdd20ca6565dd
+  SwiftProtobuf: 2cbd9409689b7df170d82a92a33443c8e3e14a70
+  XyBaseSdk: 679d4f8ddbfc70ec1ff8a4cbdccf5bf81a1894f2
   XyBleSdk: 8d63d5cba164fa7d05d662fca0231f065fddccbe
 
-PODFILE CHECKSUM: 73d69d282a87aa0aafabdecb47f632fc347a9aac
+PODFILE CHECKSUM: 8bf98b973880ed360af25d045c5f063daad047cb
 
 COCOAPODS: 1.8.4

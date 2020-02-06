@@ -4,18 +4,30 @@ import 'package:flutter/services.dart';
 import 'package:mutex/mutex.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 import 'package:retry/retry.dart';
+export 'package:sdk_xyo_flutter/protos/device.pb.dart';
+export 'package:sdk_xyo_flutter/protos/bound_witness.pb.dart';
 
 enum XyoNodeType { client, server }
 
-enum XyoScannerStatus { none, enabled, bluetoothDisabled, bluetoothUnavailable, locationDisabled, unknown }
+enum XyoScannerStatus {
+  none,
+  enabled,
+  bluetoothDisabled,
+  bluetoothUnavailable,
+  locationDisabled,
+  unknown
+}
 
 class XyoScanner {
   static XyoScanner instance = XyoScanner();
   final MethodChannel _channel = const MethodChannel('xyoDevice');
 
-  final EventChannel _deviceDetectedChannel = const EventChannel('xyoDeviceOnDetect');
-  final EventChannel _deviceExitedChannel = const EventChannel('xyoDeviceOnExit');
-  final EventChannel _statusChangedChannel = const EventChannel('xyoDeviceOnStatusChanged');
+  final EventChannel _deviceDetectedChannel =
+      const EventChannel('xyoDeviceOnDetect');
+  final EventChannel _deviceExitedChannel =
+      const EventChannel('xyoDeviceOnExit');
+  final EventChannel _statusChangedChannel =
+      const EventChannel('xyoDeviceOnStatusChanged');
 
   Future<bool> setListening(bool on) async {
     final bool success = await _channel.invokeMethod('setDeviceListening', on);
@@ -23,26 +35,33 @@ class XyoScanner {
   }
 
   Future<String> getPublicKey(BluetoothDevice device) async {
-    final String publicKey = await _channel.invokeMethod('getPublicKey', device.id);
+    final String publicKey =
+        await _channel.invokeMethod('getPublicKey', device.id);
     return publicKey;
   }
 
   Stream<BluetoothDevice> onDeviceDetected() {
-    return _deviceDetectedChannel.receiveBroadcastStream().map<BluetoothDevice>((value) {
+    return _deviceDetectedChannel
+        .receiveBroadcastStream()
+        .map<BluetoothDevice>((value) {
       final bw = BluetoothDevice.fromBuffer(value);
       return bw;
     });
   }
 
   Stream<BluetoothDevice> onDeviceExited() {
-    return _deviceExitedChannel.receiveBroadcastStream().map<BluetoothDevice>((value) {
+    return _deviceExitedChannel
+        .receiveBroadcastStream()
+        .map<BluetoothDevice>((value) {
       final bw = BluetoothDevice.fromBuffer(value);
       return bw;
     });
   }
 
   Stream<XyoScannerStatus> onStatusChanged() {
-    return _statusChangedChannel.receiveBroadcastStream().map<XyoScannerStatus>((value) {
+    return _statusChangedChannel
+        .receiveBroadcastStream()
+        .map<XyoScannerStatus>((value) {
       return value;
     });
   }
@@ -76,7 +95,8 @@ class XyoClientFlutterBridge extends XyoFlutterBridge {
 
   Future<bool> setAutoBoundWitnessing(bool autoBoundWitness) async {
     print("SDK:$channelName:setAutoBoundWitnessing $autoBoundWitness");
-    final bool success = await _channel.invokeMethod('setAutoBoundWitnessing', autoBoundWitness);
+    final bool success =
+        await _channel.invokeMethod('setAutoBoundWitnessing', autoBoundWitness);
     return success;
   }
 }
@@ -165,7 +185,8 @@ class XyoFlutterBridge {
 
   Future<bool> setAcceptBridging(bool acceptBridging) async {
     print("SDK:$channelName:setPayloadString $acceptBridging");
-    final bool success = await _channel.invokeMethod('setAcceptBridging', acceptBridging);
+    final bool success =
+        await _channel.invokeMethod('setAcceptBridging', acceptBridging);
     return success;
   }
 }

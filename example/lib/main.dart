@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
-import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
+import 'package:sdk_xyo_flutter/main.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 
 void main() => runApp(MyApp());

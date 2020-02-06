@@ -1,4 +1,4 @@
-import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
+import 'package:sdk_xyo_flutter/main.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 
