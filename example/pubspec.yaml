@@ -1,7 +1,7 @@
 name: sdk_xyo_flutter_example
 description: Demonstrates how to use the sdk_xyo_flutter plugin.
 publish_to: "none"
-version: 0.0.1
+version: 1.0.0
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
