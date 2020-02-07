@@ -44,6 +44,100 @@ If you are using VSCode, you will be prompted to update packages in the editor.
 
 ## Usage
 
+### Enums
+
+`XyoNodeType`
+
+  - `client`
+  - `server`
+
+`XyoScannerStatus`
+
+  - `none`
+  - `enabled`
+  - `bluetoothDisabled`
+  - `bluetoothUnavailable`
+  - `locationDisabled`
+  - `unknown`
+
+### Interactive Methods
+
+`XyoScanner`
+
+`XyoClientFlutterBridge`
+
+`XyoServerFlutterBridge`
+
+To start listening for devices, utilize the `XyoScanner`
+
+```dart
+  class StartListen extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Super Simple Example'),
+        ),
+        body: Center(
+          child: RaisedButton(
+            child: Text('Start Listening'),
+            onPressed: () {
+              XyoScanner.setListening()
+            },
+          ),
+        ),
+      );
+    }
+  }
+```
+
+For XYO Client functions, utilize the `XyoClientFlutterBridge`
+
+```dart
+  class StartScan extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Super Simple Example'),
+        ),
+        body: Center(
+          child: RaisedButton(
+            child: Text('Start Listening'),
+            onPressed: () {
+              XyoClientFlutterBridge.setScanning()
+            },
+          ),
+        ),
+      );
+    }
+  }
+```
+
+For XYO Server functions, utilize the `XyoServerFlutterBridge`
+
+```dart
+  class StartScan extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Super Simple Example'),
+        ),
+        body: Center(
+          child: RaisedButton(
+            child: Text('Start Listening'),
+            onPressed: () {
+              XyoServerFlutterBridge.setListening()
+            },
+          ),
+        ),
+      );
+    }
+  }
+```
+
+
 ## License
 
 See the [LICENSE](LICENSE) file for license details.
