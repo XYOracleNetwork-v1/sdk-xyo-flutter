@@ -30,5 +30,6 @@ class XyoServer extends XyoBoundWitnessTarget {
     isListening = listen;
 
     XyoServerFlutterBridge.instance.setListening(listen);
+    notifyListeners();
   }
 }

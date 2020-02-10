@@ -17,6 +17,7 @@ class XyoClient extends XyoBoundWitnessTarget {
   }
 
   set scan(bool scan) {
+    print("Xyo Client scan $scan");
     isScanning = scan;
     XyoClientFlutterBridge.instance.setScanning(scan);
     notifyListeners();
@@ -25,11 +26,13 @@ class XyoClient extends XyoBoundWitnessTarget {
   set autoBoundWitness(bool autoBoundWitness) {
     isAutoBoundWitnessing = autoBoundWitness;
     XyoClientFlutterBridge.instance.setAutoBoundWitnessing(autoBoundWitness);
+    notifyListeners();
   }
 
   set acceptBridging(bool acceptBridging) {
     isAcceptingBridging = acceptBridging;
     XyoClientFlutterBridge.instance.setAcceptBridging(acceptBridging);
+    notifyListeners();
   }
 }
 
