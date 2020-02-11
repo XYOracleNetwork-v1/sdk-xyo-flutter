@@ -21,9 +21,8 @@
 
 ## Description
 
-A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin,
- to help developers with the agonizing issues with Android the BLE stack.
-Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In adition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
+A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin, to help developers with the agonizing issues with Android the BLE stack.
+Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In addition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
 
 ## Install
 
@@ -60,83 +59,25 @@ If you are using VSCode, you will be prompted to update packages in the editor.
   - `locationDisabled`
   - `unknown`
 
-### Interactive Methods
+### Methods
 
-`XyoScanner`
+`getClient`
 
-`XyoClientFlutterBridge`
+`getServer`
 
-`XyoServerFlutterBridge`
+`addListener`
 
-To start listening for devices, utilize the `XyoScanner`
+`setListening`
 
-```dart
-  class StartListen extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Super Simple Example'),
-        ),
-        body: Center(
-          child: RaisedButton(
-            child: Text('Start Listening'),
-            onPressed: () {
-              XyoScanner.setListening()
-            },
-          ),
-        ),
-      );
-    }
-  }
-```
+`getPublicKey`
 
-For XYO Client functions, utilize the `XyoClientFlutterBridge`
+`onDeviceDetected`
 
-```dart
-  class StartScan extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Super Simple Example'),
-        ),
-        body: Center(
-          child: RaisedButton(
-            child: Text('Start Listening'),
-            onPressed: () {
-              XyoClientFlutterBridge.setScanning()
-            },
-          ),
-        ),
-      );
-    }
-  }
-```
+`onBoundWitnessSuccess`
 
-For XYO Server functions, utilize the `XyoServerFlutterBridge`
+For implementation examples, see the [example app here](example/lib/main.dart)
 
-```dart
-  class StartScan extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Super Simple Example'),
-        ),
-        body: Center(
-          child: RaisedButton(
-            child: Text('Start Listening'),
-            onPressed: () {
-              XyoServerFlutterBridge.setListening()
-            },
-          ),
-        ),
-      );
-    }
-  }
-```
-
+> We are working on a full getting started guide.
 
 ## License
 
