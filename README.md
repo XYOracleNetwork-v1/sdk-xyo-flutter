@@ -21,9 +21,8 @@
 
 ## Description
 
-A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin,
- to help developers with the agonizing issues with Android the BLE stack.
-Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In adition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
+A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin, to help developers with the agonizing issues with Android the BLE stack.
+Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In addition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
 
 ## Install
 
@@ -43,6 +42,42 @@ flutter pub get
 If you are using VSCode, you will be prompted to update packages in the editor.
 
 ## Usage
+
+### Enums
+
+`XyoNodeType`
+
+  - `client`
+  - `server`
+
+`XyoScannerStatus`
+
+  - `none`
+  - `enabled`
+  - `bluetoothDisabled`
+  - `bluetoothUnavailable`
+  - `locationDisabled`
+  - `unknown`
+
+### Methods
+
+`getClient`
+
+`getServer`
+
+`addListener`
+
+`setListening`
+
+`getPublicKey`
+
+`onDeviceDetected`
+
+`onBoundWitnessSuccess`
+
+For implementation examples, see the [example app here](example/lib/main.dart)
+
+> We are working on a full getting started guide.
 
 ## License
 
