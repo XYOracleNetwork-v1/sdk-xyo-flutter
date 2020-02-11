@@ -29,7 +29,7 @@ class XyoBoundWitnessTarget with ChangeNotifier {
   }
 
   Future<String> getPublicKey() async {
-    return _flutterBridge.getPublicKey();
+    return await _flutterBridge.getPublicKey();
   }
 
   bool isBridging;

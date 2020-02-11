@@ -166,6 +166,7 @@ class XyoFlutterBridge {
     await initialize();
     print("SDK:$channelName:getPublicKey");
     final String value = await _channel.invokeMethod('getPublicKey');
+    assert(value != null);
     return value;
   }
 

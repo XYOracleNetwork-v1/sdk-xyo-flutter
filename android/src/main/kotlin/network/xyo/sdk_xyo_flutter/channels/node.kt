@@ -11,6 +11,7 @@ import network.xyo.sdkcorekotlin.boundWitness.XyoBoundWitness
 import android.util.Log
 import network.xyo.sdk_xyo_flutter.InteractionModel
 import io.flutter.plugin.common.EventChannel
+import kotlinx.coroutines.async
 import java.util.*
 
 
@@ -174,25 +175,26 @@ open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registra
   }
 }
 
+@ExperimentalUnsignedTypes
 open class XyoNodeWrapper private constructor() {
   
   // var _hasher: XyoHasher? = null
   var node: XyoNode? = null
 
 
-  private fun buildNode(context: Context) = GlobalScope.launch {
+  private suspend fun buildNode(context: Context): XyoNode {
     val builder = XyoNodeBuilder()
-    node = builder.build(context)
+    val newNode = builder.build(context)
+    this.node = newNode
+    return newNode
   }
 
   companion object {
     @Volatile private var instance: XyoNodeWrapper ?= null
-    fun getInstance(context: Context): XyoNodeWrapper {
+    suspend fun getInstance(context: Context): XyoNodeWrapper {
       if (instance == null) {
-        synchronized(this) {
-          instance = XyoNodeWrapper()
-          instance!!.buildNode(context)
-        }
+        instance = XyoNodeWrapper()
+        instance!!.buildNode(context)
       }
       return instance!!
     }
@@ -200,8 +202,7 @@ open class XyoNodeWrapper private constructor() {
 }
 
 @kotlin.ExperimentalUnsignedTypes
-open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
-  var context: Context = context
+open class XyoNodeChannel(val context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
   val streamHandleStart = EventStreamHandler()
   val streamHandleEnd = EventStreamHandler()
   private val channelStarted = EventChannel(registrar.messenger(), "${name}Started")
@@ -307,10 +308,12 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   }
 
   private fun getPublicKey(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
-    var value: String? = null
+    val node = XyoNodeWrapper.getInstance(context).node
+    var value: String? = "unknown"
     if (node != null) {
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      value = "1"
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        value = "2"
         if (nodeName == "xyoClient") {
           value = network.client.publicKey
         } else {
