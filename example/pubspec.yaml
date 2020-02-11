@@ -1,7 +1,7 @@
 name: sdk_xyo_flutter_example
 description: Demonstrates how to use the sdk_xyo_flutter plugin.
 publish_to: "none"
-version: 0.0.1
+version: 1.0.0
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
@@ -10,7 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_chips_input: ^1.7.0
-
+  sdk_xyo_flutter:
+    path: ../
   intl: ^0.16.0
 
   # The following adds the Cupertino Icons font to your application.
@@ -21,9 +22,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^1.0.0
-
-  sdk_xyo_flutter:
-    path: ../
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

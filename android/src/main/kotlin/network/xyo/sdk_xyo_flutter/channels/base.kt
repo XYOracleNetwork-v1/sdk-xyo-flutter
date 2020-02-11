@@ -29,9 +29,7 @@ class EventStreamHandler: EventChannel.StreamHandler {
 
 open class XyoBaseChannel(registrar: PluginRegistry.Registrar, name: String): MethodChannel.MethodCallHandler {
     val nodeName = name
-    protected val events = EventStreamHandler()
     private val methodChannel = MethodChannel(registrar.messenger(), name)
-    private val eventChannel = EventChannel(registrar.messenger(), "${name}Events")
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
 
@@ -42,7 +40,6 @@ open class XyoBaseChannel(registrar: PluginRegistry.Registrar, name: String): Me
 
     open fun initializeChannels() {
         methodChannel.setMethodCallHandler(this)
-        eventChannel.setStreamHandler(events)
     }
 
     protected fun sendResult(result: MethodChannel.Result, value:Any?) {

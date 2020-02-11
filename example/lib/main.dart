@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:sdk_xyo_flutter/protos/bound_witness.pbserver.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNodeBuilder.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
-import 'package:sdk_xyo_flutter/sdk_xyo_flutter.dart';
+import 'package:sdk_xyo_flutter/main.dart';
 import 'package:sdk_xyo_flutter/protos/device.pbserver.dart';
 
 void main() => runApp(MyApp());
@@ -20,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   String _publicKey = "";
   bool _scanning = false;
   bool _listening = false;
-  bool _autoBridging = false;
+  bool _autoBridgingClient = false;
+  bool _autoBridgingServer = false;
 
   String _payloadString;
   String _payloadStringTemp;
@@ -38,14 +39,14 @@ class _MyAppState extends State<MyApp> {
     _xyoNode.getClient('ble').addListener(() {
       setState(() {
         _scanning = _xyoNode.getClient('ble').scan;
-        _autoBridging = _xyoNode.getClient('ble').autoBridge;
+        _autoBridgingClient = _xyoNode.getClient('ble').autoBridge;
         _payloadString = _xyoNode.getClient('ble').payloadData;
         textController.text = _payloadString ?? "";
       });
     });
     _xyoNode.getServer('ble').addListener(() {
       setState(() {
-        _autoBridging = _xyoNode.getServer('ble').autoBridge;
+        _autoBridgingServer = _xyoNode.getServer('ble').autoBridge;
         _listening = _xyoNode.getServer('ble').listen;
         _payloadString = _xyoNode.getServer('ble').payloadData;
         textController.text = _payloadString ?? "";
@@ -197,7 +198,7 @@ class _MyAppState extends State<MyApp> {
                       _xyoNode.getServer('ble').autoBridge = isOn;
                     }
                   },
-                  value: _autoBridging,
+                  value: _isClient ? _autoBridgingClient : _autoBridgingServer,
                 ),
               ],
             ),
@@ -249,7 +250,7 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
             ),
-            Text("Bound Witnesses:"),
+            Text("Bound Witnesses for $nodeType"),
             if (_isClient)
               Flexible(
                 flex: 3,
