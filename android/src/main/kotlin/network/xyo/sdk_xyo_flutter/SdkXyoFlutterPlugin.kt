@@ -8,6 +8,7 @@ import network.xyo.sdk_xyo_flutter.channels.XyoDeviceChannel
 import android.util.Log
 
 class SdkXyoFlutterPlugin {
+  @ExperimentalUnsignedTypes
   companion object {
     var client:XyoClientChannel? = null
     var server:XyoServerChannel? = null
@@ -18,10 +19,7 @@ class SdkXyoFlutterPlugin {
     fun registerWith(registrar: Registrar) {
 
       val context = registrar.activeContext()
-      val smartScan = XYSmartScanModern(context.applicationContext)
 
-      device = XyoDeviceChannel(context, smartScan, registrar, "xyoDevice")
-      device?.initializeChannels()
 
       client = XyoClientChannel(context, registrar)
       client?.initializeChannels()
@@ -29,7 +27,9 @@ class SdkXyoFlutterPlugin {
       server = XyoServerChannel(context, registrar)
       server?.initializeChannels()
 
-
+      val smartScan = XYSmartScanModern(context.applicationContext)
+      device = XyoDeviceChannel(context, smartScan, registrar, "xyoDevice")
+      device?.initializeChannels()
     }
 
   }

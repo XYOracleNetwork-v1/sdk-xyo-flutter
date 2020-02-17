@@ -1,19 +1,20 @@
 package network.xyo.sdk_xyo_flutter.channels
 
 import android.content.Context
-//import io.flutter.Log
 import io.flutter.plugin.common.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import network.xyo.sdk.*
-import network.xyo.sdk_xyo_flutter.protobuf.BoundWitness
-import network.xyo.sdkcorekotlin.boundWitness.XyoBoundWitness
 import android.util.Log
 import network.xyo.sdk_xyo_flutter.InteractionModel
 import io.flutter.plugin.common.EventChannel
+import network.xyo.sdk.XyoBleNetwork
+import network.xyo.sdk.XyoBoundWitnessTarget
+import network.xyo.sdk.XyoNode
+import network.xyo.sdk.XyoNodeBuilder
+import network.xyo.sdkcorekotlin.boundWitness.XyoBoundWitness
 import java.util.*
 
-
+@ExperimentalUnsignedTypes
 open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registrar) :XyoNodeChannel(context, registrar, "xyoClient") {
   val listener = object : XyoBoundWitnessTarget.Listener() {
     override fun boundWitnessCompleted(source: Any?, target: XyoBoundWitnessTarget, boundWitness: XyoBoundWitness?, error:String?) {
@@ -40,19 +41,13 @@ open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registra
     }
   }
   private fun build(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    if (listener == null) {
-            Log.i(TAG, "listener is null")
 
-      sendResult(result, null)
-    } else {
-              Log.i(TAG, "listener is ready")
+      listener.let {
+        Log.i(TAG, "listener let is done")
 
-      listener!!.let {
-              Log.i(TAG, "listener let is done")
-
-        val node = XyoNodeWrapper.getInstance(context)?.node
+        val node = XyoNodeWrapper.getInstance(context).node
         if (node != null) {
-          (XyoNodeWrapper.getInstance(context)?.node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+          (XyoNodeWrapper.getInstance(context).node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
             network.client.listeners[nodeName] = it
           }
           Log.i(TAG, "Sending success from listeneer")
@@ -62,14 +57,12 @@ open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registra
           sendResult(result, null)
         }
       }
-    }    
   }
 
   private fun getScanning(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val args = call.arguments as List<Boolean>
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         sendResult(result, network.client.scan)
       }
     } else {
@@ -78,10 +71,9 @@ open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registra
   }
   private fun setScanning(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
     val on = call.arguments as Boolean
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
-      val node = node
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         network.client.scan = on
       }
       sendResult(result, true)
@@ -91,15 +83,16 @@ open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registra
     }
   }
   companion object {
-    val TAG = "XyoClientChannel"
+    const val TAG = "XyoClientChannel"
   }
 }
 
+@ExperimentalUnsignedTypes
 open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registrar): XyoNodeChannel(context, registrar, "xyoServer") {
   val listener = object : XyoBoundWitnessTarget.Listener() {
     override fun boundWitnessCompleted(source: Any?, target: XyoBoundWitnessTarget, boundWitness: XyoBoundWitness?, error:String?) {
       Log.i(TAG, "Bound Witness Completed")
-      var model = InteractionModel(boundWitness, null, Date())
+      val model = InteractionModel(boundWitness, null, Date())
       streamHandleEnd.send(model.toBuffer().toByteArray())
       }
 
@@ -122,37 +115,26 @@ open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registra
   }
 
   private fun build(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-     if (listener == null) {
-            Log.i(TAG, "listener is null")
-
-      sendResult(result, null)
-    } else {
-              Log.i(TAG, "listener is ready")
-
-      listener!!.let {
-              Log.i(TAG, "listener let is done")
-
-        val node = XyoNodeWrapper.getInstance(context)?.node
-        if (node != null) {
-          (XyoNodeWrapper.getInstance(context)?.node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
-            network.server.listeners[nodeName] = it
-          }
-          Log.i(TAG, "Sending success from listeneer")
-
-          sendResult(result, "success")
-        } else {
-          sendResult(result, null)
+    listener.let {
+      val node = XyoNodeWrapper.getInstance(context).node
+      if (node != null) {
+        (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+          network.server.listeners[nodeName] = it
         }
+        Log.i(TAG, "Sending success from listener")
+
+        sendResult(result, "success")
+      } else {
+        sendResult(result, null)
       }
     } 
   }
   private fun setListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
       val args = call.arguments as Boolean
-      val on = args
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
-        network.server.listen = on
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
+        network.server.listen = args
       }
       sendResult(result, true)
     } else {
@@ -160,9 +142,9 @@ open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registra
     }
   }
   private fun getListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         sendResult(result, network.server.listen)
       }
     } else {
@@ -170,29 +152,30 @@ open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registra
     }
   }
   companion object {
-    val TAG = "XyoServerChannel"
+    const val TAG = "XyoServerChannel"
   }
 }
 
+@ExperimentalUnsignedTypes
 open class XyoNodeWrapper private constructor() {
   
   // var _hasher: XyoHasher? = null
   var node: XyoNode? = null
 
 
-  private fun buildNode(context: Context) = GlobalScope.launch {
+  private suspend fun buildNode(context: Context): XyoNode {
     val builder = XyoNodeBuilder()
-    node = builder.build(context)
+    val newNode = builder.build(context)
+    this.node = newNode
+    return newNode
   }
 
   companion object {
     @Volatile private var instance: XyoNodeWrapper ?= null
-    fun getInstance(context: Context): XyoNodeWrapper {
+    suspend fun getInstance(context: Context): XyoNodeWrapper {
       if (instance == null) {
-        synchronized(this) {
-          instance = XyoNodeWrapper()
-          instance!!.buildNode(context)
-        }
+        instance = XyoNodeWrapper()
+        instance!!.buildNode(context)
       }
       return instance!!
     }
@@ -200,8 +183,7 @@ open class XyoNodeWrapper private constructor() {
 }
 
 @kotlin.ExperimentalUnsignedTypes
-open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
-  var context: Context = context
+open class XyoNodeChannel(val context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
   val streamHandleStart = EventStreamHandler()
   val streamHandleEnd = EventStreamHandler()
   private val channelStarted = EventChannel(registrar.messenger(), "${name}Started")
@@ -228,11 +210,11 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   }
 
   private fun setBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
       val isClient = nodeName == "xyoClient"
       val setBridging = call.arguments as Boolean
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         if (isClient) {
           network.client.autoBridge = setBridging
         } else {
@@ -248,9 +230,9 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
 
 
   private fun getBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         if (nodeName == "xyoClient") {
           sendResult(result, network.client.autoBridge)
         } else {
@@ -265,10 +247,10 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
 
 
    private fun setAcceptBridging(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
       val on = call.arguments as Boolean
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network -> 
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         if (nodeName == "xyoClient") {
           network.client.acceptBridging = on
         } else {
@@ -282,11 +264,11 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   }
 
  private fun setAutoBoundWitnessing(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
   
       val on = call.arguments as Boolean
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         network.client.autoBoundWitness = on
       }
       sendResult(result, true)
@@ -297,9 +279,8 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
 
 
   private fun setPayloadData(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     if (node != null) {
-      val payload = call.arguments as String
       sendResult(result, true)
     } else {
       sendResult(result, false)
@@ -307,10 +288,10 @@ open class XyoNodeChannel(context: Context, registrar: PluginRegistry.Registrar,
   }
 
   private fun getPublicKey(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
-    val node = XyoNodeWrapper.getInstance(context)?.node
+    val node = XyoNodeWrapper.getInstance(context).node
     var value: String? = null
     if (node != null) {
-      (node!!.networks["ble"] as? XyoBleNetwork)?.let { network ->
+      (node.networks["ble"] as? XyoBleNetwork)?.let { network ->
         if (nodeName == "xyoClient") {
           value = network.client.publicKey
         } else {

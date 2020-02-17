@@ -37,7 +37,7 @@ class InteractionModel {
 
     constructor(block: XyoBoundWitness?, hash: ByteArray?, date: Date, linked: Boolean = true) {
         if (hash != null) {
-            this.byteHash = hash!!
+            this.byteHash = hash
         }
         this.date = date
         this.linked = linked

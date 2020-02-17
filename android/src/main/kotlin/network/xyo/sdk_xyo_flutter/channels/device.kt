@@ -118,6 +118,8 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
   }
 
   private fun setListening(call: MethodCall, result: MethodChannel.Result) = GlobalScope.launch {
+    Log.i(TAG, "setDeviceListening " + call.arguments)
+
     if (call.arguments as Boolean == true) {
       smartScan.start()
     } else {

@@ -4,7 +4,7 @@
 
 ![](https://github.com/XYOracleNetwork/sdk-xyo-flutter/workflows/iOS%20Build/badge.svg?branch=develop)
 ![](https://github.com/XYOracleNetwork/sdk-xyo-flutter/workflows/APK%20Build/badge.svg?branch=develop)
-[![BCH compliance](https://bettercodehub.com/edge/badge/XYOracleNetwork/sdk-xyo-flutter?branch=master)](https://bettercodehub.com/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9f0fbaa81c0c46d4879dc70e1b665139)](https://www.codacy.com/gh/XYOracleNetwork/sdk-xyo-flutter?utm_source=github.com&utm_medium=referral&utm_content=XYOracleNetwork/sdk-xyo-flutter&utm_campaign=Badge_Grade) [![Known Vulnerabilities](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter/badge.svg?targetFile=android/build.gradle)](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter?targetFile=android/build.gradle)
+[![BCH compliance](https://bettercodehub.com/edge/badge/XYOracleNetwork/sdk-xyo-flutter?branch=master)](https://bettercodehub.com/) [![Known Vulnerabilities](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter/badge.svg?targetFile=android/build.gradle)](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter?targetFile=android/build.gradle)
 
 
 
@@ -21,9 +21,8 @@
 
 ## Description
 
-A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin,
- to help developers with the agonizing issues with Android the BLE stack.
-Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In adition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
+A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin, to help developers with the agonizing issues with Android the BLE stack.
+Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In addition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
 
 ## Install
 
@@ -43,6 +42,42 @@ flutter pub get
 If you are using VSCode, you will be prompted to update packages in the editor.
 
 ## Usage
+
+### Enums
+
+`XyoNodeType`
+
+  - `client`
+  - `server`
+
+`XyoScannerStatus`
+
+  - `none`
+  - `enabled`
+  - `bluetoothDisabled`
+  - `bluetoothUnavailable`
+  - `locationDisabled`
+  - `unknown`
+
+### Methods
+
+`getClient`
+
+`getServer`
+
+`addListener`
+
+`setListening`
+
+`getPublicKey`
+
+`onDeviceDetected`
+
+`onBoundWitnessSuccess`
+
+For implementation examples, see the [example app here](example/lib/main.dart)
+
+> We are working on a full getting started guide.
 
 ## License
 

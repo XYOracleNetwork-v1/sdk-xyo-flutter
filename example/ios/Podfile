@@ -1,8 +1,9 @@
-# Uncomment this line to define a global platform for your project
+use_frameworks!
 platform :ios, '11.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+ENV['SWIFT_VERSION'] = '4'
 
 project 'Runner', {
   'Debug' => :debug,
@@ -35,7 +36,7 @@ end
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  
+
   # Flutter Pod
 
   copied_flutter_dir = File.join(__dir__, 'Flutter')
