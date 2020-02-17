@@ -8,6 +8,7 @@ import network.xyo.sdk_xyo_flutter.channels.XyoDeviceChannel
 import android.util.Log
 
 class SdkXyoFlutterPlugin {
+  @ExperimentalUnsignedTypes
   companion object {
     var client:XyoClientChannel? = null
     var server:XyoServerChannel? = null
