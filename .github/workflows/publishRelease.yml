@@ -11,18 +11,14 @@ jobs:
     
     steps: 
       - uses: actions/checkout@v2
-      - name: Pre Build
+      - name: Build and Publish
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b beta
           export PATH="$PATH":`pwd`/flutter/bin
           $GITHUB_WORKSPACE/flutter/bin/flutter doctor
-      - name: Build
-        run: |
           flutter pub get
           cd example
           flutter packages pub run build_runner build --delete-conflicting-outputs
-      - name: Publish Package
-        run: |
           mkdir ./flutter/.pub-cache/
           cat <<EOF > ./flutter/.pub-cache/credentials.json 
           {
