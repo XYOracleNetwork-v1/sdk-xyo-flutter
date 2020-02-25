@@ -11,18 +11,16 @@ jobs:
     
     steps: 
       - uses: actions/checkout@v2
-      - uses: steebchen/flutter@v1.0.0
       - name: Pre Build
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b beta
+          export PATH="$PATH":`pwd`/flutter/bin
           $GITHUB_WORKSPACE/flutter/bin/flutter doctor
-      - uses: steebchen/flutter@v1.0.0
       - name: Build
         run: |
           flutter pub get
           cd example
           flutter packages pub run build_runner build --delete-conflicting-outputs
-      - uses: steebchen/flutter@v1.0.0
       - name: Publish Package
         run: |
           mkdir ./flutter/.pub-cache/
