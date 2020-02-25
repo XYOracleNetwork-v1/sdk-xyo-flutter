@@ -11,23 +11,12 @@ jobs:
     
     steps: 
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: 'stable'  
+      - name: Pre Build
+        run: |
+          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
+          $GITHUB_WORKSPACE/flutter/bin/flutter doctor
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE && bash $GITHUB_WORKSPACE/scripts/build.sh
-      - name: Setup credentials
-        run: |
-          mkdir ./flutter/.pub-cache/
-          cat <<EOF > ./flutter/.pub-cache/credentials.json 
-          {
-            "accessToken":"${{ secrets.ACCESS_TOKEN }}",
-            "refreshToken":"${{ secrets.REFRESH_TOKEN }}",
-            "tokenEndpoint":"https://accounts.google.com/o/oauth2/token",
-            "scopes":["openid","https://www.googleapis.com/auth/userinfo.email"],
-            "expiration":1564090897608
-          }
-          EOF
       - name: Publish Package
-        run: ./flutter/bin/flutter pub pub publish -f -v
+        run: cd $GITHUB_WORKSPACE && bash $GITHUB_WORKSPACE/scripts/deploy.sh
