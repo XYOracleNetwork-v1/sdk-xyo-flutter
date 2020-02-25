@@ -1,0 +1,33 @@
+name: Publish Release
+
+on: 
+  push:
+    branches:
+      - 'master'
+
+jobs: 
+  build: 
+    runs-on: macOS-latest
+    
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          flutter pub get
+          cd example
+          flutter packages pub run build_runner build --delete-conflicting-outputs
+              
+      - name: publish
+        run: |
+            mkdir ./flutter/.pub-cache/
+            cat <<EOF > ./flutter/.pub-cache/credentials.json 
+            {
+              "accessToken":"$accessToken",
+              "refreshToken":"$refreshToken",
+              "tokenEndpoint":"https://accounts.google.com/o/oauth2/token",
+              "scopes":["openid","https://www.googleapis.com/auth/userinfo.email"],
+              "expiration":1564090897608
+            }
+            EOF
+
+            ./flutter/bin/flutter pub pub publish -f -v
