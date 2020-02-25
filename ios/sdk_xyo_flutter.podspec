@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'sdk_xyo_flutter'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.swift_version    = '4.2'
   s.summary          = 'XYO Flutter SDK.'
   s.description      = <<-DESC
@@ -21,7 +21,6 @@ Pod::Spec.new do |s|
   s.dependency 'Flutter'
   s.dependency 'SwiftProtobuf', '~> 1.8'
   s.dependency 'sdk-xyo-swift', '~> 1.0'
-  s.dependency 'XyBleSdk', '~> 3.0'
 
   s.ios.deployment_target = '11.0'
 
