@@ -17,6 +17,17 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE && bash $GITHUB_WORKSPACE/scripts/build.sh
-      - name: publish
+      - name: Setup credentials
         run: |
-          cd $GITHUB_WORKSPACE && bash $GITHUB_WORKSPACE/scripts/deploy.sh
+          mkdir ./flutter/.pub-cache/
+          cat <<EOF > ./flutter/.pub-cache/credentials.json 
+          {
+            "accessToken":"${{ secrets.ACCESS_TOKEN }}",
+            "refreshToken":"${{ secrets.REFRESH_TOKEN }}",
+            "tokenEndpoint":"https://accounts.google.com/o/oauth2/token",
+            "scopes":["openid","https://www.googleapis.com/auth/userinfo.email"],
+            "expiration":1564090897608
+          }
+          EOF
+      - name: Publish Package
+        run: ./flutter/bin/flutter pub pub publish -f -v
