@@ -16,7 +16,7 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: 'v1.12.13+hotfix.8'
+          flutter-version: 'v1.15.3'
       - name: Pre Build
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b beta
