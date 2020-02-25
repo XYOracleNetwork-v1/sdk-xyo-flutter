@@ -5,7 +5,6 @@ import network.xyo.sdk_xyo_flutter.channels.XyoClientChannel
 import network.xyo.sdk_xyo_flutter.channels.XyoServerChannel
 import network.xyo.ble.generic.scanner.XYSmartScanModern
 import network.xyo.sdk_xyo_flutter.channels.XyoDeviceChannel
-import android.util.Log
 
 class SdkXyoFlutterPlugin {
   @ExperimentalUnsignedTypes
