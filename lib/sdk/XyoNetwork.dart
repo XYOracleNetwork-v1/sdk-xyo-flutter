@@ -14,12 +14,12 @@ class XyoBleNetwork extends XyoNetwork {
     type = XyoNetworkType.ble;
 
     client = XyoBleClient(XyoNetworkType.ble);
-    client.autoBoundWitness = false; // true
+    client.autoBoundWitness = true;
     client.autoBridge = false;
     client.acceptBridging = false;
-    client.scan = false; // true
+    client.scan = true;
     server = XyoBleServer(XyoNetworkType.ble);
-    server.autoBridge = false; // true
+    server.autoBridge = true;
     server.acceptBridging = false;
     server.isListening = false;
   }

@@ -72,6 +72,7 @@ internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
     XyoBluetoothDeviceCreator.enable(enable: true)
     XyoBluetoothDevice.family.enable(enable: true)
     XyoSentinelXDeviceCreator().enable(enable: true)
+    
     super.init()
     registrar.addMethodCallDelegate(self, channel: channel)
     smartScan.setDelegate(self, key: "xyo_smart_scan_wrapper")
