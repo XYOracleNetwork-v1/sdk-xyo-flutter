@@ -17,6 +17,6 @@ jobs:
           $GITHUB_WORKSPACE/flutter/bin/flutter doctor
       - name: Build
         run: |
-          cd $GITHUB_WORKSPACE && bash $GITHUB_WORKSPACE/scripts/build.sh
+          cd $GITHUB_WORKSPACE/flutter/bin/flutter && bash $GITHUB_WORKSPACE/scripts/build.sh
       - name: Publish Package
-        run: cd $GITHUB_WORKSPACE && bash $GITHUB_WORKSPACE/scripts/deploy.sh
+        run: cd $GITHUB_WORKSPACE/flutter/bin/flutter && bash $GITHUB_WORKSPACE/scripts/deploy.sh
