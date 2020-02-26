@@ -14,11 +14,12 @@ jobs:
       - name: Build and Publish
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b beta
-          export PATH="$PATH":`pwd`/flutter/bin
+          export PATH="$PATH":$GITHUB_WORKSPACE/flutter/bin
           $GITHUB_WORKSPACE/flutter/bin/flutter doctor
           flutter pub get
           cd example
           flutter packages pub run build_runner build --delete-conflicting-outputs
+          cd $GITHUB_WORKSPACE
           mkdir ./flutter/.pub-cache/
           cat <<EOF > ./flutter/.pub-cache/credentials.json 
           {
