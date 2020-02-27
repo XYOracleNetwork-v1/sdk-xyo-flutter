@@ -26,14 +26,12 @@ jobs:
           gem install cocoapods
           pod repo update
           pip install six
-          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
           $GITHUB_WORKSPACE/flutter/bin/flutter doctor
           $GITHUB_WORKSPACE/flutter/bin/flutter emulators --launch apple_ios_simulator
           cd $GITHUB_WORKSPACE/example
           $GITHUB_WORKSPACE/flutter/bin/flutter build ios --simulator --no-codesign
       - name: Build and Publish
         run: |
-          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
           export PATH="$PATH":$GITHUB_WORKSPACE/flutter/bin
           $GITHUB_WORKSPACE/flutter/bin/flutter doctor
           flutter pub get
