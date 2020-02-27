@@ -11,6 +11,26 @@ jobs:
     
     steps: 
       - uses: actions/checkout@v2
+      - name: Android Build
+        run: |
+          brew reinstall gradle
+          export GRADLE_HOME=$PWD/gradle-6.0.1
+          export PATH=$GRADLE_HOME/bin:$PATH
+          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
+          $GITHUB_WORKSPACE/flutter/bin/flutter doctor
+          cd $GITHUB_WORKSPACE/example
+          $GITHUB_WORKSPACE/flutter/bin/flutter -v build apk
+      - name: iOS Build
+        run: |
+          gem install cocoapods-acknowledgements
+          gem install cocoapods
+          pod repo update
+          pip install six
+          git clone https://github.com/flutter/flutter.git --depth 1 -b beta
+          $GITHUB_WORKSPACE/flutter/bin/flutter doctor
+          $GITHUB_WORKSPACE/flutter/bin/flutter emulators --launch apple_ios_simulator
+          cd $GITHUB_WORKSPACE/example
+          $GITHUB_WORKSPACE/flutter/bin/flutter build ios --simulator --no-codesign
       - name: Build and Publish
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b beta
