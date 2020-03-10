@@ -21,8 +21,9 @@
 
 ## Description
 
-A robust Bluetooth solution for Android. This BLE SDK was written from ground-up, in Kotlin, to help developers with the agonizing issues with Android the BLE stack.
-Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  In addition to generalized BLE support, the SDK also has specific support for XY spacific hardware.
+A robust Flutter solution for mobile, cross-platform integration. This SDK was written from ground-up, in Flutter, to give developers another tool in integrating XYO in their mobile solution.
+
+Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  This SDK follows the updated paradigm of ble client/server thinking in bound witness operations.
 
 ## Install
 
@@ -30,7 +31,7 @@ Add this to your pubspec:
 
 ```yaml
 dependencies: 
-  sdk_xyo_flutter: ^0.1.0
+  sdk_xyo_flutter: ^0.2.2
 ```
 
 Update your packages:
@@ -42,6 +43,20 @@ flutter pub get
 If you are using VSCode, you will be prompted to update packages in the editor.
 
 ## Usage
+
+Look at the [example](example/lib/main.dart), for implementation of the SDK in a created state complete with widgets. 
+
+Bringing the node into your widgets can be as simple as 
+
+```dart
+  XyoNode _xyoNode;
+```
+
+From there you can utilize the SDK Methods
+
+```dart
+  _xyoNode.getClient('ble')
+```
 
 ### Enums
 
@@ -75,7 +90,7 @@ If you are using VSCode, you will be prompted to update packages in the editor.
 
 `onBoundWitnessSuccess`
 
-For implementation examples, see the [example app here](example/lib/main.dart)
+Again, for implementation examples, see the [example app here](example/lib/main.dart)
 
 > We are working on a full getting started guide.
 
