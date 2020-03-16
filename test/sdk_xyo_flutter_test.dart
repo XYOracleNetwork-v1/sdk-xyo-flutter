@@ -1,8 +1,11 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:sdk_xyo_flutter/sdk/XyoNode.dart';
+
 void main() {
   const MethodChannel channel = MethodChannel('sdk_xyo_flutter');
+  XyoNode _xyoNode;
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
@@ -14,7 +17,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    // expect(await SdkXyoFlutter.platformVersion, '42');
+  test('can get a public key', () async {
+    expect(await _xyoNode.getClient('ble').getPublicKey(), "");
   });
 }
