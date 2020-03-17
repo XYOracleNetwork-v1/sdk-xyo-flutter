@@ -58,6 +58,8 @@ From there you can utilize the SDK Methods
   _xyoNode.getClient('ble')
 ```
 
+Once you get the client or server, you can use the public key and bound witness data however you like. We have found the **Flexible Widget** to be helpful in working with dynamic datasets. 
+
 ### Enums
 
 `XyoNodeType`
