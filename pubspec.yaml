@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  protobuf: ^0.13.15
+  protobuf: ^1.0.1
   mutex: ^1.0.3
   retry: ^3.0.0+1
   fixnum: ^0.10.11
