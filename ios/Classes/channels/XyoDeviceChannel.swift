@@ -9,6 +9,7 @@ import Flutter
 import XyBleSdk
 import CoreBluetooth
 import sdk_core_swift
+import sdk_xyo_swift
 
 extension XYBluetoothDevice {
     var toBuffer: BluetoothDevice {

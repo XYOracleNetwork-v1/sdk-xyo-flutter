@@ -8,7 +8,6 @@
 import Foundation
 import secp256k1
 import sdk_core_swift
-import sdk_objectmodel_swift
 import sdk_xyo_swift
 
 class InteractionModel {

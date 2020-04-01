@@ -6,7 +6,6 @@
 import Flutter
 import sdk_xyo_swift
 import sdk_core_swift
-import sdk_objectmodel_swift
 
 
 internal class XyoNodeInstance {
