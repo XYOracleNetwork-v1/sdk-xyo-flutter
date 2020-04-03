@@ -87,7 +87,7 @@ class InteractionModel {
             return nil
         }
 
-        guard let publicKeySet = try fetterOfParty.get(id: XyoSchemas.KEY_SET.id).first as? XyoIterableStructure else {
+        guard let publicKeySet = try fetterOfParty.get(objectId: XyoSchemas.KEY_SET.id).first as? XyoIterableStructure else {
             return nil
         }
 

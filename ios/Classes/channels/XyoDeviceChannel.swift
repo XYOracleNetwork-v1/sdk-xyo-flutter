@@ -97,7 +97,7 @@ internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
 
 extension XyoDeviceChannel: XYSmartScanDelegate {
 
-  func smartScan(status: XYSmartScanStatus) {
+  func smartScan(status: XYSmartScanStatus) : LosslessStringConvertible {
     if let sink = statusChanged.eventSink {
       try? sink(String(status))
     }
