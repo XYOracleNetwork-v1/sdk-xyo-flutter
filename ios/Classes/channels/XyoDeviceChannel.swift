@@ -99,7 +99,7 @@ extension XyoDeviceChannel: XYSmartScanDelegate {
 
   func smartScan(status: XYSmartScanStatus) {
 
-    let statusString = String(status)
+    let statusString = String(decoding: status, as: UTF8.self)
     if let sink = statusChanged.eventSink {
       try? sink(statusString)
     }
