@@ -3,14 +3,14 @@ PODS:
   - PromisesObjC (1.2.8)
   - PromisesSwift (1.2.8):
     - PromisesObjC (= 1.2.8)
-  - sdk-core-swift (3.1.1):
+  - sdk-core-swift (3.1.2):
     - secp256k1.swift
-  - sdk-xyo-swift (1.0.10):
-    - sdk-core-swift (~> 3.1.1)
+  - sdk-xyo-swift (1.0.12):
+    - sdk-core-swift (~> 3.1.2)
     - XyBleSdk (~> 3.1.2)
   - sdk_xyo_flutter (0.2.0):
     - Flutter
-    - sdk-xyo-swift (~> 1.0.10)
+    - sdk-xyo-swift (~> 1.0.12)
     - SwiftProtobuf (~> 1.8)
   - secp256k1.swift (0.1.4)
   - SwiftProtobuf (1.8.0)
@@ -44,9 +44,9 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
-  sdk-core-swift: 5886565308b5a35659f2cac0df3d0157fd942370
-  sdk-xyo-swift: 27eb6bb69ebe44cfbd92c23c89c7bee59641b1b8
-  sdk_xyo_flutter: 49275881baa7eada78616bf651ef6c307c6c33cd
+  sdk-core-swift: 9f7c3edb2bc9819b5b0a64cdaf8a6eedcbd58ca2
+  sdk-xyo-swift: cc4ab6fa6f87606ec38ffc9653e51ea8a98886c6
+  sdk_xyo_flutter: a07c892ac34205a20bdc83de704fbe75b7960b3f
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SwiftProtobuf: 2cbd9409689b7df170d82a92a33443c8e3e14a70
   XyBaseSdk: 679d4f8ddbfc70ec1ff8a4cbdccf5bf81a1894f2

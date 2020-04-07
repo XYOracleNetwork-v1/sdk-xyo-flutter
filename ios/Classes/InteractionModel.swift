@@ -45,7 +45,7 @@ class InteractionModel {
         }
       
 
-      return try! XyoHumanName.getHumanName(boundWitmess: bw, publicKey: bw.getWitnessOfParty(partyIndex: 0))
+      return try! XyoHumanName.getHumanName(boundWitness: bw, publicKey: bw.getWitnessOfParty(partyIndex: 0))
     }
 
     var parties: [String] {
@@ -87,7 +87,7 @@ class InteractionModel {
             return nil
         }
 
-        guard let publicKeySet = try fetterOfParty.get(objectId: XyoSchemas.KEY_SET.id).first as? XyoIterableStructure else {
+        guard let publicKeySet = try fetterOfParty.get(id: XyoSchemas.KEY_SET.id).first as? XyoIterableStructure else {
             return nil
         }
 
