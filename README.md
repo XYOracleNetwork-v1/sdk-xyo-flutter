@@ -6,9 +6,9 @@
 ![](https://github.com/XYOracleNetwork/sdk-xyo-flutter/workflows/APK%20Build/badge.svg?branch=develop)
 [![BCH compliance](https://bettercodehub.com/edge/badge/XYOracleNetwork/sdk-xyo-flutter?branch=master)](https://bettercodehub.com/) [![Known Vulnerabilities](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter/badge.svg?targetFile=android/build.gradle)](https://snyk.io/test/github/XYOracleNetwork/sdk-xyo-flutter?targetFile=android/build.gradle)
 
-
-
 # XYO Flutter SDK
+
+> The XYO Foundation provides this source code available in our efforts to advance the understanding of the XYO Procotol and its possible uses. We continue to maintain this software in the interest of developer education. Usage of this source code is not intended for production.
 
 ## Table of Contents
 
