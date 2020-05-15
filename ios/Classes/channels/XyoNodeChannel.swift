@@ -158,7 +158,8 @@ class XyoNodeChannel: NSObject, FlutterPlugin {
         result(self.build())
         break
     case .getPublicKey:
-        result(self.getPublicKey())
+        let publicKey = self.getPublicKey()
+        result(publicKey)
         break
     case .setBridging:
       let bridging = arguments as! Bool
