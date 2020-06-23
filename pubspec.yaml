@@ -1,17 +1,17 @@
 name: sdk_xyo_flutter
 description: XYO SDK for Flutter Projects
-version: 0.2.2
+version: 0.2.3
 homepage: https://github.com/XYOracleNetwork/sdk-xyo-flutter
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
   flutter: ">=1.10.0 <2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   protobuf: ^1.0.1
-  mutex: ^1.0.3
+  mutex: ^1.1.0
   retry: ^3.0.0+1
   fixnum: ^0.10.11
 

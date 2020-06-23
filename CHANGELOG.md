@@ -1,3 +1,6 @@
-## 0.2.1
+## 0.2.3
 
-- update release build with android and iOS builds
+- Update core SDKs from iOS and Android
+- Security patches
+- Dependency updates
+- Improved bound witness (timing modifications) bewteen iOS and Android
