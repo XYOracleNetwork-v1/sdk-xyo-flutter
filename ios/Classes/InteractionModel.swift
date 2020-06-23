@@ -8,7 +8,6 @@
 import Foundation
 import secp256k1
 import sdk_core_swift
-import sdk_objectmodel_swift
 import sdk_xyo_swift
 
 class InteractionModel {
@@ -46,7 +45,7 @@ class InteractionModel {
         }
       
 
-      return try! XyoHumanName.getHumanName(boundWitmess: bw, publicKey: bw.getWitnessOfParty(partyIndex: 0))
+      return try! XyoHumanName.getHumanName(boundWitness: bw, publicKey: bw.getWitnessOfParty(partyIndex: 0))
     }
 
     var parties: [String] {

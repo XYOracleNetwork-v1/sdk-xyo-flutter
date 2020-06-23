@@ -9,7 +9,6 @@ import Foundation
 import CoreData
 import Promises
 import sdk_core_swift
-import sdk_xyobleinterface_swift
 import sdk_xyo_swift
 
 enum CoreDataStorageError: Error {
