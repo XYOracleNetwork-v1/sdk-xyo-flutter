@@ -31,7 +31,7 @@ Add this to your pubspec:
 
 ```yaml
 dependencies: 
-  sdk_xyo_flutter: ^0.2.2
+  sdk_xyo_flutter: ^0.2.3
 ```
 
 Update your packages:
