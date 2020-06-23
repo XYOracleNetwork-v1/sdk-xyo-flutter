@@ -20,10 +20,10 @@ Pod::Spec.new do |s|
 
   s.dependency 'Flutter'
   s.dependency 'SwiftProtobuf', '~> 1.8'
-  s.dependency 'sdk-xyo-swift', '~> 1.0'
+  s.dependency 'sdk-xyo-swift', '~> 1.0.17'
 
   s.ios.deployment_target = '11.0'
-
+  
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
    s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
   # s.swift_version = '5.0'

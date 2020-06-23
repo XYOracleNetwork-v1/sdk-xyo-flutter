@@ -71,7 +71,7 @@ protobuf {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'network.xyo:sdk-xyo-android:3.1.30'
+    implementation 'network.xyo:sdk-xyo-android:3.1.38'
 
     api 'com.snappydb:snappydb-lib:0.5.2'
     api 'com.esotericsoftware.kryo:kryo:2.24.0'

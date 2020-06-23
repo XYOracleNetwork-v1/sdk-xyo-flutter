@@ -9,7 +9,6 @@ import Foundation
 import sdk_xyo_swift
 import Flutter
 import sdk_core_swift
-import sdk_objectmodel_swift
 
 // Wraps up the event listener and the event sink, used by the wrapper below
 internal class XyoNodeStreamHandler: NSObject, FlutterStreamHandler {

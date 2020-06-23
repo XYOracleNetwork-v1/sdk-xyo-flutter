@@ -8,8 +8,8 @@
 import Flutter
 import XyBleSdk
 import CoreBluetooth
-import sdk_xyobleinterface_swift
 import sdk_core_swift
+import sdk_xyo_swift
 
 extension XYBluetoothDevice {
     var toBuffer: BluetoothDevice {
@@ -95,11 +95,15 @@ internal class XyoDeviceChannel: NSObject, FlutterPlugin  {
 
 }
 
-
-
 extension XyoDeviceChannel: XYSmartScanDelegate {
 
-  func smartScan(status: XYSmartScanStatus) {}
+  func smartScan(status: XYSmartScanStatus) {
+
+    if let sink = statusChanged.eventSink {
+      sink(status)
+    }
+  }
+
   func smartScan(location: XYLocationCoordinate2D) {}
   func smartScan(detected devices: [XYBluetoothDevice], family: XYDeviceFamily) {}
   func smartScan(entered device: XYBluetoothDevice) {}

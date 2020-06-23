@@ -6,7 +6,6 @@
 import Flutter
 import sdk_xyo_swift
 import sdk_core_swift
-import sdk_objectmodel_swift
 
 
 internal class XyoNodeInstance {
@@ -159,7 +158,8 @@ class XyoNodeChannel: NSObject, FlutterPlugin {
         result(self.build())
         break
     case .getPublicKey:
-        result(self.getPublicKey())
+        let publicKey = self.getPublicKey()
+        result(publicKey)
         break
     case .setBridging:
       let bridging = arguments as! Bool
