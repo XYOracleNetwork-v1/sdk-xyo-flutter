@@ -75,17 +75,24 @@ class _MyAppState extends State<MyApp> {
   Widget _buildTile(DeviceBoundWitness s) {
     // final fmt = DateFormat("MMMM dd, h:mm a");
 
-    return ListTile(
-      title: Text(
-        "${s.parties} - ${s.huerestics}",
-        softWrap: true,
-      ),
-      // subtitle: Text(fmt.format(DateTime.now())),
+    return Card(
+      shadowColor: Colors.blue[300],
+      child: ListTile(
+        title: Text(
+          "${s.parties}",
+          softWrap: true,
+        ),
+        subtitle: Text(
+          "${s.huerestics}",
+        ),
+      ),// subtitle: Text(fmt.format(DateTime.now())),
     );
   }
 
   Widget _buildDeviceTile(BluetoothDevice s) {
-    return ListTile(
+    return Card(
+      shadowColor: Colors.tealAccent[400],
+      child: ListTile(
       title: Text(
         "${s.family.name} ${s.family.prefix} - ${s.family.uuid} ",
         overflow: TextOverflow.ellipsis,
@@ -98,6 +105,7 @@ class _MyAppState extends State<MyApp> {
               color: Colors.green,
             )
           : Icon(Icons.link_off),
+      ),
     );
   }
 
@@ -238,7 +246,11 @@ class _MyAppState extends State<MyApp> {
                   )
               ],
             ),
-            Text("Detected Devices:"),
+            Text(
+              "Detected Devices:",
+              softWrap: true,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             Flexible(
               flex: 1,
               child: StreamBuilder<BluetoothDevice>(
@@ -250,7 +262,11 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
             ),
-            Text("Bound Witnesses for $nodeType"),
+            Text(
+              "Bound Witnesses for $nodeType",
+              softWrap: true,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             if (_isClient)
               Flexible(
                 flex: 3,
