@@ -92,6 +92,35 @@ From there you can utilize the SDK Methods
 
 Again, for implementation examples, see the [example app here](example/lib/main.dart)
 
+## Flutter cleaning
+
+During usage as the project updates, you may run into "unexpected" Podfile being out of date. To fix: 
+
+```bash
+  cd example
+  rm ios/Podfile
+```
+
+After removing the Podfile, run 
+
+```bash
+  flutter clean
+```
+
+You can then run as per your workflow
+
+If running on one device
+
+```bash
+  flutter run
+```
+
+For multiple devices
+
+```bash
+  flutter run -d all
+```
+
 > We are working on a full getting started guide.
 
 ## License

@@ -46,7 +46,9 @@ class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: 
 
       builder.setId(device.id)
       builder.setConnected(device.connected)
+
       val family = Device.Family.newBuilder().setId(device.id).setName(device.name)
+      
       if (device is XYIBeaconBluetoothDevice) {
         family.setUuid(device.uuid.toString())
       }
