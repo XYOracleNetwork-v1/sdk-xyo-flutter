@@ -24,5 +24,6 @@ jobs:
         run: |
               $GITHUB_WORKSPACE/flutter/bin/flutter emulators --launch apple_ios_simulator
               cd $GITHUB_WORKSPACE/example
+              $GITHUB_WORKSPACE/flutter/bin/flutter rm ios/Podfile
               $GITHUB_WORKSPACE/flutter/bin/flutter clean
               $GITHUB_WORKSPACE/flutter/bin/flutter build ios --simulator --no-codesign
