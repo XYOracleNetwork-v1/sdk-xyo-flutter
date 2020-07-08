@@ -8,7 +8,7 @@
 
 # XYO Flutter SDK
 
-> The XYO Foundation provides this source code available in our efforts to advance the understanding of the XYO Procotol and its possible uses. We continue to maintain this software in the interest of developer education. Usage of this source code is not intended for production.
+> The XYO Foundation provides this source code in our efforts to advance the understanding of the XYO Procotol and its possible uses. We continue to maintain this software in the interest of developer education. In addition, this sdk can be used as a tool (through the example app) for XYO network block exploration and testing. 
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@
 
 A robust Flutter solution for mobile, cross-platform integration. This SDK was written from ground-up, in Flutter, to give developers another tool in integrating XYO in their mobile solution.
 
-Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  This SDK follows the updated paradigm of ble client/server thinking in bound witness operations.
+Not only will this SDK make XYO apps better, but bring XYO functionality to existing apps.  This SDK follows the updated paradigm of ble client/server thinking in bound witness operations. Please note that the archivist functionality is agnostic and customizable based on your needs for storing interactions. 
 
 ## Install
 
