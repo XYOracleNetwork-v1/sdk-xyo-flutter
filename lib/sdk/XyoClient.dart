@@ -3,8 +3,8 @@ import 'package:sdk_xyo_flutter/sdk/XyoBoundWitnessTarget.dart';
 import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 
 class XyoClient extends XyoBoundWitnessTarget {
-  bool isScanning;
-  bool isAutoBoundWitnessing;
+  bool isScanning = false;
+  bool isAutoBoundWitnessing = false;
 
   XyoClient(XyoNetworkType network) : super(network);
 

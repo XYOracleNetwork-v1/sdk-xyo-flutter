@@ -2,9 +2,13 @@
 //  Generated code. Do not modify.
 //  source: protos/device.proto
 //
-// @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
 
+import 'dart:core' as $core;
+import 'dart:convert' as $convert;
+import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use familyDescriptor instead')
 const Family$json = const {
   '1': 'Family',
   '2': const [
@@ -15,6 +19,9 @@ const Family$json = const {
   ],
 };
 
+/// Descriptor for `Family`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List familyDescriptor = $convert.base64Decode('CgZGYW1pbHkSEgoEdXVpZBgBIAEoCVIEdXVpZBIWCgZwcmVmaXgYAiABKAlSBnByZWZpeBISCgRuYW1lGAMgASgJUgRuYW1lEg4KAmlkGAQgASgJUgJpZA==');
+@$core.Deprecated('Use rangeDescriptor instead')
 const Range$json = const {
   '1': 'Range',
   '2': const [
@@ -23,6 +30,9 @@ const Range$json = const {
   ],
 };
 
+/// Descriptor for `Range`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rangeDescriptor = $convert.base64Decode('CgVSYW5nZRIQCgNtaW4YASABKBJSA21pbhIQCgNtYXgYAiABKBJSA21heA==');
+@$core.Deprecated('Use iBeaconDescriptor instead')
 const IBeacon$json = const {
   '1': 'IBeacon',
   '2': const [
@@ -32,6 +42,9 @@ const IBeacon$json = const {
   ],
 };
 
+/// Descriptor for `IBeacon`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List iBeaconDescriptor = $convert.base64Decode('CgdJQmVhY29uEhQKBW1ham9yGAEgASgDUgVtYWpvchIUCgVtaW5vchgCIAEoA1IFbWlub3ISEgoEdXVpZBgDIAEoCVIEdXVpZA==');
+@$core.Deprecated('Use bluetoothDeviceDescriptor instead')
 const BluetoothDevice$json = const {
   '1': 'BluetoothDevice',
   '2': const [
@@ -44,3 +57,5 @@ const BluetoothDevice$json = const {
   ],
 };
 
+/// Descriptor for `BluetoothDevice`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List bluetoothDeviceDescriptor = $convert.base64Decode('Cg9CbHVldG9vdGhEZXZpY2USDgoCaWQYASABKAlSAmlkEh8KBmZhbWlseRgCIAEoCzIHLkZhbWlseVIGZmFtaWx5EiAKBmJlYWNvbhgDIAEoCzIILklCZWFjb25SBmJlYWNvbhISCgRyc3NpGAQgASgSUgRyc3NpEhwKBXJhbmdlGAUgASgLMgYuUmFuZ2VSBXJhbmdlEhwKCWNvbm5lY3RlZBgGIAEoCFIJY29ubmVjdGVk');

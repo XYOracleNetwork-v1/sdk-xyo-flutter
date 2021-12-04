@@ -75,13 +75,13 @@ class XyoClientFlutterBridge extends XyoFlutterBridge {
   Future<bool> setScanning(bool on) async {
     await initialize();
     print("SDK:$channelName:setScanning $on");
-    final bool scanning = await _channel.invokeMethod('setScanning', on);
+    final bool scanning = await _channel?.invokeMethod('setScanning', on);
     return scanning;
   }
 
   Future<bool> getScanning() async {
     await initialize();
-    final bool scanning = await _channel.invokeMethod('getScanning');
+    final bool scanning = await _channel?.invokeMethod('getScanning');
     print("SDK:$channelName:getScanning $scanning");
     return scanning;
   }
@@ -89,14 +89,14 @@ class XyoClientFlutterBridge extends XyoFlutterBridge {
   Future<bool> initiateBoundWitness(String id) async {
     await initialize();
     print("SDK:$channelName:initiateBoundWitness");
-    final bool result = await _channel.invokeMethod('initiateBoundWitness');
+    final bool result = await _channel?.invokeMethod('initiateBoundWitness');
     return result;
   }
 
   Future<bool> setAutoBoundWitnessing(bool autoBoundWitness) async {
     print("SDK:$channelName:setAutoBoundWitnessing $autoBoundWitness");
     final bool success =
-        await _channel.invokeMethod('setAutoBoundWitnessing', autoBoundWitness);
+        await _channel?.invokeMethod('setAutoBoundWitnessing', autoBoundWitness);
     return success;
   }
 }
@@ -109,21 +109,21 @@ class XyoServerFlutterBridge extends XyoFlutterBridge {
   Future<bool> setListening(bool listen) async {
     await initialize();
     print("SDK:$channelName:setListening $listen");
-    final bool success = await _channel.invokeMethod('setListening', listen);
+    final bool success = await _channel?.invokeMethod('setListening', listen);
     return success;
   }
 
   Future<bool> getListening() async {
     await initialize();
     print("SDK:$channelName:getListening");
-    final bool listening = await _channel.invokeMethod('getListening');
+    final bool listening = await _channel?.invokeMethod('getListening');
     return listening;
   }
 }
 
 class XyoFlutterBridge {
-  MethodChannel _channel;
-  String _buildResult;
+  MethodChannel? _channel;
+  String? _buildResult;
   final channelName;
   var _initMutex = new Mutex();
 
@@ -133,7 +133,7 @@ class XyoFlutterBridge {
 
   Future<String> initialize() async {
     if (_buildResult != null) {
-      return _buildResult;
+      return Future.value(_buildResult);
     }
     print("SDK:$channelName:initialize");
 
@@ -144,7 +144,7 @@ class XyoFlutterBridge {
       _buildResult = await r.retry(() async {
         print("SDK:$channelName:try build");
 
-        _buildResult = await _channel.invokeMethod('build');
+        _buildResult = await _channel?.invokeMethod('build');
         print("SDK:$channelName:try build finished");
 
         return _buildResult;
@@ -154,7 +154,7 @@ class XyoFlutterBridge {
     } finally {
       _initMutex.release();
     }
-    return _buildResult;
+    return Future.value(_buildResult);
   }
 
   Future<String> build() async {
@@ -165,7 +165,7 @@ class XyoFlutterBridge {
   Future<String> getPublicKey() async {
     await initialize();
     print("SDK:$channelName:getPublicKey");
-    final String value = await _channel.invokeMethod('getPublicKey');
+    final String value = await _channel?.invokeMethod('getPublicKey');
     assert(value != null);
     return value;
   }
@@ -173,21 +173,21 @@ class XyoFlutterBridge {
   Future<bool> setBridging(bool on) async {
     await initialize();
     print("SDK:$channelName:setBridging $on");
-    final bool success = await _channel.invokeMethod('setBridging', on);
+    final bool success = await _channel?.invokeMethod('setBridging', on);
     return success;
   }
 
-  Future<bool> setPayloadString(String data) async {
+  Future<bool> setPayloadString(String? data) async {
     await initialize();
     print("SDK:$channelName:setPayloadString $data");
-    final bool success = await _channel.invokeMethod('setPayloadData', data);
+    final bool success = await _channel?.invokeMethod('setPayloadData', data);
     return success;
   }
 
   Future<bool> setAcceptBridging(bool acceptBridging) async {
     print("SDK:$channelName:setPayloadString $acceptBridging");
     final bool success =
-        await _channel.invokeMethod('setAcceptBridging', acceptBridging);
+        await _channel?.invokeMethod('setAcceptBridging', acceptBridging);
     return success;
   }
 }

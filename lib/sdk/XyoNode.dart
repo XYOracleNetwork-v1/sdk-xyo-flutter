@@ -6,11 +6,11 @@ class XyoNode {
   Map<String, XyoNetwork> networks;
   XyoNode(this.networks);
 
-  XyoServer getServer(String networkName) {
-    return networks[networkName].server;
+  XyoServer? getServer(String networkName) {
+    return networks[networkName]?.server;
   }
 
-  XyoClient getClient(String networkName) {
-    return networks[networkName].client;
+  XyoClient? getClient(String networkName) {
+    return networks[networkName]?.client;
   }
 }

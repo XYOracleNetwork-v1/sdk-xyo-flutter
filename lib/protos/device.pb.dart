@@ -2,8 +2,8 @@
 //  Generated code. Do not modify.
 //  source: protos/device.proto
 //
-// @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
@@ -11,20 +11,48 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class Family extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Family', createEmptyInstance: create)
-    ..aOS(1, 'uuid')
-    ..aOS(2, 'prefix')
-    ..aOS(3, 'name')
-    ..aOS(4, 'id')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Family', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'prefix')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..hasRequiredFields = false
   ;
 
   Family._() : super();
-  factory Family() => create();
+  factory Family({
+    $core.String? uuid,
+    $core.String? prefix,
+    $core.String? name,
+    $core.String? id,
+  }) {
+    final _result = create();
+    if (uuid != null) {
+      _result.uuid = uuid;
+    }
+    if (prefix != null) {
+      _result.prefix = prefix;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (id != null) {
+      _result.id = id;
+    }
+    return _result;
+  }
   factory Family.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Family.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Family clone() => Family()..mergeFromMessage(this);
-  Family copyWith(void Function(Family) updates) => super.copyWith((message) => updates(message as Family));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Family copyWith(void Function(Family) updates) => super.copyWith((message) => updates(message as Family)) as Family; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Family create() => Family._();
@@ -32,7 +60,7 @@ class Family extends $pb.GeneratedMessage {
   static $pb.PbList<Family> createRepeated() => $pb.PbList<Family>();
   @$core.pragma('dart2js:noInline')
   static Family getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Family>(create);
-  static Family _defaultInstance;
+  static Family? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get uuid => $_getSZ(0);
@@ -72,18 +100,38 @@ class Family extends $pb.GeneratedMessage {
 }
 
 class Range extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Range', createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, 'min', $pb.PbFieldType.OS6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(2, 'max', $pb.PbFieldType.OS6, defaultOrMaker: $fixnum.Int64.ZERO)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Range', createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'min', $pb.PbFieldType.OS6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'max', $pb.PbFieldType.OS6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
   Range._() : super();
-  factory Range() => create();
+  factory Range({
+    $fixnum.Int64? min,
+    $fixnum.Int64? max,
+  }) {
+    final _result = create();
+    if (min != null) {
+      _result.min = min;
+    }
+    if (max != null) {
+      _result.max = max;
+    }
+    return _result;
+  }
   factory Range.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Range.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Range clone() => Range()..mergeFromMessage(this);
-  Range copyWith(void Function(Range) updates) => super.copyWith((message) => updates(message as Range));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Range copyWith(void Function(Range) updates) => super.copyWith((message) => updates(message as Range)) as Range; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Range create() => Range._();
@@ -91,7 +139,7 @@ class Range extends $pb.GeneratedMessage {
   static $pb.PbList<Range> createRepeated() => $pb.PbList<Range>();
   @$core.pragma('dart2js:noInline')
   static Range getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Range>(create);
-  static Range _defaultInstance;
+  static Range? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get min => $_getI64(0);
@@ -113,19 +161,43 @@ class Range extends $pb.GeneratedMessage {
 }
 
 class IBeacon extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('IBeacon', createEmptyInstance: create)
-    ..aInt64(1, 'major')
-    ..aInt64(2, 'minor')
-    ..aOS(3, 'uuid')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'IBeacon', createEmptyInstance: create)
+    ..aInt64(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'major')
+    ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'minor')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
     ..hasRequiredFields = false
   ;
 
   IBeacon._() : super();
-  factory IBeacon() => create();
+  factory IBeacon({
+    $fixnum.Int64? major,
+    $fixnum.Int64? minor,
+    $core.String? uuid,
+  }) {
+    final _result = create();
+    if (major != null) {
+      _result.major = major;
+    }
+    if (minor != null) {
+      _result.minor = minor;
+    }
+    if (uuid != null) {
+      _result.uuid = uuid;
+    }
+    return _result;
+  }
   factory IBeacon.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory IBeacon.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   IBeacon clone() => IBeacon()..mergeFromMessage(this);
-  IBeacon copyWith(void Function(IBeacon) updates) => super.copyWith((message) => updates(message as IBeacon));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  IBeacon copyWith(void Function(IBeacon) updates) => super.copyWith((message) => updates(message as IBeacon)) as IBeacon; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static IBeacon create() => IBeacon._();
@@ -133,7 +205,7 @@ class IBeacon extends $pb.GeneratedMessage {
   static $pb.PbList<IBeacon> createRepeated() => $pb.PbList<IBeacon>();
   @$core.pragma('dart2js:noInline')
   static IBeacon getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IBeacon>(create);
-  static IBeacon _defaultInstance;
+  static IBeacon? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get major => $_getI64(0);
@@ -164,22 +236,58 @@ class IBeacon extends $pb.GeneratedMessage {
 }
 
 class BluetoothDevice extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('BluetoothDevice', createEmptyInstance: create)
-    ..aOS(1, 'id')
-    ..aOM<Family>(2, 'family', subBuilder: Family.create)
-    ..aOM<IBeacon>(3, 'beacon', subBuilder: IBeacon.create)
-    ..a<$fixnum.Int64>(4, 'rssi', $pb.PbFieldType.OS6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<Range>(5, 'range', subBuilder: Range.create)
-    ..aOB(6, 'connected')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BluetoothDevice', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..aOM<Family>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'family', subBuilder: Family.create)
+    ..aOM<IBeacon>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'beacon', subBuilder: IBeacon.create)
+    ..a<$fixnum.Int64>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rssi', $pb.PbFieldType.OS6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<Range>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'range', subBuilder: Range.create)
+    ..aOB(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connected')
     ..hasRequiredFields = false
   ;
 
   BluetoothDevice._() : super();
-  factory BluetoothDevice() => create();
+  factory BluetoothDevice({
+    $core.String? id,
+    Family? family,
+    IBeacon? beacon,
+    $fixnum.Int64? rssi,
+    Range? range,
+    $core.bool? connected,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (family != null) {
+      _result.family = family;
+    }
+    if (beacon != null) {
+      _result.beacon = beacon;
+    }
+    if (rssi != null) {
+      _result.rssi = rssi;
+    }
+    if (range != null) {
+      _result.range = range;
+    }
+    if (connected != null) {
+      _result.connected = connected;
+    }
+    return _result;
+  }
   factory BluetoothDevice.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory BluetoothDevice.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   BluetoothDevice clone() => BluetoothDevice()..mergeFromMessage(this);
-  BluetoothDevice copyWith(void Function(BluetoothDevice) updates) => super.copyWith((message) => updates(message as BluetoothDevice));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BluetoothDevice copyWith(void Function(BluetoothDevice) updates) => super.copyWith((message) => updates(message as BluetoothDevice)) as BluetoothDevice; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static BluetoothDevice create() => BluetoothDevice._();
@@ -187,7 +295,7 @@ class BluetoothDevice extends $pb.GeneratedMessage {
   static $pb.PbList<BluetoothDevice> createRepeated() => $pb.PbList<BluetoothDevice>();
   @$core.pragma('dart2js:noInline')
   static BluetoothDevice getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BluetoothDevice>(create);
-  static BluetoothDevice _defaultInstance;
+  static BluetoothDevice? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);

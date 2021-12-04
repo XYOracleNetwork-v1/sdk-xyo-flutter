@@ -11,7 +11,7 @@ class XyoTcpServer extends XyoServer {
 }
 
 class XyoServer extends XyoBoundWitnessTarget {
-  bool isListening;
+  bool isListening = false;
 
   XyoServer(XyoNetworkType network) : super(network) {
     _initVars();

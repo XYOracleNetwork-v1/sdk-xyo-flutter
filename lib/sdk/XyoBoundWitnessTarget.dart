@@ -7,11 +7,11 @@ import 'package:sdk_xyo_flutter/sdk/XyoNetwork.dart';
 import 'XyoClient.dart';
 
 class XyoBoundWitnessTarget with ChangeNotifier {
-  EventChannel _boundWitnessStartedChannel;
-  EventChannel _boundWitnessCompletedChannel;
-  XyoNetworkType network;
+  EventChannel? _boundWitnessStartedChannel;
+  EventChannel? _boundWitnessCompletedChannel;
+  XyoNetworkType? network;
 
-  XyoFlutterBridge _flutterBridge;
+  XyoFlutterBridge? _flutterBridge;
 
   XyoBoundWitnessTarget(this.network) {
     String cliStr = isClient() ? "xyoClient" : "xyoServer";
@@ -29,45 +29,46 @@ class XyoBoundWitnessTarget with ChangeNotifier {
   }
 
   Future<String> getPublicKey() async {
-    return await _flutterBridge.getPublicKey();
+    return Future.value(await _flutterBridge?.getPublicKey());
   }
 
-  bool isBridging;
-  bool isAcceptingBridging;
-  String payloadData;
+  bool isBridging = false;
+  bool isAcceptingBridging = false;
+  String? payloadData;
 
   bool get autoBridge {
     return isBridging;
   }
 
-  String get stringHeuristic {
+  String? get stringHeuristic {
     return payloadData;
   }
 
-  set stringHeuristic(String stringHeuristic) {
+  set stringHeuristic(String? stringHeuristic) {
     payloadData = stringHeuristic;
-    _flutterBridge.setPayloadString(payloadData);
+    _flutterBridge?.setPayloadString(payloadData);
     notifyListeners();
   }
 
   set autoBridge(bool autoBridge) {
     isBridging = autoBridge;
-    _flutterBridge.setBridging(autoBridge);
+    _flutterBridge?.setBridging(autoBridge);
     notifyListeners();
   }
 
   set acceptBridging(bool acceptBridging) {
     isAcceptingBridging = acceptBridging;
-    _flutterBridge.setAcceptBridging(acceptBridging);
+    _flutterBridge?.setAcceptBridging(acceptBridging);
     notifyListeners();
   }
 
   bool isClient() => this is XyoClient;
 
   Stream<List<DeviceBoundWitness>> onBoundWitnessSuccess() {
-    if (_boundWitnessCompletedChannel == null) return Stream.empty();
+    var boundWitnessCompletedChannel = _boundWitnessCompletedChannel;
+    if (boundWitnessCompletedChannel == null) return Stream.empty();
     List<DeviceBoundWitness> bws = [];
-    return _boundWitnessCompletedChannel
+    return boundWitnessCompletedChannel
         .receiveBroadcastStream()
         .map<List<DeviceBoundWitness>>((value) {
       final bw = DeviceBoundWitness.fromBuffer(value);
@@ -78,11 +79,12 @@ class XyoBoundWitnessTarget with ChangeNotifier {
   }
 
   Stream<List<dynamic>> onBoundWitnessStarted() {
-    if (_boundWitnessStartedChannel == null) return Stream.empty();
+    var boundWitnessStartedChannel = _boundWitnessStartedChannel;
+    if (boundWitnessStartedChannel == null) return Stream.empty();
 
     List<dynamic> somethings = [];
 
-    return _boundWitnessStartedChannel.receiveBroadcastStream().map((value) {
+    return boundWitnessStartedChannel.receiveBroadcastStream().map((value) {
       print("Bw Started $value");
       somethings.add(value);
       return somethings;

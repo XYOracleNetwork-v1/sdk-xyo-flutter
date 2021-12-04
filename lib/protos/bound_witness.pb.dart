@@ -2,25 +2,41 @@
 //  Generated code. Do not modify.
 //  source: protos/bound_witness.proto
 //
-// @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class DeviceBoundWitnessList extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeviceBoundWitnessList', createEmptyInstance: create)
-    ..pc<DeviceBoundWitness>(1, 'boundWitnesses', $pb.PbFieldType.PM, subBuilder: DeviceBoundWitness.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeviceBoundWitnessList', createEmptyInstance: create)
+    ..pc<DeviceBoundWitness>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boundWitnesses', $pb.PbFieldType.PM, subBuilder: DeviceBoundWitness.create)
     ..hasRequiredFields = false
   ;
 
   DeviceBoundWitnessList._() : super();
-  factory DeviceBoundWitnessList() => create();
+  factory DeviceBoundWitnessList({
+    $core.Iterable<DeviceBoundWitness>? boundWitnesses,
+  }) {
+    final _result = create();
+    if (boundWitnesses != null) {
+      _result.boundWitnesses.addAll(boundWitnesses);
+    }
+    return _result;
+  }
   factory DeviceBoundWitnessList.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory DeviceBoundWitnessList.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   DeviceBoundWitnessList clone() => DeviceBoundWitnessList()..mergeFromMessage(this);
-  DeviceBoundWitnessList copyWith(void Function(DeviceBoundWitnessList) updates) => super.copyWith((message) => updates(message as DeviceBoundWitnessList));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeviceBoundWitnessList copyWith(void Function(DeviceBoundWitnessList) updates) => super.copyWith((message) => updates(message as DeviceBoundWitnessList)) as DeviceBoundWitnessList; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static DeviceBoundWitnessList create() => DeviceBoundWitnessList._();
@@ -28,29 +44,65 @@ class DeviceBoundWitnessList extends $pb.GeneratedMessage {
   static $pb.PbList<DeviceBoundWitnessList> createRepeated() => $pb.PbList<DeviceBoundWitnessList>();
   @$core.pragma('dart2js:noInline')
   static DeviceBoundWitnessList getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeviceBoundWitnessList>(create);
-  static DeviceBoundWitnessList _defaultInstance;
+  static DeviceBoundWitnessList? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<DeviceBoundWitness> get boundWitnesses => $_getList(0);
 }
 
 class DeviceBoundWitness extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeviceBoundWitness', createEmptyInstance: create)
-    ..aOS(1, 'bytes')
-    ..aOS(2, 'byteHash')
-    ..aOS(3, 'humanName')
-    ..m<$core.String, $core.String>(4, 'huerestics', entryClassName: 'DeviceBoundWitness.HueresticsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS)
-    ..pPS(5, 'parties')
-    ..aOB(6, 'linked')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeviceBoundWitness', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bytes')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'byteHash')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'humanName')
+    ..m<$core.String, $core.String>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'huerestics', entryClassName: 'DeviceBoundWitness.HueresticsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS)
+    ..pPS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'parties')
+    ..aOB(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'linked')
     ..hasRequiredFields = false
   ;
 
   DeviceBoundWitness._() : super();
-  factory DeviceBoundWitness() => create();
+  factory DeviceBoundWitness({
+    $core.String? bytes,
+    $core.String? byteHash,
+    $core.String? humanName,
+    $core.Map<$core.String, $core.String>? huerestics,
+    $core.Iterable<$core.String>? parties,
+    $core.bool? linked,
+  }) {
+    final _result = create();
+    if (bytes != null) {
+      _result.bytes = bytes;
+    }
+    if (byteHash != null) {
+      _result.byteHash = byteHash;
+    }
+    if (humanName != null) {
+      _result.humanName = humanName;
+    }
+    if (huerestics != null) {
+      _result.huerestics.addAll(huerestics);
+    }
+    if (parties != null) {
+      _result.parties.addAll(parties);
+    }
+    if (linked != null) {
+      _result.linked = linked;
+    }
+    return _result;
+  }
   factory DeviceBoundWitness.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory DeviceBoundWitness.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   DeviceBoundWitness clone() => DeviceBoundWitness()..mergeFromMessage(this);
-  DeviceBoundWitness copyWith(void Function(DeviceBoundWitness) updates) => super.copyWith((message) => updates(message as DeviceBoundWitness));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeviceBoundWitness copyWith(void Function(DeviceBoundWitness) updates) => super.copyWith((message) => updates(message as DeviceBoundWitness)) as DeviceBoundWitness; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static DeviceBoundWitness create() => DeviceBoundWitness._();
@@ -58,7 +110,7 @@ class DeviceBoundWitness extends $pb.GeneratedMessage {
   static $pb.PbList<DeviceBoundWitness> createRepeated() => $pb.PbList<DeviceBoundWitness>();
   @$core.pragma('dart2js:noInline')
   static DeviceBoundWitness getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeviceBoundWitness>(create);
-  static DeviceBoundWitness _defaultInstance;
+  static DeviceBoundWitness? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get bytes => $_getSZ(0);
