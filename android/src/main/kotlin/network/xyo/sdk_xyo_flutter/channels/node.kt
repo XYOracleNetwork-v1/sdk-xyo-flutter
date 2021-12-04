@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import android.util.Log
 import network.xyo.sdk_xyo_flutter.InteractionModel
 import io.flutter.plugin.common.EventChannel
+import kotlinx.coroutines.InternalCoroutinesApi
 import network.xyo.sdk.XyoBleNetwork
 import network.xyo.sdk.XyoBoundWitnessTarget
 import network.xyo.sdk.XyoNode
@@ -14,6 +15,7 @@ import network.xyo.sdk.XyoNodeBuilder
 import network.xyo.sdkcorekotlin.boundWitness.XyoBoundWitness
 import java.util.*
 
+@InternalCoroutinesApi
 @ExperimentalUnsignedTypes
 open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registrar) :XyoNodeChannel(context, registrar, "xyoClient") {
   val listener = object : XyoBoundWitnessTarget.Listener() {
@@ -87,6 +89,7 @@ open class XyoClientChannel(context: Context, registrar: PluginRegistry.Registra
   }
 }
 
+@InternalCoroutinesApi
 @ExperimentalUnsignedTypes
 open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registrar): XyoNodeChannel(context, registrar, "xyoServer") {
   val listener = object : XyoBoundWitnessTarget.Listener() {
@@ -156,6 +159,7 @@ open class XyoServerChannel(context: Context, registrar: PluginRegistry.Registra
   }
 }
 
+@InternalCoroutinesApi
 @ExperimentalUnsignedTypes
 open class XyoNodeWrapper private constructor() {
   
@@ -182,6 +186,7 @@ open class XyoNodeWrapper private constructor() {
   }
 }
 
+@InternalCoroutinesApi
 @kotlin.ExperimentalUnsignedTypes
 open class XyoNodeChannel(val context: Context, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
   val streamHandleStart = EventStreamHandler()

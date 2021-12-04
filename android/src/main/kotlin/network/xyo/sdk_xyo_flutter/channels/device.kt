@@ -11,21 +11,23 @@ import network.xyo.ble.generic.scanner.XYSmartScan
 import network.xyo.ble.devices.apple.XYIBeaconBluetoothDevice
 import network.xyo.ble.generic.devices.XYBluetoothDevice
 import network.xyo.ble.devices.xy.XY4BluetoothDevice
+import network.xyo.ble.generic.scanner.XYSmartScanListener
+import network.xyo.ble.generic.scanner.XYSmartScanStatus
 
 
 @ExperimentalUnsignedTypes
 class XyoDeviceChannel(context: Context, val smartScan: XYSmartScan, registrar: PluginRegistry.Registrar, name: String): XyoBaseChannel(registrar, name) {
 
-  private val listener = object: XYSmartScan.Listener() {
-    override fun statusChanged(status: XYSmartScan.Status) {
+  private val listener = object: XYSmartScanListener() {
+    override fun statusChanged(status: XYSmartScanStatus) {
       Log.i(TAG, "statusChanged$status")
 
       val result = when (status) {
-        XYSmartScan.Status.Enabled -> "Enabled"
-        XYSmartScan.Status.None -> "None"
-        XYSmartScan.Status.BluetoothDisabled -> "BluetoothDisabled"
-        XYSmartScan.Status.BluetoothUnavailable -> "BluetoothUnavailable"
-        XYSmartScan.Status.LocationDisabled -> "LocationDisabled"
+        XYSmartScanStatus.Enabled -> "Enabled"
+        XYSmartScanStatus.None -> "None"
+        XYSmartScanStatus.BluetoothDisabled -> "BluetoothDisabled"
+        XYSmartScanStatus.BluetoothUnavailable -> "BluetoothUnavailable"
+        XYSmartScanStatus.LocationDisabled -> "LocationDisabled"
       }
 
       onStatusChanged.send(result)

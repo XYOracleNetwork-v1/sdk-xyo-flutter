@@ -31,7 +31,7 @@ class InteractionModel {
         this.linked = linked
 
         runBlocking {
-            boundWitness = blockRepo.getOriginBlockByBlockHash(hash).await()
+            boundWitness = blockRepo.getOriginBlockByBlockHash(hash)
         }
     }
 

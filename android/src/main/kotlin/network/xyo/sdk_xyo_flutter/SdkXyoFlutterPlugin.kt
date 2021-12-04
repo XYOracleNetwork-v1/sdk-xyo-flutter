@@ -1,12 +1,14 @@
 package network.xyo.sdk_xyo_flutter
 
 import io.flutter.plugin.common.PluginRegistry.Registrar
+import kotlinx.coroutines.InternalCoroutinesApi
 import network.xyo.sdk_xyo_flutter.channels.XyoClientChannel
 import network.xyo.sdk_xyo_flutter.channels.XyoServerChannel
 import network.xyo.ble.generic.scanner.XYSmartScanModern
 import network.xyo.sdk_xyo_flutter.channels.XyoDeviceChannel
 
 class SdkXyoFlutterPlugin {
+  @InternalCoroutinesApi
   @ExperimentalUnsignedTypes
   companion object {
     var client:XyoClientChannel? = null
